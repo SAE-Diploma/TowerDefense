@@ -24,7 +24,6 @@ public class Player_Movement : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         m_collider = GetComponent<CapsuleCollider>();
         rayLength = m_collider.bounds.extents.y + 0.2f;
-        Debug.Log(rayLength);
     }
 
     void Update()
@@ -45,7 +44,7 @@ public class Player_Movement : MonoBehaviour
             }
         } else { inputDir *= airSpeed; }
 
-        Debug.DrawLine(transform.position, transform.position + forward * 10, Color.red, Time.deltaTime);
+        //Debug.DrawLine(transform.position, transform.position + forward * 10, Color.red, Time.deltaTime);
 
     }
 
@@ -88,7 +87,6 @@ public class Player_Movement : MonoBehaviour
         // jumping when on the ground
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            Debug.Log("jump");
             if (isMoving)
             {
                 m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized*jumpForce, ForceMode.Impulse);
