@@ -6,7 +6,7 @@ public class Player_Interaction : MonoBehaviour
 {
     [SerializeField] GameObject towers; // Parent GameObject of all Towers
     [SerializeField] float threshold; // how exactly you must look at a tower
-    [SerializeField, Range(0, 10)] float sqrRange; // how great the distance between the tower and the player can be
+    [SerializeField, Range(0, 10)] float Range; // how great the distance between the tower and the player can be
 
     List<Transform> allTowers;
     List<Transform> towersInRange;
@@ -35,7 +35,7 @@ public class Player_Interaction : MonoBehaviour
         {
             Vector3 dir = tower.position - transform.position;
             float distance = Vector3.SqrMagnitude(dir);
-            if (distance < sqrRange)
+            if (distance < Mathf.Pow(Range,2))
             {
                 float cross = Vector3.Dot(dir.normalized, transform.forward.normalized);
                 if (cross > threshold)
