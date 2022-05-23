@@ -33,13 +33,20 @@ public class Player_Mouselook : MonoBehaviour
         {
             rotationX += Input.GetAxis("Mouse X") * sensitivityX;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
+            rotationX = CapRotation(rotationX);
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
             Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
             Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
             transform.localRotation = originalCamRotation * quaternionY;
             player.localRotation = originalPlayerRotation * quaternionX;
         }
+    }
+
+    private float CapRotation(float rotation)
+    {
+        if (rotation > 360) return rotation - 360;
+        else if (rotation < -360) return rotation + 360;
+        else return rotation;
     }
 
 
