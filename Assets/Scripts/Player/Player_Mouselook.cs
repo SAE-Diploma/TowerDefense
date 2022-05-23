@@ -29,14 +29,17 @@ public class Player_Mouselook : MonoBehaviour
 
     void Update()
     {
-        rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-        rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
-        rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-        Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
-        Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
-        transform.localRotation = originalCamRotation * quaternionY;
-        player.localRotation = originalPlayerRotation * quaternionX;
+        if (Input.GetMouseButton(1))
+        {
+            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationX = Mathf.Clamp(rotationX, minimumX, maximumX);
+            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+            Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
+            Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
+            transform.localRotation = originalCamRotation * quaternionY;
+            player.localRotation = originalPlayerRotation * quaternionX;
+        }
     }
 
 
