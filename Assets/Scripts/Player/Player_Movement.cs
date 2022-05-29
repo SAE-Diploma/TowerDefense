@@ -9,7 +9,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] float airSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] bool moveInAir;
-    [SerializeField] bool isGrounded;
+    bool isGrounded;
     bool isMoving;
 
     Vector3 inputDir;
