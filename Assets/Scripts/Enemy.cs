@@ -54,8 +54,8 @@ public class Enemy : MonoBehaviour
             currentCheckpointIndex++;
             if (currentCheckpointIndex < checkpoints.Count) sqrDistToNextPoint = (checkpoints[currentCheckpointIndex] - checkpoints[currentCheckpointIndex - 1]).sqrMagnitude;
         }
-        Debug.DrawLine(transform.position, transform.position + direction, Color.yellow, Time.deltaTime);
-        Debug.DrawLine(transform.position, transform.position + transform.forward, Color.green, Time.deltaTime);
+        //Debug.DrawLine(transform.position, transform.position + direction, Color.yellow, Time.deltaTime);
+        //Debug.DrawLine(transform.position, transform.position + transform.forward, Color.green, Time.deltaTime);
     }
 
     private void CalculateProgress(float distance)
@@ -95,7 +95,6 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < coinsDropped; i++)
         {
             Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
-            Debug.Log(Random.Range(-randomDropDistance, randomDropDistance));
             Instantiate(coinPrefab, position, Quaternion.identity);
         }
         Destroy(gameObject);

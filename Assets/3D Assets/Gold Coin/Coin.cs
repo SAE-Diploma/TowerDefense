@@ -9,7 +9,6 @@ public class Coin : MonoBehaviour
 
     [SerializeField] float bobingHeight;
     [SerializeField] float bobingSpeed;
-    Vector3 originStartPosition;
     float counter = 0f;
     public int Value { get; private set; }
 
@@ -17,7 +16,7 @@ public class Coin : MonoBehaviour
     {
         Value = 0;
         origin = transform.GetChild(0);
-        originStartPosition = origin.position;
+        transform.position += transform.up * 0.3f;
 
         // randomize startValues
         counter = Random.Range(0, 90);
@@ -31,7 +30,7 @@ public class Coin : MonoBehaviour
 
         // bobing
         counter += bobingSpeed * Time.deltaTime;
-        origin.transform.position = originStartPosition + (transform.up * Mathf.Sin(counter) * bobingHeight / 2);
+        origin.transform.position = transform.position + (transform.up * Mathf.Sin(counter) * bobingHeight / 2);
     }
 
     /// <summary>

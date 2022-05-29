@@ -1,54 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player_Interaction : MonoBehaviour
 {
-    [SerializeField] GameObject towers; // Parent GameObject of all Towers
-    [SerializeField] float threshold; // how exactly you must look at a tower
-    [SerializeField, Range(0, 10)] float Range; // how great the distance between the tower and the player can be
-
-    List<Transform> allTowers;
-    List<Transform> towersInRange;
-
-    // The Tower object that is looked at and valid to interact with
-    GameObject selectedTower;
-    public GameObject SelectedTower { get { return selectedTower; } }
+    [SerializeField] float coinAttractionRange;
+    [SerializeField] float coinAttractionSpeed;
+    [SerializeField] UnityEvent coinCollected;
 
     void Start()
     {
-        // get all towers
-        allTowers = new List<Transform>();
-        Transform[] towersChildren = towers.GetComponentsInChildren<Transform>();
-        foreach (Transform tower in towersChildren)
-        {
-            if (tower != towers.transform)
-            {
-                allTowers.Add(tower);
-            }
-        }
+        if (coinCollected == null) coinCollected = new UnityEvent();
     }
 
     void Update()
     {
-        foreach (Transform tower in allTowers)
+
+    }
+
+    private void FixedUpdate()
+    {
+        Collider[] overlaps = Physics.OverlapSphere(transform.position, coinAttractionRange);
+        foreach (Collider overlap in overlaps)
         {
-            Vector3 dir = tower.position - transform.position;
-            float distance = Vector3.SqrMagnitude(dir);
-            if (distance < Mathf.Pow(Range,2))
+            // attract all coins in range
+            if (overlap.gameObject.tag == "coin")
             {
-                float cross = Vector3.Dot(dir.normalized, transform.forward.normalized);
-                if (cross > threshold)
-                {
-                    selectedTower = tower.gameObject;
-                    break;
-                }
-            }
-            else
-            {
-                selectedTower = null;
+                Transform obj = overlap.transform.parent.parent; // Top most parent of a coin
+                Vector3 dir = transform.position - obj.position;
+                obj.position += dir.normalized * coinAttractionSpeed * Time.deltaTime;
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "coin")
+        {
+            coinCollected.Invoke();
+            Destroy(other.gameObject);
+        }
+    }
+
 
 }
