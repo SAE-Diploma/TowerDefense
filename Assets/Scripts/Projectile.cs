@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     float speed = 6f;
-    int damage = 1;
+    int damage = 100;
     float hitDistance = 1f;
     GameObject enemy;
     Quaternion offsetRotation;
@@ -43,7 +43,8 @@ public class Projectile : MonoBehaviour
     {
         // inflict damage to enemy
         Destroy(gameObject);
-        Destroy(enemy);
+        Enemy enemyClass = enemy.GetComponent<Enemy>();
+        if (enemyClass != null) enemyClass.TakeDamage(damage);
     }
 
     /// <summary>

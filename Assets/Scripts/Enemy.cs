@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     [Header("On Death")]
     [SerializeField] int coinsDropped;
     [SerializeField] GameObject coinPrefab;
+    float randomDropDistance = 0.5f;
 
     void Start()
     {
@@ -91,6 +92,12 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Die()
     {
-
+        for (int i = 0; i < coinsDropped; i++)
+        {
+            Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
+            Debug.Log(Random.Range(-randomDropDistance, randomDropDistance));
+            Instantiate(coinPrefab, position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }
