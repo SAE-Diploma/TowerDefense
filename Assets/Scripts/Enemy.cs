@@ -7,12 +7,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] int health;
 
     [Header("Movement")]
-    [SerializeField] Vector3 movement;
-    [SerializeField] Vector3 nextPoint;
+    [SerializeField] float moveSpeed;
+
+    [Header("Checkpoints")]
+    [SerializeField] float sqrDistToNextPoint;
+    [SerializeField] float progress = 0;
     [SerializeField] GameObject checkpointsParent; // only for testing 
     List<Vector3> checkpoints;
-    int currentCheckpointIndex = 0;
-    [SerializeField] float speed;
+    [SerializeField] int currentCheckpointIndex = 0;
+    [SerializeField, Tooltip("readonly")] float percToNextPoint = 0;
 
     [Header("On Death")]
     [SerializeField] int coinsDropped;
@@ -22,12 +25,12 @@ public class Enemy : MonoBehaviour
     {
         checkpoints = new List<Vector3>();
         SetCheckPoints(checkpointsParent);
-        currentCheckpointIndex = 0;
+
+        transform.position = checkpoints[currentCheckpointIndex];
     }
 
     void Update()
     {
-        //transform.Translate(movement*speed*Time.deltaTime);
         if (currentCheckpointIndex < checkpoints.Count)
         {
             MoveToCheckpoint(checkpoints[currentCheckpointIndex]);
@@ -40,31 +43,26 @@ public class Enemy : MonoBehaviour
     /// <param name="checkpoint">current ceckpoint</param>
     private void MoveToCheckpoint(Vector3 checkpoint)
     {
-        Vector3 direction = checkpoint - transform.position;
-        Debug.DrawLine(transform.position, transform.position+direction, Color.yellow, Time.deltaTime);
-        Debug.DrawLine(transform.position, transform.position+transform.forward, Color.green, Time.deltaTime);
         transform.LookAt(checkpoint);
-        transform.position = transform.position + transform.forward * speed * Time.deltaTime;
+        transform.position = transform.position + transform.forward * moveSpeed * Time.deltaTime;
+        Vector3 direction = checkpoint - transform.position;
         float squareDist = Vector3.SqrMagnitude(direction);
+        CalculateProgress(squareDist);
         if (squareDist < 1f)
         {
             currentCheckpointIndex++;
+            if (currentCheckpointIndex < checkpoints.Count) sqrDistToNextPoint = (checkpoints[currentCheckpointIndex] - checkpoints[currentCheckpointIndex - 1]).sqrMagnitude;
         }
+        Debug.DrawLine(transform.position, transform.position + direction, Color.yellow, Time.deltaTime);
+        Debug.DrawLine(transform.position, transform.position + transform.forward, Color.green, Time.deltaTime);
     }
 
-    public void TakeDamage(int damage)
+    private void CalculateProgress(float distance)
     {
-        health -= damage;
-        if (health <= 0) Die();
+        float percToNextPoint = 1 / sqrDistToNextPoint * (sqrDistToNextPoint - distance);
+        progress = 1f / (checkpoints.Count - 1) * (currentCheckpointIndex - 1 + percToNextPoint);
     }
 
-    /// <summary>
-    /// On Enemy Death
-    /// </summary>
-    private void Die()
-    {
-
-    }
 
     /// <summary>
     /// Set the checkpoint positions from the enemyspawner
@@ -78,5 +76,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Decrease health or die if low on health
+    /// </summary>
+    /// <param name="damage">incomming damage</param>
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0) Die();
+    }
 
+    /// <summary>
+    /// On Enemy Death
+    /// </summary>
+    private void Die()
+    {
+
+    }
 }
