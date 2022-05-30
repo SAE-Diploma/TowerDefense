@@ -95,7 +95,10 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < coinsDropped; i++)
         {
             Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
-            Instantiate(coinPrefab, position, Quaternion.identity);
+            GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity);
+            Debug.Log(coinObject.name);
+            Coin coin = coinObject.GetComponent<Coin>();
+            coin.SetValue(1);
         }
         Destroy(gameObject);
     }

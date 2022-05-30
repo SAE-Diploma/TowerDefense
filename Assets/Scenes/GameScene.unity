@@ -914,11 +914,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af3870faffb7384b8da79d956923dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   coinAttractionRange: 0
   coinAttractionSpeed: 0
-  coinCollected:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &1063057955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1760,23 +1758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af3870faffb7384b8da79d956923dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 465213590}
   coinAttractionRange: 3
   coinAttractionSpeed: 10
-  coinCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 465213590}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AddCoins
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &2073114970
 GameObject:
   m_ObjectHideFlags: 0

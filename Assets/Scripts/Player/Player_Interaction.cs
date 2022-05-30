@@ -5,16 +5,13 @@ using UnityEngine.Events;
 
 public class Player_Interaction : MonoBehaviour
 {
+    [SerializeField] GameManager manager;
+
+    [Header("Coins")]
     [SerializeField] float coinAttractionRange;
     [SerializeField] float coinAttractionSpeed;
-    [SerializeField] UnityEvent coinCollected;
 
     void Start()
-    {
-        if (coinCollected == null) coinCollected = new UnityEvent();
-    }
-
-    void Update()
     {
 
     }
@@ -38,7 +35,8 @@ public class Player_Interaction : MonoBehaviour
     {
         if (other.gameObject.tag == "coin")
         {
-            coinCollected.Invoke();
+            Coin coin = other.transform.parent.parent.GetComponent<Coin>();
+            manager.AddCoins(coin.Value);
             Destroy(other.gameObject);
         }
     }
