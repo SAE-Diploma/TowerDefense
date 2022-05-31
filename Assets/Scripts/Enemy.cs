@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject checkpointsParent; // only for testing 
     List<Vector3> checkpoints;
     [SerializeField] int currentCheckpointIndex = 0;
-    [SerializeField, Tooltip("readonly")] float percToNextPoint = 0;
 
     [Header("Attacking")]
     [SerializeField] float attackSpeed;

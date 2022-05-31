@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+public enum Interactions
+{
+    None,
+    PlaceTower
+}
+
 public class Player_Interaction : MonoBehaviour
 {
     [SerializeField] GameManager manager;
+    [SerializeField] UIManager uiManager;
 
     [Header("Coins")]
     [SerializeField] float coinAttractionRange;
     [SerializeField] float coinAttractionSpeed;
+    private Interactions currentInteraction;
 
     void Start()
     {
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
     private void FixedUpdate()
@@ -31,6 +48,17 @@ public class Player_Interaction : MonoBehaviour
         }
     }
 
+    private void Interact()
+    {
+        switch (currentInteraction)
+        {
+            case Interactions.PlaceTower:
+                uiManager.TogglePanel(Panels.ChooseTower);
+                break;
+        }
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "coin")
@@ -38,6 +66,20 @@ public class Player_Interaction : MonoBehaviour
             Coin coin = other.transform.parent.parent.GetComponent<Coin>();
             manager.AddCoins(coin.Value);
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "towerPlace")
+        {
+            uiManager.TogglePanel(Panels.Interaction);
+            currentInteraction = Interactions.PlaceTower;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "towerPlace")
+        {
+            uiManager.TogglePanel(Panels.Interaction);
+            currentInteraction = Interactions.None;
         }
     }
 

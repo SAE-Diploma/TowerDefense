@@ -14,8 +14,6 @@ public class Player_Mouselook : MonoBehaviour
     Transform player;
 
     [Header("Clamping")]
-    float minimumX = -360;
-    float maximumX = 360;
     [SerializeField, Range(-90f, 90f)] float minimumY;
     [SerializeField, Range(-90f, 90f)] float maximumY;
 
