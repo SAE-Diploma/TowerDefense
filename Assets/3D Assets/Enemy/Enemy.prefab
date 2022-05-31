@@ -110,3 +110,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0020963b6eff6f94e80e0d0226362687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  moveSpeed: 5
+  sqrDistToNextPoint: 0
+  progress: 0
+  checkpointsParent: {fileID: 0}
+  currentCheckpointIndex: 0
+  percToNextPoint: 0
+  attackSpeed: 1
+  damage: 5
+  coinsDropped: 5
+  coinPrefab: {fileID: 1498403948531744, guid: fa2c57d3f28a5e6419393e8bc3eeb32a, type: 3}

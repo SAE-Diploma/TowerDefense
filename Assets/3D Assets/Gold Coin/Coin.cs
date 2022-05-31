@@ -6,16 +6,12 @@ public class Coin : MonoBehaviour
 {
     Transform origin;
     [SerializeField] float rotationSpeed;
-
     [SerializeField] float bobingHeight;
     [SerializeField] float bobingSpeed;
     float counter = 0f;
     int _value = 0;
-    public int Value
-    {
-        get { return _value; }
-        private set { _value = value; }
-    }
+
+    public int Value => _value;
 
     void Start()
     {
@@ -41,5 +37,5 @@ public class Coin : MonoBehaviour
     /// Set the Value of the coin
     /// </summary>
     /// <param name="value">value the coin should have</param>
-    public void SetValue(int value) { Value = value; }
+    public void SetValue(int value) { _value = value; }
 }

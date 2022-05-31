@@ -17,10 +17,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] int currentCheckpointIndex = 0;
     [SerializeField, Tooltip("readonly")] float percToNextPoint = 0;
 
+    [Header("Attacking")]
+    [SerializeField] float attackSpeed;
+    [SerializeField] int damage;
+    [SerializeField] Tresor tresor;
+    private bool isAttacking = false;
+
     [Header("On Death")]
     [SerializeField] int coinsDropped;
     [SerializeField] GameObject coinPrefab;
     float randomDropDistance = 0.5f;
+
 
     void Start()
     {
@@ -35,6 +42,14 @@ public class Enemy : MonoBehaviour
         if (currentCheckpointIndex < checkpoints.Count)
         {
             MoveToCheckpoint(checkpoints[currentCheckpointIndex]);
+        }
+        else
+        {
+            if (!isAttacking)
+            {
+                StartCoroutine(AttackTresor(attackSpeed));
+                isAttacking = true;
+            }
         }
     }
 
@@ -54,16 +69,17 @@ public class Enemy : MonoBehaviour
             currentCheckpointIndex++;
             if (currentCheckpointIndex < checkpoints.Count) sqrDistToNextPoint = (checkpoints[currentCheckpointIndex] - checkpoints[currentCheckpointIndex - 1]).sqrMagnitude;
         }
-        //Debug.DrawLine(transform.position, transform.position + direction, Color.yellow, Time.deltaTime);
-        //Debug.DrawLine(transform.position, transform.position + transform.forward, Color.green, Time.deltaTime);
     }
 
+    /// <summary>
+    /// Calculate the percent of the track walked
+    /// </summary>
+    /// <param name="distance">distance to next checkpoint</param>
     private void CalculateProgress(float distance)
     {
         float percToNextPoint = 1 / sqrDistToNextPoint * (sqrDistToNextPoint - distance);
         progress = 1f / (checkpoints.Count - 1) * (currentCheckpointIndex - 1 + percToNextPoint);
     }
-
 
     /// <summary>
     /// Set the checkpoint positions from the enemyspawner
@@ -87,6 +103,16 @@ public class Enemy : MonoBehaviour
         if (health <= 0) Die();
     }
 
+    private IEnumerator AttackTresor(float attackspeed)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(attackspeed);
+            if (tresor != null) tresor.TakeDamage(damage);
+            else { break; }
+        }
+    }
+
     /// <summary>
     /// On Enemy Death
     /// </summary>
@@ -96,7 +122,6 @@ public class Enemy : MonoBehaviour
         {
             Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
             GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity);
-            Debug.Log(coinObject.name);
             Coin coin = coinObject.GetComponent<Coin>();
             coin.SetValue(1);
         }

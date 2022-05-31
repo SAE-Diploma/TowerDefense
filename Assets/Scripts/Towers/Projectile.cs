@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     float speed = 6f;
-    int damage = 100;
+    int damage = 50;
     float hitDistance = 1f;
     GameObject enemy;
     Quaternion offsetRotation;
@@ -22,17 +22,21 @@ public class Projectile : MonoBehaviour
         if (enemy != null)
         {
             transform.LookAt(enemy.transform);
+            transform.rotation *= offsetRotation;
+
+            // Move towards enemy
+            transform.localPosition += transform.up * speed * Time.deltaTime;
+
+            // Check if hit enemy
+            Vector3 dir = enemy.transform.position - transform.position;
+            if (dir.sqrMagnitude < Mathf.Pow(hitDistance, 2))
+            {
+                EnemyHit();
+            }
         }
-        transform.rotation *= offsetRotation;
-
-        // Move towards enemy
-        transform.localPosition += transform.up * speed * Time.deltaTime;
-
-        // Check if hit enemy
-        Vector3 dir = enemy.transform.position - transform.position;
-        if (dir.sqrMagnitude < Mathf.Pow(hitDistance, 2))
+        else
         {
-            EnemyHit();
+            Destroy(gameObject);
         }
     }
 

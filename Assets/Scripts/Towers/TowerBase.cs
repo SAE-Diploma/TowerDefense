@@ -7,14 +7,15 @@ public class TowerBase : MonoBehaviour
 
     [SerializeField] protected float range;
     [SerializeField] protected int damage;
-    [SerializeField] protected float attackspeed;
+    [SerializeField] protected float attackSpeed;
+    [SerializeField] protected float projectileSpeed;
 
     GameObject enemiesParent;
     List<GameObject> enemiesInRange;
     GameObject turret;
     Shoot turretShoot;
 
-    bool shot = false;
+    [SerializeField] bool shot = false;
 
     protected virtual void Start()
     {
@@ -43,12 +44,13 @@ public class TowerBase : MonoBehaviour
         if (enemiesInRange.Count > 0)
         {
             GameObject enemy = GetProritizedEnemy(enemiesInRange);
-            Debug.DrawLine(transform.position, enemy.transform.position,Color.red,Time.deltaTime);
+            Debug.DrawLine(transform.position, enemy.transform.position, Color.red, Time.deltaTime);
             aimAtEnemy(enemy);
             if (!shot)
             {
-                turretShoot.ShootAt(enemy);
+                turretShoot.ShootAt(enemy, damage, projectileSpeed);
                 shot = true;
+                StartCoroutine(ShootCooldown(attackSpeed));
             }
         }
     }
@@ -102,5 +104,11 @@ public class TowerBase : MonoBehaviour
     public void aimAtEnemy(GameObject enemy)
     {
         turret.transform.LookAt(enemy.transform);
+    }
+
+    private IEnumerator ShootCooldown(float attackSpeed)
+    {
+        yield return new WaitForSeconds(attackSpeed);
+        shot = false;
     }
 }

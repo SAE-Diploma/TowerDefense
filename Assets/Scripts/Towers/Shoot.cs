@@ -15,6 +15,8 @@ public class Shoot : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab,spawnOrigin.transform.position,Quaternion.identity);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
+        projectileScript.SetDamage(damage);
+        projectileScript.SetSpeed(speed);
         projectileScript.SetEnemy(enemy);
     }
 }
