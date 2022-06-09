@@ -4,17 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public enum Panels : int
+public enum Menus : int
 {
-    Interaction = 0,
-    ChooseTower = 1
+    ChooseTower = 0,
 }
 
 
 public class UIManager : MonoBehaviour
 {
-
-    [SerializeField] List<Image> panels;
+    [SerializeField] GameObject interactionPanel;
+    [SerializeField] List<Image> menus;
 
 
     // Start is called before the first frame update
@@ -29,12 +28,15 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void TogglePanel(Panels panel)
+    public void SetMenuVisibility(Menus menu,bool visibility)
     {
-        //panels[(int)panel].enabled = !panels[(int)panel].enabled;
-        GameObject obj = panels[(int)panel].gameObject;
-        obj.SetActive(!obj.activeSelf);
+        GameObject obj = menus[(int)menu].gameObject;
+        obj.SetActive(visibility);
     }
 
+    public void SetInteractionVisibility(bool visibility)
+    {
+        interactionPanel.SetActive(visibility);
+    }
 
 }

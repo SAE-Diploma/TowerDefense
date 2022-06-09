@@ -50,7 +50,6 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         // disable movement when wanted
         if (!canMove) return;
 
