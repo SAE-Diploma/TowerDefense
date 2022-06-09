@@ -12,6 +12,7 @@ public class Player_Mouselook : MonoBehaviour
     float rotationY = 0;
 
     Transform player;
+    Player_Movement movement;
 
     [Header("Clamping")]
     [SerializeField, Range(-90f, 90f)] float minimumY;
@@ -21,12 +22,17 @@ public class Player_Mouselook : MonoBehaviour
     void Start()
     {
         player = transform.parent;
+        movement = player.GetComponent<Player_Movement>();
         originalCamRotation = transform.localRotation;
         originalPlayerRotation = player.localRotation;
     }
 
     void Update()
     {
+        // terminate the player can't move
+        if (!movement.CanMove) return;
+
+        // Mouselook logic
         if (Input.GetMouseButton(1))
         {
             rotationX += Input.GetAxis("Mouse X") * sensitivityX;

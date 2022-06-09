@@ -14,6 +14,7 @@ public class Player_Interaction : MonoBehaviour
 {
     [SerializeField] GameManager manager;
     [SerializeField] UIManager uiManager;
+    Player_Movement movement;
 
     [Header("Coins")]
     [SerializeField] float coinAttractionRange;
@@ -22,7 +23,7 @@ public class Player_Interaction : MonoBehaviour
 
     void Start()
     {
-
+        movement = gameObject.GetComponent<Player_Movement>();
     }
 
     private void Update()
@@ -54,6 +55,7 @@ public class Player_Interaction : MonoBehaviour
         {
             case Interactions.PlaceTower:
                 uiManager.TogglePanel(Panels.ChooseTower);
+                movement.CanPlayerMove(!movement.CanMove);
                 break;
         }
     }

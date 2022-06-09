@@ -9,8 +9,10 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] float airSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] bool moveInAir;
-    bool isGrounded;
-    bool isMoving;
+    private bool isGrounded;
+    private bool isMoving;
+    private bool canMove = true;
+    public bool CanMove => canMove;
 
     Vector3 inputDir;
     Vector3 forward;
@@ -44,12 +46,14 @@ public class Player_Movement : MonoBehaviour
             }
         } else { inputDir *= airSpeed; }
 
-        //Debug.DrawLine(transform.position, transform.position + forward * 10, Color.red, Time.deltaTime);
-
     }
 
     private void FixedUpdate()
     {
+
+        // disable movement when wanted
+        if (!canMove) return;
+
         // check for the ground and set the forward vector parallel to it
         if (Physics.Raycast(transform.position, -transform.up, out groundHit,rayLength))
         {
@@ -96,6 +100,11 @@ public class Player_Movement : MonoBehaviour
                 m_rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
         }
+    }
+
+    public void CanPlayerMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 
 }
