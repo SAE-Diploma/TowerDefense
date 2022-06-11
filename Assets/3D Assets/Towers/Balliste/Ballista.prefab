@@ -97,8 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e202674071437234e85098e3ac822723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1156803670215244, guid: 65d7e2f41d2be8e48995bb4070bbeca1, type: 3}
-  spawnOrigin: {fileID: 5545808449635365285}
 --- !u!1 &1326093064322132
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4939996705135754}
-  - component: {fileID: 8827109309796817249}
+  - component: {fileID: 229216125899778139}
   m_Layer: 0
   m_Name: Ballista
   m_TagString: Untagged
@@ -133,7 +131,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8827109309796817249
+--- !u!114 &229216125899778139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,12 +140,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326093064322132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441938b5566afe345a76533a573a5811, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d60fe81378018e41ba874b065a80171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 20
-  damage: 1
-  attackspeed: 1
 --- !u!1 &1414511323558576
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +155,7 @@ GameObject:
   - component: {fileID: 33586998647412368}
   - component: {fileID: 23027622446349308}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: TowerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

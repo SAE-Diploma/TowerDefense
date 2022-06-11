@@ -8,18 +8,19 @@ public class Enemy : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] float moveSpeed;
+    [SerializeField] float randomOffset;
 
-    [Header("Checkpoints")]
-    [SerializeField] float sqrDistToNextPoint;
-    [SerializeField] float progress = 0;
-    [SerializeField] GameObject checkpointsParent; // only for testing 
-    List<Vector3> checkpoints;
-    [SerializeField] int currentCheckpointIndex = 0;
+    float sqrDistToNextPoint;
+    float progress = 0;
+
+    // Checkpoints
+    List<Vector3> checkpoints = new List<Vector3>();
+    int currentCheckpointIndex = 0;
 
     [Header("Attacking")]
     [SerializeField] float attackSpeed;
     [SerializeField] int damage;
-    [SerializeField] Tresor tresor;
+    Tresor tresor;
     private bool isAttacking = false;
 
     [Header("On Death")]
@@ -27,27 +28,26 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     float randomDropDistance = 0.5f;
 
-
-    void Start()
+    private void Start()
     {
-        checkpoints = new List<Vector3>();
-        SetCheckPoints(checkpointsParent);
-
-        transform.position = checkpoints[currentCheckpointIndex];
+        transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
     }
 
     void Update()
     {
-        if (currentCheckpointIndex < checkpoints.Count)
+        if (checkpoints.Count > 0)
         {
-            MoveToCheckpoint(checkpoints[currentCheckpointIndex]);
-        }
-        else
-        {
-            if (!isAttacking)
+            if (currentCheckpointIndex < checkpoints.Count)
             {
-                StartCoroutine(AttackTresor(attackSpeed));
-                isAttacking = true;
+                MoveToCheckpoint(checkpoints[currentCheckpointIndex]);
+            }
+            else
+            {
+                if (!isAttacking)
+                {
+                    StartCoroutine(AttackTresor(attackSpeed));
+                    isAttacking = true;
+                }
             }
         }
     }
@@ -88,8 +88,13 @@ public class Enemy : MonoBehaviour
     {
         foreach (Transform t in cpParent.transform)
         {
-            checkpoints.Add(new Vector3(t.position.x, transform.position.y, t.position.z));
+            checkpoints.Add(new Vector3(t.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, t.position.z + Random.Range(-randomOffset, randomOffset)));
         }
+    }
+
+    public void SetTresor(Tresor tresor)
+    {
+        this.tresor = tresor;
     }
 
     /// <summary>
@@ -126,4 +131,5 @@ public class Enemy : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }

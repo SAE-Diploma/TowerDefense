@@ -10,12 +10,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerController Player;
     [SerializeField] TextMeshProUGUI coinsText;
-    int _coins = 0;
 
     [Header("Towers")]
     [SerializeField] Transform towerParent;
-    [SerializeField] GameObject[] towerPrefabs;
+    [SerializeField] Tower[] towers;
 
+    private int _coins = 0;
     public int Coins
     {
         get { return _coins; }
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.visible = defaultCursorVisibility;
+        Coins += 100;
     }
 
     // Update is called once per frame
@@ -49,16 +50,27 @@ public class GameManager : MonoBehaviour
         Coins += amount;
     }
 
-    public void PlaceTower(int towerIndex)
+    public void PlaceTower(Tower towerToSpawn)
     {
-        if (Player.PlaceTower != null)
+        if (Player.PlaceTower != null && towerToSpawn != null)
         {
             if (Player.PlaceTower.Tower == null)
             {
-                GameObject tower = Instantiate(towerPrefabs[towerIndex],Player.PlaceTower.Place.position,Quaternion.identity,towerParent);
-                Player.PlaceTower.SetTower(tower);
+                if (Coins >= towerToSpawn.Cost)
+                {
+                    GameObject tower = Instantiate(towerToSpawn.TowerPrefab,Player.PlaceTower.Place.position,Quaternion.identity,towerParent);
+                    TowerBase towerBase = tower.GetComponent<TowerBase>();
+                    towerBase.Initialize(towerToSpawn);
+                    Player.PlaceTower.SetTower(tower);
+                    Coins -= towerToSpawn.Cost;
+                }
             }
         }
+    }
+
+    public void test(Tower tower)
+    {
+
     }
 
     #region UI Stuff

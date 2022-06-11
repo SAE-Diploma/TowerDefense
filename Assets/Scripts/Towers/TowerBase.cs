@@ -5,19 +5,20 @@ using UnityEngine;
 public class TowerBase : MonoBehaviour
 {
 
-    [SerializeField] protected float range;
-    [SerializeField] protected int damage;
-    [SerializeField] protected float attackSpeed;
-    [SerializeField] protected float projectileSpeed;
+    private float range;
+    private int damage;
+    private float attackSpeed; // rounds per seconds
+    private float projectileSpeed;
+    private GameObject projectilePrefab;
 
     GameObject enemiesParent;
     List<GameObject> enemiesInRange;
     GameObject turret;
     Shoot turretShoot;
 
-    [SerializeField] bool shot = false;
+    bool shot = false;
 
-    protected virtual void Start()
+    private void Start()
     {
         enemiesParent = GameObject.Find("Enemies");
         if (enemiesParent == null)
@@ -30,7 +31,7 @@ public class TowerBase : MonoBehaviour
         turretShoot = turret.GetComponent<Shoot>();
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         // make sure that the enemiesParent was found
         if (enemiesParent == null)
@@ -45,21 +46,30 @@ public class TowerBase : MonoBehaviour
         {
             GameObject enemy = GetProritizedEnemy(enemiesInRange);
             Debug.DrawLine(transform.position, enemy.transform.position, Color.red, Time.deltaTime);
-            aimAtEnemy(enemy);
+            turret.transform.LookAt(enemy.transform);
             if (!shot)
             {
-                turretShoot.ShootAt(enemy, damage, projectileSpeed);
+                turretShoot.ShootAt(enemy, projectilePrefab, damage, projectileSpeed);
                 shot = true;
-                StartCoroutine(ShootCooldown(attackSpeed));
+                StartCoroutine(ShootCooldown(1 / attackSpeed));
             }
         }
+    }
+
+    public void Initialize(Tower towerSpecs)
+    {
+        range = towerSpecs.Range;
+        damage = towerSpecs.Damage;
+        attackSpeed = towerSpecs.Attackspeed;
+        projectileSpeed = towerSpecs.ProjectileSpeed;
+        projectilePrefab = towerSpecs.ProjectilePrefab;
     }
 
     /// <summary>
     /// get all enemies that are in range.
     /// </summary>
     /// <param name="enemies">reference to the enemiesInRange list</param>
-    protected void GetEnemiesInRange(ref List<GameObject> enemies)
+    private void GetEnemiesInRange(ref List<GameObject> enemies)
     {
         enemies.Clear();
         foreach (Transform enemy in enemiesParent.transform)
@@ -77,7 +87,7 @@ public class TowerBase : MonoBehaviour
     /// </summary>
     /// <param name="enemiesInRange">all enemies in Range</param>
     /// <returns>Enemy to shoot at</returns>
-    protected GameObject GetProritizedEnemy(List<GameObject> enemiesInRange)
+    private GameObject GetProritizedEnemy(List<GameObject> enemiesInRange)
     {
         // ToDoo:
         // Consider aming on the enemy that has the highes progression score
@@ -101,14 +111,14 @@ public class TowerBase : MonoBehaviour
         return null;
     }
 
-    public void aimAtEnemy(GameObject enemy)
+    /// <summary>
+    /// waits for the cooldown before reseting the shot variable
+    /// </summary>
+    /// <param name="cooldown">time in second to wait before reseting</param>
+    /// <returns></returns>
+    private IEnumerator ShootCooldown(float cooldown)
     {
-        turret.transform.LookAt(enemy.transform);
-    }
-
-    private IEnumerator ShootCooldown(float attackSpeed)
-    {
-        yield return new WaitForSeconds(attackSpeed);
+        yield return new WaitForSeconds(cooldown);
         shot = false;
     }
 }
