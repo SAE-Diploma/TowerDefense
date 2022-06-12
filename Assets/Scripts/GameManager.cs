@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private Stack<Menus> currentOpenMenu = new Stack<Menus>();
+
     void Start()
     {
         Cursor.visible = defaultCursorVisibility;
@@ -37,7 +39,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            CloseMenu(Menus.ChooseTower);
+            Menus topMostMenu = currentOpenMenu.Pop();
+            CloseMenu(topMostMenu);
         }
     }
 
@@ -58,19 +61,36 @@ public class GameManager : MonoBehaviour
             {
                 if (Coins >= towerToSpawn.Cost)
                 {
-                    GameObject tower = Instantiate(towerToSpawn.TowerPrefab,Player.PlaceTower.Place.position,Quaternion.identity,towerParent);
+                    GameObject tower = Instantiate(towerToSpawn.TowerPrefab, Player.PlaceTower.Place.position, Quaternion.identity, towerParent);
                     TowerBase towerBase = tower.GetComponent<TowerBase>();
-                    towerBase.Initialize(towerToSpawn);
+                    towerBase.SetTower(towerToSpawn);
                     Player.PlaceTower.SetTower(tower);
                     Coins -= towerToSpawn.Cost;
+                    CloseMenu(Menus.ChooseTower);
                 }
             }
         }
     }
 
-    public void test(Tower tower)
+    public void DeleteTower()
     {
+        TowerPlace towerPlace = Player.PlaceTower;
+        Coins += Mathf.RoundToInt(towerPlace.Tower.GetComponent<TowerBase>().Tower.Cost * 0.75f);
+        Destroy(towerPlace.Tower);
+        towerPlace.SetTower(null);
+        CloseMenu(Menus.TowerUpgrades);
+    }
 
+    public void UpgradeTower(int towerStatIndex)
+    {
+        TowerStat stat = (TowerStat)towerStatIndex;
+        TowerBase towerBase = Player.PlaceTower.Tower.GetComponent<TowerBase>();
+        int newCoinValue = towerBase.UpgradeStat(stat,Coins);
+        if (newCoinValue != -1)
+        {
+            Coins = newCoinValue;
+            uiManager.UpdateTowerUpgradePanel(towerBase);
+        }
     }
 
     #region UI Stuff
@@ -78,14 +98,22 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Shows the menu
     /// </summary>
-    /// <param name="panel">the menu to show</param>
+    /// <param name="menu">the menu to show</param>
     /// <param name="movement">can the player move when the menu is open</param>
     /// <param name="showCursor">should the cursor be visiblie in the menu</param>
-    public void OpenMenu(Menus panel, bool movement = false, bool showCursor = true)
+    public void OpenMenu(Menus menu, bool movement = false, bool showCursor = true)
     {
-        uiManager.SetMenuVisibility(Menus.ChooseTower, true);
+        uiManager.SetMenuVisibility(menu, true);
         Player.SetMovability(movement);
+        currentOpenMenu.Push(menu);
         Cursor.visible = true;
+
+        switch (menu)
+        {
+            case Menus.TowerUpgrades:
+                uiManager.UpdateTowerUpgradePanel(Player.PlaceTower.Tower.GetComponent<TowerBase>());
+                break;
+        }
     }
 
     /// <summary>
@@ -97,6 +125,15 @@ public class GameManager : MonoBehaviour
         uiManager.SetMenuVisibility(menu, false);
         Player.SetMovability(true);
         Cursor.visible = defaultCursorVisibility;
+        if (menu == currentOpenMenu.Peek())
+        {
+            currentOpenMenu.Pop();
+        }
+        else
+        {
+            Menus topMostMenu = currentOpenMenu.Pop();
+            CloseMenu(topMostMenu);
+        }
     }
 
     /// <summary>

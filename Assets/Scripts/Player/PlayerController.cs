@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public enum Interactions
 {
     None,
-    ChooseTower
+    TowerPlace
 }
 
 public class PlayerController : MonoBehaviour
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.tag == "towerPlace")
             {
-                CurrentInteraction = Interactions.ChooseTower;
+                CurrentInteraction = Interactions.TowerPlace;
                 placeTower = hit.transform.GetComponent<TowerPlace>();
             }
             else
@@ -93,8 +93,15 @@ public class PlayerController : MonoBehaviour
     {
         switch (CurrentInteraction)
         {
-            case Interactions.ChooseTower:
-                manager.OpenMenu(Menus.ChooseTower);
+            case Interactions.TowerPlace:
+                if (placeTower.Tower == null)
+                {
+                    manager.OpenMenu(Menus.ChooseTower);
+                }
+                else
+                {
+                    manager.OpenMenu(Menus.TowerUpgrades);
+                }
                 break;
         }
     }

@@ -4,19 +4,69 @@ using UnityEngine;
 
 public class TowerBase : MonoBehaviour
 {
-
-    private float range;
-    private int damage;
+    // Attackspeed
     private float attackSpeed; // rounds per seconds
+    public float AttackSpeed => attackSpeed;
+
+    private int attackSpeedLevel = 1;
+    public int AttackSpeedLevel
+    {
+        get { return attackSpeedLevel; }
+        private set { attackSpeedLevel = value; }
+    }
+
+    // Damage
+    private int damage;
+    public int Damage => damage;
+
+    private int damageLevel = 1;
+    public int DamageLevel
+    {
+        get { return damageLevel; }
+        private set { damageLevel = value; }
+    }
+
+    // Range
+    private float range;
+    public float Range => range;
+
+    private int rangeLevel = 1;
+    public int RangeLevel
+    {
+        get { return rangeLevel; }
+        private set { rangeLevel = value; }
+    }
+
+    // ProjectileSpeed
     private float projectileSpeed;
+    public float ProjectileSpeed => projectileSpeed;
+
+    private int projectileSpeedLevel = 1;
+    public int ProjectileSpeedLevel
+    {
+        get { return projectileSpeedLevel; }
+        private set { projectileSpeedLevel = value; }
+    }
+
+    private Tower tower;
+    public Tower Tower
+    {
+        get { return tower; }
+        private set
+        {
+            tower = value;
+            Initialize(tower);
+        }
+    }
+    public void SetTower(Tower tower) { Tower = tower; }
+
     private GameObject projectilePrefab;
+    private GameObject enemiesParent;
+    private List<GameObject> enemiesInRange;
+    private GameObject turret;
+    private Shoot turretShoot;
+    private bool shot = false;
 
-    GameObject enemiesParent;
-    List<GameObject> enemiesInRange;
-    GameObject turret;
-    Shoot turretShoot;
-
-    bool shot = false;
 
     private void Start()
     {
@@ -56,7 +106,8 @@ public class TowerBase : MonoBehaviour
         }
     }
 
-    public void Initialize(Tower towerSpecs)
+
+    private void Initialize(Tower towerSpecs)
     {
         range = towerSpecs.Range;
         damage = towerSpecs.Damage;
@@ -98,7 +149,7 @@ public class TowerBase : MonoBehaviour
     /// get the child with the Name "Turret"
     /// </summary>
     /// <returns>the GameObject of the Turret or null if not found</returns>
-    public GameObject GetTurret()
+    private GameObject GetTurret()
     {
         foreach (Transform child in transform)
         {
@@ -121,4 +172,52 @@ public class TowerBase : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         shot = false;
     }
+
+    public int UpgradeStat(TowerStat stat, int coins)
+    {
+        int cost = 0;
+        switch (stat)
+        {
+            case TowerStat.Attackspeed:
+                cost = (AttackSpeedLevel) * this.Tower.AttackspeedUpgradeCost;
+                if (coins >= cost)
+                {
+                    attackSpeedLevel++;
+                    attackSpeed += this.Tower.AttackspeedUpgradeValue;
+                    return coins - cost;
+                }
+                else { return -1; }
+            case TowerStat.Damage:
+                cost = (DamageLevel) * this.Tower.DamageUpgradeCost;
+                if (coins >= cost)
+                {
+                    damageLevel++;
+                    damage += this.Tower.DamageUpgradeValue;
+                    return coins - cost;
+                }
+                else { return -1; }
+            case TowerStat.Range:
+                cost = (RangeLevel) * this.Tower.RangeUpgradeCost;
+                if (coins >= cost)
+                {
+                    RangeLevel++;
+                    range += this.Tower.RangeUpgradeValue;
+                    return coins - cost;
+                }
+                else { return -1; }
+            case TowerStat.ProjectileSpeed:
+                cost = (ProjectileSpeedLevel) * this.Tower.ProjectileSpeedUpgradeCost;
+                if (coins >= cost)
+                {
+                    ProjectileSpeedLevel++;
+                    projectileSpeed += this.Tower.ProjectileSpeedUpgradeValue;
+                    return coins - cost;
+                }
+                else { return -1; }
+            default:
+                return -1;
+        }
+
+    }
+
 }
