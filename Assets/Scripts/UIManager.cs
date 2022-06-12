@@ -28,18 +28,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI projectileSpeedValue;
     [SerializeField] TextMeshProUGUI projectileSpeedCost;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [Header("Waves")]
+    [SerializeField] TextMeshProUGUI currentWaveText;
+    [SerializeField] TextMeshProUGUI timer;
 
     public void SetMenuVisibility(Menus menu, bool visibility)
     {
@@ -51,7 +42,6 @@ public class UIManager : MonoBehaviour
     {
         interactionPanel.SetActive(visibility);
     }
-
 
     public void UpdateTowerUpgradePanel(TowerBase tower)
     {
@@ -90,5 +80,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateWaveCounter(int currentWave, int maxWaveCount)
+    {
+        currentWaveText.text = $"Wave {currentWave}/{maxWaveCount}";
+    }
 
+    public void ShowRemainingTime(int remainingSeconds)
+    {
+        timer.text = SecondsToTime(remainingSeconds);
+    }
+
+    private string SecondsToTime(int timeInSeconds)
+    {
+        int minutes = Mathf.FloorToInt(timeInSeconds / 60);
+        int seconds = timeInSeconds - minutes * 60;
+        string secondsString = seconds < 10 ? $"0{seconds}" : seconds.ToString();
+        return $"{minutes}:{secondsString}";
+    }
 }

@@ -15,6 +15,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform towerParent;
     [SerializeField] Tower[] towers;
 
+    [Header("Waves")]
+    [SerializeField] Spawner spawner;
+    [SerializeField] int maxWaves;
+    [SerializeField] int startEnemyCount;
+    [SerializeField] float enemyCountMultiplier;
+    [SerializeField, Tooltip("In Seconds")] int timeBetweenWaves;
+    [SerializeField] float spawnInterval;
+    [SerializeField] float spawnIntervalMutliplier;
+
     private int _coins = 0;
     public int Coins
     {
@@ -26,21 +35,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private int _currentWave;
+    public int CurrentWave
+    {
+        get { return _currentWave; }
+        private set
+        {
+            _currentWave = value;
+            UpdateWaveCounter();
+        }
+    }
+
     private Stack<Menus> currentOpenMenu = new Stack<Menus>();
 
     void Start()
     {
         Cursor.visible = defaultCursorVisibility;
+        if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
         Coins += 100;
+        CurrentWave = 1;
+        StartCoroutine(WaitForNextWave(timeBetweenWaves));
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Menus topMostMenu = currentOpenMenu.Pop();
-            CloseMenu(topMostMenu);
+            if (currentOpenMenu.Count > 0)
+            {
+                Menus topMostMenu = currentOpenMenu.Peek();
+                CloseMenu(topMostMenu);
+            }
         }
     }
 
@@ -52,6 +77,40 @@ public class GameManager : MonoBehaviour
     {
         Coins += amount;
     }
+
+    private IEnumerator WaitForNextWave(int timeInSeconds)
+    {
+        int remaining = timeInSeconds;
+        uiManager.ShowRemainingTime(remaining);
+
+        while (remaining > 0)
+        {
+            yield return new WaitForSeconds(1);
+            remaining--;
+            uiManager.ShowRemainingTime(remaining);
+        }
+        StartCoroutine(SpawnWave(spawnInterval * Mathf.Pow(spawnIntervalMutliplier, CurrentWave - 1), Mathf.RoundToInt(startEnemyCount * Mathf.Pow(enemyCountMultiplier, CurrentWave - 1))));
+    }
+
+    private IEnumerator SpawnWave(float spawnDelay, int enemyCount)
+    {
+        for (int i = 0; i < enemyCount; i++)
+        {
+            yield return new WaitForSeconds(spawnDelay);
+            spawner.SpawnEnemy();
+        }
+        if (CurrentWave <= maxWaves)
+        {
+            StartCoroutine(WaitForNextWave(timeBetweenWaves));
+            CurrentWave++;
+        }
+        else
+        {
+            Debug.Log("You won the Game!");
+        }
+    }
+
+    #region Tower Logic
 
     public void PlaceTower(Tower towerToSpawn)
     {
@@ -85,7 +144,7 @@ public class GameManager : MonoBehaviour
     {
         TowerStat stat = (TowerStat)towerStatIndex;
         TowerBase towerBase = Player.PlaceTower.Tower.GetComponent<TowerBase>();
-        int newCoinValue = towerBase.UpgradeStat(stat,Coins);
+        int newCoinValue = towerBase.UpgradeStat(stat, Coins);
         if (newCoinValue != -1)
         {
             Coins = newCoinValue;
@@ -97,7 +156,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    #region UI Stuff
+    #endregion
+
+    #region UI handling
 
     /// <summary>
     /// Shows the menu
@@ -111,6 +172,7 @@ public class GameManager : MonoBehaviour
         Player.SetMovability(movement);
         currentOpenMenu.Push(menu);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         switch (menu)
         {
@@ -129,6 +191,8 @@ public class GameManager : MonoBehaviour
         uiManager.SetMenuVisibility(menu, false);
         Player.SetMovability(true);
         Cursor.visible = defaultCursorVisibility;
+        if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
+
         if (menu == currentOpenMenu.Peek())
         {
             currentOpenMenu.Pop();
@@ -147,6 +211,11 @@ public class GameManager : MonoBehaviour
     public void CloseMenu(int enumIndex)
     {
         CloseMenu((Menus)enumIndex);
+    }
+
+    public void UpdateWaveCounter()
+    {
+        uiManager.UpdateWaveCounter(CurrentWave, maxWaves);
     }
 
     #endregion

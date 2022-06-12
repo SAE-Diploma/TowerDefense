@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] int coinsDropped;
     [SerializeField] GameObject coinPrefab;
     float randomDropDistance = 0.5f;
+    Transform coinsParent;
 
     private void Start()
     {
@@ -97,6 +98,11 @@ public class Enemy : MonoBehaviour
         this.tresor = tresor;
     }
 
+    public void SetCoinParent(Transform parent)
+    {
+        coinsParent = parent;
+    }
+
     /// <summary>
     /// Decrease health or die if low on health
     /// </summary>
@@ -125,7 +131,7 @@ public class Enemy : MonoBehaviour
         for (int i = 0; i < coinsDropped; i++)
         {
             Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
-            GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity);
+            GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity, coinsParent);
             Coin coin = coinObject.GetComponent<Coin>();
             coin.SetValue(1);
         }

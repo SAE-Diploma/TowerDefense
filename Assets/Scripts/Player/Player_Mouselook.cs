@@ -29,21 +29,19 @@ public class Player_Mouselook : MonoBehaviour
 
     void Update()
     {
-        // terminate the player can't move
-        if (!movement.CanMove) return;
 
         // Mouselook logic
-        if (Input.GetMouseButton(1))
+        if (movement.CanMove)
         {
             rotationX += Input.GetAxis("Mouse X") * sensitivityX;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationX = CapRotation(rotationX);
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-            Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
-            Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
-            transform.localRotation = originalCamRotation * quaternionY;
-            player.localRotation = originalPlayerRotation * quaternionX;
         }
+        Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
+        Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
+        player.localRotation = originalPlayerRotation * quaternionX;
+        transform.localRotation = originalCamRotation * quaternionY;
     }
 
     private float CapRotation(float rotation)
