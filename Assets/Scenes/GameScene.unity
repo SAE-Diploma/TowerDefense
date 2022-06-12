@@ -1161,6 +1161,7 @@ GameObject:
   - component: {fileID: 376098321}
   - component: {fileID: 376098323}
   - component: {fileID: 376098322}
+  - component: {fileID: 376098324}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -1285,6 +1286,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376098320}
   m_CullTransparentMesh: 1
+--- !u!95 &376098324
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376098320}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a739decb1b21c4499f451e452feaae8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &465213588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1503,7 @@ GameObject:
   - component: {fileID: 523388772}
   - component: {fileID: 523388774}
   - component: {fileID: 523388773}
+  - component: {fileID: 523388775}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -1606,6 +1628,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523388771}
   m_CullTransparentMesh: 1
+--- !u!95 &523388775
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523388771}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a739decb1b21c4499f451e452feaae8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &550750759
 GameObject:
   m_ObjectHideFlags: 0
@@ -2852,6 +2894,7 @@ GameObject:
   - component: {fileID: 859749856}
   - component: {fileID: 859749858}
   - component: {fileID: 859749857}
+  - component: {fileID: 859749859}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -2976,6 +3019,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859749855}
   m_CullTransparentMesh: 1
+--- !u!95 &859749859
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859749855}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a739decb1b21c4499f451e452feaae8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &861396927
 GameObject:
   m_ObjectHideFlags: 0
@@ -6288,6 +6351,7 @@ GameObject:
   - component: {fileID: 1538540135}
   - component: {fileID: 1538540137}
   - component: {fileID: 1538540136}
+  - component: {fileID: 1538540138}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -6414,6 +6478,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538540134}
   m_CullTransparentMesh: 1
+--- !u!95 &1538540138
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538540134}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a739decb1b21c4499f451e452feaae8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1557608094
 GameObject:
   m_ObjectHideFlags: 0

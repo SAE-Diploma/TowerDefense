@@ -66,4 +66,29 @@ public class UIManager : MonoBehaviour
         projectileSpeedCost.text = ((tower.ProjectileSpeedLevel) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
     }
 
+    public void UpdateTowerMenuCoinError(TowerStat stat)
+    {
+        Animator animator;
+        switch (stat)
+        {
+            case TowerStat.Attackspeed:
+                animator = attackSpeedCost.GetComponent<Animator>();
+                animator.SetTrigger("NotEnoughCoins");
+                break;
+            case TowerStat.Damage:
+                animator = damageCost.GetComponent<Animator>();
+                animator.SetTrigger("NotEnoughCoins");
+                break;
+            case TowerStat.Range:
+                animator = rangeCost.GetComponent<Animator>();
+                animator.SetTrigger("NotEnoughCoins");
+                break;
+            case TowerStat.ProjectileSpeed:
+                animator = projectileSpeedCost.GetComponent<Animator>();
+                animator.SetTrigger("NotEnoughCoins");
+                break;
+        }
+    }
+
+
 }

@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
             Coins = newCoinValue;
             uiManager.UpdateTowerUpgradePanel(towerBase);
         }
+        else
+        {
+            uiManager.UpdateTowerMenuCoinError(stat);
+        }
     }
 
     #region UI Stuff
