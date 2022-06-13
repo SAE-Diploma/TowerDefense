@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: 
   towerName: Sniper
-  icon: {fileID: 21300000, guid: c4f97e4090e57f74884ae994e3137665, type: 3}
+  icon: {fileID: 21300000, guid: aa1146bffbc636142bf46cc514830c84, type: 3}
   towerPrefab: {fileID: 2514064306076533324, guid: c604fb1f138c9e14ca090cbee14861ce, type: 3}
   projectilePrefab: {fileID: 8665575844502894687, guid: 3d8a361f87641af45a7a37b18441e710, type: 3}
   cost: 75
