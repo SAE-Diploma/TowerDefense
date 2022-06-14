@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,9 +65,47 @@ public class GameManager : MonoBehaviour
             if (currentOpenMenu.Count > 0)
             {
                 Menus topMostMenu = currentOpenMenu.Peek();
-                CloseMenu(topMostMenu);
+                if (topMostMenu == Menus.PauseMenu)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    CloseMenu(topMostMenu);
+                }
+            }
+            else
+            {
+                PauseGame();
             }
         }
+    }
+
+    /// <summary>
+    /// Pause the game and show the pause overlay
+    /// </summary>
+    public void PauseGame()
+    {
+        OpenMenu(Menus.PauseMenu);
+        Time.timeScale = 0;
+    }
+
+    /// <summary>
+    /// resume the game and hide the play overlay
+    /// </summary>
+    public void ResumeGame()
+    {
+        CloseMenu(Menus.PauseMenu);
+        Time.timeScale = 1;
+    }
+
+    /// <summary>
+    /// Load the main menu scene
+    /// </summary>
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>
@@ -78,6 +117,11 @@ public class GameManager : MonoBehaviour
         Coins += amount;
     }
 
+    /// <summary>
+    /// Cooldown bevor next Wave is spawning
+    /// </summary>
+    /// <param name="timeInSeconds">time between waves</param>
+    /// <returns></returns>
     private IEnumerator WaitForNextWave(int timeInSeconds)
     {
         int remaining = timeInSeconds;
@@ -92,6 +136,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnWave(spawnInterval * Mathf.Pow(spawnIntervalMutliplier, CurrentWave - 1), Mathf.RoundToInt(startEnemyCount * Mathf.Pow(enemyCountMultiplier, CurrentWave - 1))));
     }
 
+    /// <summary>
+    /// Spawns a wave
+    /// </summary>
+    /// <param name="spawnDelay">time between spawns</param>
+    /// <param name="enemyCount">how many enemies should be spawned</param>
+    /// <returns></returns>
     private IEnumerator SpawnWave(float spawnDelay, int enemyCount)
     {
         for (int i = 0; i < enemyCount; i++)
@@ -213,6 +263,9 @@ public class GameManager : MonoBehaviour
         CloseMenu((Menus)enumIndex);
     }
 
+    /// <summary>
+    /// Set the UI Wave Counter
+    /// </summary>
     public void UpdateWaveCounter()
     {
         uiManager.UpdateWaveCounter(CurrentWave, maxWaves);

@@ -26,6 +26,7 @@ public class Player_Movement : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         m_collider = GetComponent<CapsuleCollider>();
         rayLength = m_collider.bounds.extents.y + 0.2f;
+        canMove = true;
     }
 
     void Update()
