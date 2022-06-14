@@ -2116,7 +2116,7 @@ MonoBehaviour:
   towers:
   - {fileID: 11400000, guid: aa9dfea214ee80e4bb5f73e216131f72, type: 2}
   spawner: {fileID: 1396180871}
-  maxWaves: 10
+  maxWaves: 1
   startEnemyCount: 10
   enemyCountMultiplier: 1.5
   timeBetweenWaves: 10
@@ -8007,7 +8007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396180867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9, y: 0.5, z: -39.64}
+  m_LocalPosition: {x: 4.9, y: 0, z: -39.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8076,10 +8076,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d1125eaa4dec348abd9fb0437fd90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 315417367714447012, guid: 31e199fca7a284f4abe05f85f1da007f, type: 3}
+  enemyPrefab: {fileID: 3936276331223816418, guid: 31e199fca7a284f4abe05f85f1da007f, type: 3}
+  bossPrefab: {fileID: 6491060369193897908, guid: fcb8ea73bcf7cac48b1279ca47554f3b, type: 3}
   coinsParent: {fileID: 661188447}
   checkpointsParent: {fileID: 1952010472}
-  tresor: {fileID: 0}
+  tresor: {fileID: 7566693077643904525}
 --- !u!1 &1413554095
 GameObject:
   m_ObjectHideFlags: 0

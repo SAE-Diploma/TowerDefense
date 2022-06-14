@@ -144,12 +144,21 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SpawnWave(float spawnDelay, int enemyCount)
     {
+        bool isLastWave = CurrentWave == maxWaves;
+
         for (int i = 0; i < enemyCount; i++)
         {
             yield return new WaitForSeconds(spawnDelay);
-            spawner.SpawnEnemy();
+            if (isLastWave && i == enemyCount - 1)
+            {
+                spawner.SpawnEnemy(true);
+            }
+            else
+            {
+                spawner.SpawnEnemy();
+            }
         }
-        if (CurrentWave <= maxWaves)
+        if (CurrentWave < maxWaves)
         {
             StartCoroutine(WaitForNextWave(timeBetweenWaves));
             CurrentWave++;
