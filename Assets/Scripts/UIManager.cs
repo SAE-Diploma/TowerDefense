@@ -10,6 +10,8 @@ public enum Menus : int
     ChooseTower = 0,
     TowerUpgrades = 1,
     PauseMenu = 2,
+    WinMenu = 3,
+    LooseMenu = 4,
 }
 
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Tresor : MonoBehaviour
@@ -11,7 +12,7 @@ public class Tresor : MonoBehaviour
     public int Health
     {
         get { return health; }
-        set
+        private set
         {
             health = value;
             if (healthBar != null)
@@ -20,6 +21,8 @@ public class Tresor : MonoBehaviour
             }
         }
     }
+
+    [SerializeField] private UnityEvent destroyed = new UnityEvent();
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +52,8 @@ public class Tresor : MonoBehaviour
     /// </summary>
     private void Destroyed()
     {
-        Destroy(gameObject);
+        // Display Opened Tresor
+        destroyed.Invoke();
     }
 
 }

@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private bool lastWaveSpawned = false;
+
     private Stack<Menus> currentOpenMenu = new Stack<Menus>();
 
     void Start()
@@ -79,7 +81,26 @@ public class GameManager : MonoBehaviour
                 PauseGame();
             }
         }
+
+        if (lastWaveSpawned)
+        {
+            if (spawner.transform.childCount == 0)
+            {
+                OpenMenu(Menus.WinMenu);
+            }
+        }
     }
+
+    /// <summary>
+    /// Add coins to the coins counter
+    /// </summary>
+    /// <param name="amount">amount of coins</param>
+    public void AddCoins(int amount)
+    {
+        Coins += amount;
+    }
+
+    #region PauseMenu Logic
 
     /// <summary>
     /// Pause the game and show the pause overlay
@@ -109,13 +130,24 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Add coins to the coins counter
+    /// reload the game scene
     /// </summary>
-    /// <param name="amount">amount of coins</param>
-    public void AddCoins(int amount)
+    public void PlayAgain()
     {
-        Coins += amount;
+        SceneManager.LoadScene(1);
     }
+
+    /// <summary>
+    /// When the Game is lost ie. the tresor has 0 health
+    /// </summary>
+    public void LooseGame()
+    {
+        OpenMenu(Menus.LooseMenu);
+    }
+
+    #endregion
+
+    #region WaveLogic
 
     /// <summary>
     /// Cooldown bevor next Wave is spawning
@@ -165,12 +197,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("You won the Game!");
+            lastWaveSpawned = true;
         }
     }
 
+    #endregion
+
     #region Tower Logic
 
+    /// <summary>
+    /// Places a tower at the currently looking at position. Called by ui button
+    /// </summary>
+    /// <param name="towerToSpawn">Tower Object to spawn</param>
     public void PlaceTower(Tower towerToSpawn)
     {
         if (Player.PlaceTower != null && towerToSpawn != null)
@@ -190,6 +228,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Delete tower and give the refund. Called by ui button
+    /// </summary>
     public void DeleteTower()
     {
         TowerPlace towerPlace = Player.PlaceTower;
@@ -199,6 +240,10 @@ public class GameManager : MonoBehaviour
         CloseMenu(Menus.TowerUpgrades);
     }
 
+    /// <summary>
+    /// Increase a tower stat. Called by ui Button
+    /// </summary>
+    /// <param name="towerStatIndex">tower stat enum index to increase</param>
     public void UpgradeTower(int towerStatIndex)
     {
         TowerStat stat = (TowerStat)towerStatIndex;
@@ -217,7 +262,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region UI handling
+    #region UI Menu Logic
 
     /// <summary>
     /// Shows the menu
@@ -281,5 +326,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
 }
