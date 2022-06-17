@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Tower : ScriptableObject
 {
-    [SerializeField] private string towerName;
-    public string TowerName => towerName;
+    [SerializeField] private Towers towerType;
+    public Towers TowerType => towerType;
 
     [SerializeField] private Sprite icon;
     public Sprite Icon => icon;

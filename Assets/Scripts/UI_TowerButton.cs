@@ -18,7 +18,7 @@ public class UI_TowerButton : MonoBehaviour
         {
             if (tower != null)
             {
-                nameText.text = tower.TowerName;
+                nameText.text = tower.TowerType.ToString();
                 towerIcon.sprite = tower.Icon;
                 towerCost.text = tower.Cost.ToString();
             }

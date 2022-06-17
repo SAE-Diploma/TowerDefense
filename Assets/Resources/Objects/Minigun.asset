@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9521c55c9ed55414b939d3d3c3c0f217, type: 3}
   m_Name: Minigun
   m_EditorClassIdentifier: 
-  towerName: Minigun
+  towerType: 1
   icon: {fileID: 21300000, guid: 9b4c272ca1a778a4a9624ab338531599, type: 3}
   towerPrefab: {fileID: 7082900090185293696, guid: 579b4b846df647a4e9c2e09ce8f2b35c, type: 3}
   projectilePrefab: {fileID: 4309222024364041835, guid: 028cecaa336baa040ab737061858c06d, type: 3}
