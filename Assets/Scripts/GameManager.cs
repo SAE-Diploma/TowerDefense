@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Towers")]
     [SerializeField] Transform towerParent;
-    [SerializeField] Tower[] towers;
 
     [Header("Waves")]
     [SerializeField] Spawner spawner;

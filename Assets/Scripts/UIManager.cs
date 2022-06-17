@@ -19,20 +19,24 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject interactionPanel;
     [SerializeField] List<Image> menus;
-    [SerializeField] TextMeshProUGUI coinsText;
 
     [Header("TowerUpgradePanel")]
     [SerializeField] TextMeshProUGUI towerName;
     [SerializeField] TextMeshProUGUI attackSpeedValue;
+    [SerializeField] Button attackSpeedButton;
     [SerializeField] TextMeshProUGUI attackSpeedCost;
     [SerializeField] TextMeshProUGUI damageValue;
+    [SerializeField] Button damageButton;
     [SerializeField] TextMeshProUGUI damageCost;
     [SerializeField] TextMeshProUGUI rangeValue;
+    [SerializeField] Button rangeButton;
     [SerializeField] TextMeshProUGUI rangeCost;
     [SerializeField] TextMeshProUGUI projectileSpeedValue;
+    [SerializeField] Button projectileSpeedButton;
     [SerializeField] TextMeshProUGUI projectileSpeedCost;
 
-    [Header("Waves")]
+    [Header("InGameUI")]
+    [SerializeField] TextMeshProUGUI coinsText;
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI timer;
 
@@ -63,14 +67,29 @@ public class UIManager : MonoBehaviour
     public void UpdateTowerUpgradePanel(TowerBase tower)
     {
         towerName.text = tower.Tower.name;
-        attackSpeedValue.text = $"{tower.AttackSpeed} rps";
+        attackSpeedValue.text = $"Level {tower.AttackSpeedLevel}: {tower.AttackSpeed} rps";
+        if (tower.AttackSpeedLevel == tower.AttackSpeedMaxLevel && attackSpeedButton.interactable) DisableUpgradeButton(attackSpeedButton);
         attackSpeedCost.text = ((tower.AttackSpeedLevel) * tower.Tower.AttackspeedUpgradeCost).ToString();
-        damageValue.text = $"{tower.Damage} hp";
+        damageValue.text = $"Level {tower.DamageLevel}: {tower.Damage} hp";
+        if (tower.DamageLevel == tower.DamageMaxLevel && damageButton.interactable) DisableUpgradeButton(damageButton);
         damageCost.text = ((tower.DamageLevel) * tower.Tower.DamageUpgradeCost).ToString();
-        rangeValue.text = $"{tower.Range} meters";
+        rangeValue.text = $"Level {tower.RangeLevel}: {tower.Range} m";
+        if (tower.RangeLevel == tower.RangeMaxLevel && rangeButton.interactable) DisableUpgradeButton(rangeButton);
         rangeCost.text = ((tower.RangeLevel) * tower.Tower.RangeUpgradeCost).ToString();
-        projectileSpeedValue.text = $"{tower.ProjectileSpeed} m/s";
+        projectileSpeedValue.text = $"Level {tower.ProjectileSpeedLevel}: {tower.ProjectileSpeed} m/s";
+        if (tower.ProjectileSpeedLevel == tower.ProjectileSpeedMaxLevel && projectileSpeedButton.interactable) DisableUpgradeButton(projectileSpeedButton);
         projectileSpeedCost.text = ((tower.ProjectileSpeedLevel) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
+    }
+
+    /// <summary>
+    /// disable an upgrade button and show the max text
+    /// </summary>
+    /// <param name="upgradeButton">upgrade button to disable</param>
+    private void DisableUpgradeButton(Button upgradeButton)
+    {
+        upgradeButton.interactable = false;
+        upgradeButton.transform.GetChild(1).gameObject.SetActive(true);
+        upgradeButton.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     /// <summary>

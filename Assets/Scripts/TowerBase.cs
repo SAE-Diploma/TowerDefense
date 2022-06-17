@@ -15,6 +15,9 @@ public class TowerBase : MonoBehaviour
         private set { attackSpeedLevel = value; }
     }
 
+    private int attackSpeedMaxLevel = 2;
+    public int AttackSpeedMaxLevel => attackSpeedMaxLevel;
+
     // Damage
     private int damage;
     public int Damage => damage;
@@ -25,6 +28,9 @@ public class TowerBase : MonoBehaviour
         get { return damageLevel; }
         private set { damageLevel = value; }
     }
+
+    private int damageMaxLevel = 5;
+    public int DamageMaxLevel => damageMaxLevel;
 
     // Range
     private float range;
@@ -37,6 +43,9 @@ public class TowerBase : MonoBehaviour
         private set { rangeLevel = value; }
     }
 
+    private int rangeMaxLevel = 5;
+    public int RangeMaxLevel => rangeMaxLevel;
+
     // ProjectileSpeed
     private float projectileSpeed;
     public float ProjectileSpeed => projectileSpeed;
@@ -47,6 +56,9 @@ public class TowerBase : MonoBehaviour
         get { return projectileSpeedLevel; }
         private set { projectileSpeedLevel = value; }
     }
+
+    private int projectileSpeedMaxLevel = 5;
+    public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
 
     private Tower tower;
     public Tower Tower
@@ -184,7 +196,7 @@ public class TowerBase : MonoBehaviour
     /// </summary>
     /// <param name="stat">stat to upgrade</param>
     /// <param name="coins">current coins</param>
-    /// <returns></returns>
+    /// <returns>success: remaining coins | -1 : not enough coins </returns>
     public int UpgradeStat(TowerStat stat, int coins)
     {
         int cost = 0;
@@ -200,6 +212,7 @@ public class TowerBase : MonoBehaviour
                     return coins - cost;
                 }
                 else { return -1; }
+
             case TowerStat.Damage:
                 cost = (DamageLevel) * this.Tower.DamageUpgradeCost;
                 if (coins >= cost)
@@ -210,6 +223,7 @@ public class TowerBase : MonoBehaviour
                     return coins - cost;
                 }
                 else { return -1; }
+
             case TowerStat.Range:
                 cost = (RangeLevel) * this.Tower.RangeUpgradeCost;
                 if (coins >= cost)
@@ -220,6 +234,7 @@ public class TowerBase : MonoBehaviour
                     return coins - cost;
                 }
                 else { return -1; }
+
             case TowerStat.ProjectileSpeed:
                 cost = (ProjectileSpeedLevel) * this.Tower.ProjectileSpeedUpgradeCost;
                 if (coins >= cost)
@@ -230,6 +245,7 @@ public class TowerBase : MonoBehaviour
                     return coins - cost;
                 }
                 else { return -1; }
+
             default:
                 return -1;
         }
