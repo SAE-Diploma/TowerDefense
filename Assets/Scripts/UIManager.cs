@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject interactionPanel;
     [SerializeField] List<Image> menus;
+    [SerializeField] TextMeshProUGUI coinsText;
 
     [Header("TowerUpgradePanel")]
     [SerializeField] TextMeshProUGUI towerName;
@@ -35,17 +36,30 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI timer;
 
+    /// <summary>
+    /// Sets the visibility of the given Menu
+    /// </summary>
+    /// <param name="menu">menu to set the visibility of</param>
+    /// <param name="visibility">should it be visible</param>
     public void SetMenuVisibility(Menus menu, bool visibility)
     {
         GameObject obj = menus[(int)menu].gameObject;
         obj.SetActive(visibility);
     }
 
+    /// <summary>
+    /// Sets the visiblity of the Interaction E
+    /// </summary>
+    /// <param name="visibility">the visibility</param>
     public void SetInteractionVisibility(bool visibility)
     {
         interactionPanel.SetActive(visibility);
     }
 
+    /// <summary>
+    /// Sets all the text and icons in the Tower Upgrade Menu
+    /// </summary>
+    /// <param name="tower">referenced tower</param>
     public void UpdateTowerUpgradePanel(TowerBase tower)
     {
         towerName.text = tower.Tower.name;
@@ -59,6 +73,10 @@ public class UIManager : MonoBehaviour
         projectileSpeedCost.text = ((tower.ProjectileSpeedLevel) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
     }
 
+    /// <summary>
+    /// Play error animation for a stat when not enough coins to upgrade a tower
+    /// </summary>
+    /// <param name="stat">stat that failed</param>
     public void UpdateTowerMenuCoinError(TowerStat stat)
     {
         Animator animator;
@@ -83,21 +101,44 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// set the wave counter text
+    /// </summary>
+    /// <param name="currentWave">the current wave</param>
+    /// <param name="maxWaveCount">the maximum wave count</param>
     public void UpdateWaveCounter(int currentWave, int maxWaveCount)
     {
         currentWaveText.text = $"Wave {currentWave}/{maxWaveCount}";
     }
 
+    /// <summary>
+    /// Show the remaining Time on the tresor
+    /// </summary>
+    /// <param name="remainingSeconds">remaining time in seconds</param>
     public void ShowRemainingTime(int remainingSeconds)
     {
         timer.text = SecondsToTime(remainingSeconds);
     }
 
+    /// <summary>
+    /// Formats seconds into a time string
+    /// </summary>
+    /// <param name="timeInSeconds">seconds</param>
+    /// <returns>formatted string</returns>
     private string SecondsToTime(int timeInSeconds)
     {
         int minutes = Mathf.FloorToInt(timeInSeconds / 60);
         int seconds = timeInSeconds - minutes * 60;
         string secondsString = seconds < 10 ? $"0{seconds}" : seconds.ToString();
         return $"{minutes}:{secondsString}";
+    }
+
+    /// <summary>
+    /// Set the coins text
+    /// </summary>
+    /// <param name="coins">amount of coins</param>
+    public void SetCoins(int coins)
+    {
+        coinsText.text = coins.ToString();
     }
 }

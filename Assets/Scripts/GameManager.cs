@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool defaultCursorVisibility;
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerController Player;
-    [SerializeField] TextMeshProUGUI coinsText;
 
     [Header("Towers")]
     [SerializeField] Transform towerParent;
@@ -32,7 +31,7 @@ public class GameManager : MonoBehaviour
         private set
         {
             _coins = value;
-            if (coinsText != null) { coinsText.text = _coins.ToString(); }
+            uiManager.SetCoins(_coins);
         }
     }
 
