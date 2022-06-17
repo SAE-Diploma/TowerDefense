@@ -60,13 +60,15 @@ public class TowerBase : MonoBehaviour
     }
     public void SetTower(Tower tower) { Tower = tower; }
 
+    private int totalCoinsSpent = 0;
+    public int TotalCoinsSpent => totalCoinsSpent;
+
     private GameObject projectilePrefab;
     private GameObject enemiesParent;
     private List<GameObject> enemiesInRange;
     private GameObject turret;
     private Shoot turretShoot;
     private bool shot = false;
-
 
     private void Start()
     {
@@ -106,7 +108,10 @@ public class TowerBase : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Set stats by a towerObject
+    /// </summary>
+    /// <param name="towerSpecs">TowerObject</param>
     private void Initialize(Tower towerSpecs)
     {
         range = towerSpecs.Range;
@@ -114,6 +119,7 @@ public class TowerBase : MonoBehaviour
         attackSpeed = towerSpecs.Attackspeed;
         projectileSpeed = towerSpecs.ProjectileSpeed;
         projectilePrefab = towerSpecs.ProjectilePrefab;
+        totalCoinsSpent = towerSpecs.Cost;
     }
 
     /// <summary>
@@ -173,6 +179,12 @@ public class TowerBase : MonoBehaviour
         shot = false;
     }
 
+    /// <summary>
+    /// Increase a stat by one Level
+    /// </summary>
+    /// <param name="stat">stat to upgrade</param>
+    /// <param name="coins">current coins</param>
+    /// <returns></returns>
     public int UpgradeStat(TowerStat stat, int coins)
     {
         int cost = 0;
@@ -184,6 +196,7 @@ public class TowerBase : MonoBehaviour
                 {
                     attackSpeedLevel++;
                     attackSpeed += this.Tower.AttackspeedUpgradeValue;
+                    totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }
@@ -193,6 +206,7 @@ public class TowerBase : MonoBehaviour
                 {
                     damageLevel++;
                     damage += this.Tower.DamageUpgradeValue;
+                    totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }
@@ -202,6 +216,7 @@ public class TowerBase : MonoBehaviour
                 {
                     RangeLevel++;
                     range += this.Tower.RangeUpgradeValue;
+                    totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }
@@ -211,6 +226,7 @@ public class TowerBase : MonoBehaviour
                 {
                     ProjectileSpeedLevel++;
                     projectileSpeed += this.Tower.ProjectileSpeedUpgradeValue;
+                    totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }

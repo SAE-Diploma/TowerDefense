@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
     public void DeleteTower()
     {
         TowerPlace towerPlace = Player.PlaceTower;
-        Coins += Mathf.RoundToInt(towerPlace.Tower.GetComponent<TowerBase>().Tower.Cost * 0.75f);
+        Coins += Mathf.RoundToInt(towerPlace.Tower.GetComponent<TowerBase>().TotalCoinsSpent * 0.75f);
         Destroy(towerPlace.Tower);
         towerPlace.SetTower(null);
         CloseMenu(Menus.TowerUpgrades);
