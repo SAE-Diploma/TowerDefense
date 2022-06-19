@@ -6,10 +6,10 @@ public class SaveObject
     private int points;
     public int Points => points;
 
-    private PermanentUpgrades[] permanentUpgrades;
-    public PermanentUpgrades[] PermanentUpgrades => permanentUpgrades;
+    private PermanentUpgrade[] permanentUpgrades;
+    public PermanentUpgrade[] PermanentUpgrades => permanentUpgrades;
 
-    public SaveObject(int points, PermanentUpgrades[] permanentUpgrades)
+    public SaveObject(int points, PermanentUpgrade[] permanentUpgrades)
     {
         this.points = points;
         this.permanentUpgrades = permanentUpgrades;

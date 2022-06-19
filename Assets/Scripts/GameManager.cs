@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
     {
         if (saveFile != null)
         {
-            PermanentUpgrades upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
+            PermanentUpgrade upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
             towerObject.ApplyPermanentUpgrade(upgrade);
         }
     }

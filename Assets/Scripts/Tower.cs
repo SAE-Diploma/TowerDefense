@@ -21,6 +21,10 @@ public class Tower : ScriptableObject
     [SerializeField] private int cost;
     public int Cost => cost;
 
+    [SerializeField] private int unlockCost;
+    public int UnlockCost => unlockCost;
+
+
     [Header("AttackSpeed")]
     [SerializeField, Tooltip("Rounds per second")] private float attackspeed;
     public float Attackspeed => attackspeed;
@@ -73,7 +77,7 @@ public class Tower : ScriptableObject
     [SerializeField, Tooltip("Maximum projectileSpeed Level")] private int projectileSpeedMaxLevel;
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
 
-    public void ApplyPermanentUpgrade(PermanentUpgrades upgrades)
+    public void ApplyPermanentUpgrade(PermanentUpgrade upgrades)
     {
         attackspeed = upgrades.AttackSpeedStartValue;
         attackspeedMaxLevel = upgrades.AttackSpeedMaxLevel;
@@ -85,7 +89,7 @@ public class Tower : ScriptableObject
         rangeMaxLevel = upgrades.RangeMaxLevel;
 
         projectileSpeed = upgrades.ProjectileSpeedStartValue;
-        projectileSpeedUpgradeCost = upgrades.ProjectileSpeedMaxLevel;
+        projectileSpeedMaxLevel = upgrades.ProjectileSpeedMaxLevel;
 
     }
 
