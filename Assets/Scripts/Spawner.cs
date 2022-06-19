@@ -11,6 +11,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject checkpointsParent;
     [SerializeField] Tresor tresor;
 
+    /// <summary>
+    /// Spawns an enemy and sets its start values
+    /// </summary>
+    /// <param name="boss">if a boss should be spawned</param>
     public void SpawnEnemy(bool boss = false)
     {
         GameObject enemy;

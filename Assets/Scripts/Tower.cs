@@ -77,6 +77,10 @@ public class Tower : ScriptableObject
     [SerializeField, Tooltip("Maximum projectileSpeed Level")] private int projectileSpeedMaxLevel;
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
 
+    /// <summary>
+    /// Apply the values read from the savefile
+    /// </summary>
+    /// <param name="upgrades">read PermanentUpgrade</param>
     public void ApplyPermanentUpgrade(PermanentUpgrade upgrades)
     {
         attackspeed = upgrades.AttackSpeedStartValue;

@@ -130,6 +130,10 @@ public class PermanentUpgrade
         this.attackSpeedValueCost = attackSpeedValueCost;
     }
 
+    /// <summary>
+    /// Update with the stats loaded from the savefile
+    /// </summary>
+    /// <param name="loaded">loaded PermanentUpgrade</param>
     public void UpdateValues(PermanentUpgrade loaded)
     {
         unlocked = loaded.unlocked;
@@ -143,6 +147,10 @@ public class PermanentUpgrade
         projectileSpeedMaxLevel = loaded.ProjectileSpeedMaxLevel;
     }
 
+    /// <summary>
+    /// increments a level stat
+    /// </summary>
+    /// <param name="stat">level stat to increase</param>
     public void IncrementStat(PermanentStats stat)
     {
         switch (stat)
@@ -174,6 +182,11 @@ public class PermanentUpgrade
         }
     }
 
+    /// <summary>
+    /// Get an array of all cost values in the order of the PermanentStats enum
+    /// Allows refence by index
+    /// </summary>
+    /// <returns>Array of all Costs</returns>
     public int[] GetCostArray()
     {
         return new int[]

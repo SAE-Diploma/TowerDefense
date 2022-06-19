@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [Header("Coins")]
     [SerializeField] float coinAttractionRange;
     [SerializeField] float coinAttractionSpeed;
-    private Interactions _currentInteraction;
 
+    private Interactions _currentInteraction;
     public Interactions CurrentInteraction
     {
         get { return _currentInteraction; }
@@ -89,6 +89,19 @@ public class PlayerController : MonoBehaviour
         // ray for interactibles
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "coin")
+        {
+            Coin coin = other.transform.parent.parent.GetComponent<Coin>();
+            manager.AddCoins(coin.Value);
+            Destroy(other.transform.parent.parent.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// when the player presses E
+    /// </summary>
     private void Interact()
     {
         switch (CurrentInteraction)
@@ -106,19 +119,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// set the canMove field from outside
+    /// </summary>
+    /// <param name="canMove">true|false</param>
     public void SetMovability(bool canMove)
     {
         movement.CanPlayerMove(canMove);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "coin")
-        {
-            Coin coin = other.transform.parent.parent.GetComponent<Coin>();
-            manager.AddCoins(coin.Value);
-            Destroy(other.transform.parent.parent.gameObject);
-        }
-    }
 
 }

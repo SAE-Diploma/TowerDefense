@@ -70,19 +70,28 @@ public class MainMenu : MonoBehaviour
             rangeLevelButtonText,
             projectileSpeedLevelButtonText
         };
-
     }
 
+    /// <summary>
+    /// Start a round
+    /// </summary>
     public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
 
+    /// <summary>
+    /// Quit the game
+    /// </summary>
     public void QuitGame()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// shows a menu and hides all others
+    /// </summary>
+    /// <param name="enumIndex"></param>
     public void ShowMenu(int enumIndex)
     {
         for (int i = 0; i < menus.Count; i++)
@@ -98,11 +107,18 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// updates the points text
+    /// </summary>
     private void UpdatePointsText()
     {
         pointsText.text = $"{saveFile.Points.ToString()} pts";
     }
 
+    /// <summary>
+    /// updates all references in the upgrades panel with the infos in the tower and savefile
+    /// </summary>
+    /// <param name="tower">tower reference</param>
     public void UpdateUpgradePanel(Tower tower)
     {
         PermanentUpgrade upgrades = saveFile.PermanentUpgrades[(int)tower.TowerType];
@@ -142,6 +158,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// shows the locked tower panel
+    /// </summary>
+    /// <param name="tower">tower object</param>
     private void ShowLocked(Tower tower)
     {
         startValues.SetActive(false);
@@ -150,6 +170,10 @@ public class MainMenu : MonoBehaviour
         locked.transform.GetChild(0).GetComponent<Image>().sprite = tower.Icon;
     }
 
+    /// <summary>
+    /// sets the colors of the tab buttons right
+    /// </summary>
+    /// <param name="index">Towers Enum index</param>
     private void SelectTabButton(int index)
     {
         Debug.Log(index);
@@ -176,6 +200,9 @@ public class MainMenu : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Unlocks the currently showing tower. If not enough points -> error animation
+    /// </summary>
     public void UnlockTower()
     {
         if (currentTower != null)
@@ -198,6 +225,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Button Method. Tries to purchase an upgrade. Shows error animation when not enough points
+    /// </summary>
+    /// <param name="enumIndex">Upgrade index</param>
     public void UpgradeStat(int enumIndex)
     {
         PermanentUpgrade upgrade = saveFile.PermanentUpgrades[(int)currentTower.TowerType];

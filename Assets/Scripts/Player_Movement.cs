@@ -102,6 +102,10 @@ public class Player_Movement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// set the canMove variable from outside
+    /// </summary>
+    /// <param name="canMove">true|false</param>
     public void CanPlayerMove(bool canMove)
     {
         this.canMove = canMove;

@@ -4,6 +4,9 @@ using System.IO;
 using UnityEngine;
 
 
+/// <summary>
+/// necessary to serialize an integer value
+/// </summary>
 public struct SerializableInt
 {
     [SerializeField] private int value;
@@ -14,6 +17,10 @@ public struct SerializableInt
         this.value = value;
     }
 
+    /// <summary>
+    /// set the value
+    /// </summary>
+    /// <param name="value">integer value</param>
     public void SetValue(int value)
     {
         this.value = value;
@@ -27,7 +34,6 @@ public class SaveFile : MonoBehaviour
 
     [SerializeField] private SerializableInt points = new SerializableInt(0);
     public int Points => points.Value;
-
     public void SetPoints(int newValue) { points.SetValue(newValue); }
 
     private PermanentUpgrade[] permanentUpgrades;
@@ -48,7 +54,7 @@ public class SaveFile : MonoBehaviour
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             }
-            
+
             Save();
         }
     }
@@ -60,51 +66,60 @@ public class SaveFile : MonoBehaviour
         // Balliste
         permanentUpgrades[0] = new PermanentUpgrade(Towers.Balliste, true,
             0.5f, 0.5f, 25, 35,     // Attackspeed
-            10  , 2   , 40, 50,     // Damage
+            10, 2, 40, 50,     // Damage
             7.5f, 2.5f, 30, 40,     // Range
-            6   , 1.5f, 40, 50);    // ProjectileSpeed
+            6, 1.5f, 40, 50);    // ProjectileSpeed
 
         // Minigun
         permanentUpgrades[1] = new PermanentUpgrade(Towers.Minigun, false,
-            2f , 0.5f, 25, 35,      // Attackspeed
-            5  , 1   , 50, 60,      // Damage
-            5  , 1.5f, 40, 50,      // Range
-            6  , 1.5f, 30, 40);     // ProjectileSpeed
+            2f, 0.5f, 25, 35,      // Attackspeed
+            5, 1, 50, 60,      // Damage
+            5, 1.5f, 40, 50,      // Range
+            6, 1.5f, 30, 40);     // ProjectileSpeed
 
         // Sniper
         permanentUpgrades[2] = new PermanentUpgrade(Towers.Sniper, false,
             0.4f, 0.5f, 50, 60,      // Attackspeed
-            20  , 5   , 30, 40,      // Damage
-            15  , 5f  , 25, 35,      // Range
-            10  , 2   , 30, 40);     // ProjectileSpeed
+            20, 5, 30, 40,      // Damage
+            15, 5f, 25, 35,      // Range
+            10, 2, 30, 40);     // ProjectileSpeed
     }
 
+    /// <summary>
+    /// Saves the Points and the PermanentUpgrades
+    /// </summary>
     public void Save()
     {
         Debug.Log("Save");
         string jsonString = string.Empty;
         jsonString += JsonUtility.ToJson(points, true) + ";";
-        foreach(PermanentUpgrade towerUpgrades in permanentUpgrades)
+        foreach (PermanentUpgrade towerUpgrades in permanentUpgrades)
         {
             jsonString += JsonUtility.ToJson(towerUpgrades, true) + ";";
         }
-        jsonString = jsonString.Substring(0,jsonString.Length - 1);
+        jsonString = jsonString.Substring(0, jsonString.Length - 1);
         File.WriteAllText(filePath, jsonString);
     }
 
+    /// <summary>
+    /// Loades the Points and PermanentUpgrades from the file
+    /// </summary>
     private void Load()
     {
-        string jsonString = File.ReadAllText(filePath);
-        string[] jsons = jsonString.Split(';');
-        for (int i = 0; i < 4; i++)
+        if (File.Exists(filePath))
         {
-            if (i == 0)
+            string jsonString = File.ReadAllText(filePath);
+            string[] jsons = jsonString.Split(';');
+            for (int i = 0; i < 4; i++)
             {
-                points = JsonUtility.FromJson<SerializableInt>(jsons[i]);
-            }
-            else
-            {
-                permanentUpgrades[i - 1].UpdateValues(JsonUtility.FromJson<PermanentUpgrade>(jsons[i]));
+                if (i == 0)
+                {
+                    points = JsonUtility.FromJson<SerializableInt>(jsons[i]);
+                }
+                else
+                {
+                    permanentUpgrades[i - 1].UpdateValues(JsonUtility.FromJson<PermanentUpgrade>(jsons[i]));
+                }
             }
         }
     }
