@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float spawnInterval;
     [SerializeField] float spawnIntervalMutliplier;
 
+    private SaveFile saveFile;
+    public SaveFile SaveFile => saveFile;
+
     private int _coins = 0;
     public int Coins
     {
@@ -53,6 +56,12 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = defaultCursorVisibility;
         if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
+        GameObject saveFileObject = GameObject.Find("SaveManager");
+        if (saveFileObject != null)
+        {
+            saveFile = saveFileObject.GetComponent<SaveFile>();
+        }
+
         Coins += 100;
         CurrentWave = 1;
         StartCoroutine(WaitForNextWave(timeBetweenWaves));
@@ -217,6 +226,7 @@ public class GameManager : MonoBehaviour
                 {
                     GameObject tower = Instantiate(towerToSpawn.TowerPrefab, Player.PlaceTower.Place.position, Quaternion.identity, towerParent);
                     TowerBase towerBase = tower.GetComponent<TowerBase>();
+                    ApplyPermanentUpgrades(towerToSpawn);
                     towerBase.SetTower(towerToSpawn);
                     Player.PlaceTower.SetTower(tower);
                     Coins -= towerToSpawn.Cost;
@@ -255,6 +265,19 @@ public class GameManager : MonoBehaviour
         else
         {
             uiManager.UpdateTowerMenuCoinError(stat);
+        }
+    }
+
+    /// <summary>
+    /// applies the permanent upgrade stats to a tower object
+    /// </summary>
+    /// <param name="towerObject">towerObejct</param>
+    private void ApplyPermanentUpgrades(Tower towerObject)
+    {
+        if (saveFile != null)
+        {
+            PermanentUpgrades upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
+            towerObject.ApplyPermanentUpgrade(upgrade);
         }
     }
 

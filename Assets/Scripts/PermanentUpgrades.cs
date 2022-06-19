@@ -28,7 +28,7 @@ public class PermanentUpgrades
     public int DamageIncrementValue => damageIncrementValue;
 
     [SerializeField] private int damageMaxLevel;
-    public float DamageMaxLevel => damageMaxLevel;
+    public int DamageMaxLevel => damageMaxLevel;
 
     // Range
     [SerializeField] private float rangeStartValue;

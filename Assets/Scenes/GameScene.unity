@@ -10666,7 +10666,7 @@ MonoBehaviour:
   maxWaves: 1
   startEnemyCount: 10
   enemyCountMultiplier: 1.5
-  timeBetweenWaves: 10
+  timeBetweenWaves: 60
   spawnInterval: 0.5
   spawnIntervalMutliplier: 0.9
 --- !u!1 &469016664
@@ -30343,8 +30343,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182072456}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 10, z: -9.14}
+  m_LocalRotation: {x: 0.004033327, y: 0.54592067, z: -0.0026199073, w: 0.8378231}
+  m_LocalPosition: {x: -16.12172, y: 3.4725027, z: -18.960663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30916,7 +30916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ballista
+  m_text: Balliste
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -37411,7 +37411,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413554095}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

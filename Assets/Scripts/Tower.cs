@@ -31,6 +31,9 @@ public class Tower : ScriptableObject
     [SerializeField, Tooltip("Added Value per upgrade level")] private int attackspeedUpgradeValue;
     public int AttackspeedUpgradeValue => attackspeedUpgradeValue;
 
+    [SerializeField, Tooltip("Maximum attackspeed Level")] private int attackspeedMaxLevel;
+    public int AttackspeedMaxLevel => attackspeedMaxLevel;
+
     [Header("Damage")]
     [SerializeField] private int damage;
     public int Damage => damage;
@@ -39,7 +42,10 @@ public class Tower : ScriptableObject
     public int DamageUpgradeCost => damageUpgradeCost;
 
     [SerializeField, Tooltip("Added Value per upgrade level")] private int damageUpgradeValue;
-    public int DamageUpgradeValue => damageUpgradeValue;
+    public int DamageUpgradeValue => damageMaxLevel;
+
+    [SerializeField, Tooltip("Maximum damage Level")] private int damageMaxLevel;
+    public int DamageMaxLevel => damageMaxLevel;
 
     [Header("Range")]
     [SerializeField, Tooltip("In meters")] private float range;
@@ -49,7 +55,10 @@ public class Tower : ScriptableObject
     public int RangeUpgradeCost => rangeUpgradeCost;
 
     [SerializeField, Tooltip("Added Value per upgrade level")] private int rangeUpgradeValue;
-    public int RangeUpgradeValue => rangeUpgradeValue;
+    public int RangeUpgradeValue => rangeMaxLevel;
+
+    [SerializeField, Tooltip("Maximum range Level")] private int rangeMaxLevel;
+    public int RangeMaxLevel => rangeMaxLevel;
 
     [Header("ProjectileSpeed")]
     [SerializeField, Tooltip("In meters per second")] private float projectileSpeed;
@@ -59,6 +68,25 @@ public class Tower : ScriptableObject
     public int ProjectileSpeedUpgradeCost => projectileSpeedUpgradeCost;
 
     [SerializeField, Tooltip("Added Value per upgrade level")] private int projectileSpeedUpgradeValue;
-    public int ProjectileSpeedUpgradeValue => projectileSpeedUpgradeValue;
+    public int ProjectileSpeedUpgradeValue => projectileSpeedMaxLevel;
+
+    [SerializeField, Tooltip("Maximum projectileSpeed Level")] private int projectileSpeedMaxLevel;
+    public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
+
+    public void ApplyPermanentUpgrade(PermanentUpgrades upgrades)
+    {
+        attackspeed = upgrades.AttackSpeedStartValue;
+        attackspeedMaxLevel = upgrades.AttackSpeedMaxLevel;
+
+        damage = upgrades.DamageStartValue;
+        damageMaxLevel = upgrades.DamageMaxLevel;
+
+        range = upgrades.RangeStartValue;
+        rangeMaxLevel = upgrades.RangeMaxLevel;
+
+        projectileSpeed = upgrades.ProjectileSpeedStartValue;
+        projectileSpeedUpgradeCost = upgrades.ProjectileSpeedMaxLevel;
+
+    }
 
 }
