@@ -75,8 +75,14 @@ public class MainMenu : MonoBehaviour
     /// <summary>
     /// Start a round
     /// </summary>
-    public void StartGame()
+    public void StartGame(bool newGame)
     {
+        //Show warning
+        if (newGame)
+        {
+            saveFile.InitializeDefaultValues();
+            saveFile.Save();
+        }
         SceneManager.LoadScene(1);
     }
 

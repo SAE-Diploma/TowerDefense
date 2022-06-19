@@ -59,9 +59,12 @@ public class SaveFile : MonoBehaviour
         }
     }
 
-    private void InitializeDefaultValues()
+    /// <summary>
+    /// Initialize the permanentUpgrades values
+    /// </summary>
+    public void InitializeDefaultValues()
     {
-        points.SetValue(100);
+        points.SetValue(0);
 
         // Balliste
         permanentUpgrades[0] = new PermanentUpgrade(Towers.Balliste, true,
