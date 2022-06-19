@@ -22,9 +22,12 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("In Seconds")] int timeBetweenWaves;
     [SerializeField] float spawnInterval;
     [SerializeField] float spawnIntervalMutliplier;
+    [SerializeField] int pointsPerEnemy;
 
     private SaveFile saveFile;
     public SaveFile SaveFile => saveFile;
+
+    private Stack<Menus> currentOpenMenu = new Stack<Menus>();
 
     private int _coins = 0;
     public int Coins
@@ -50,7 +53,8 @@ public class GameManager : MonoBehaviour
 
     private bool lastWaveSpawned = false;
 
-    private Stack<Menus> currentOpenMenu = new Stack<Menus>();
+    private int enemiesKilled = 0;
+    public void AddEnemyKilled() { enemiesKilled++; }
 
     void Start()
     {
@@ -94,6 +98,8 @@ public class GameManager : MonoBehaviour
             if (spawner.transform.childCount == 0)
             {
                 OpenMenu(Menus.WinMenu);
+                saveFile.SetPoints(saveFile.Points + enemiesKilled * pointsPerEnemy);
+                saveFile.Save();
             }
         }
     }
@@ -150,6 +156,8 @@ public class GameManager : MonoBehaviour
     public void LooseGame()
     {
         OpenMenu(Menus.LooseMenu);
+        saveFile.SetPoints(saveFile.Points + enemiesKilled * pointsPerEnemy);
+        saveFile.Save();
     }
 
     #endregion

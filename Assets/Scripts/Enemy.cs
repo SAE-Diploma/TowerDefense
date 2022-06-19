@@ -10,12 +10,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float randomOffset;
 
-    float sqrDistToNextPoint;
-    float progress = 0;
-
-    // Checkpoints
-    List<Vector3> checkpoints = new List<Vector3>();
-    int currentCheckpointIndex = 0;
 
     [Header("Attacking")]
     [SerializeField] float attackSpeed;
@@ -26,8 +20,16 @@ public class Enemy : MonoBehaviour
     [Header("On Death")]
     [SerializeField] int coinsDropped;
     [SerializeField] GameObject coinPrefab;
-    float randomDropDistance = 0.5f;
+    GameManager gameManager;
     Transform coinsParent;
+    float randomDropDistance = 0.5f;
+
+    // Checkpoints
+    float sqrDistToNextPoint;
+    float progress = 0;
+
+    List<Vector3> checkpoints = new List<Vector3>();
+    int currentCheckpointIndex = 0;
 
     private void Start()
     {
@@ -93,11 +95,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the reference to the gamemanager
+    /// </summary>
+    /// <param name="refernce">gamanager</param>
+    public void SetGameManager(GameManager refernce)
+    {
+        gameManager = refernce;
+    }
+
+    /// <summary>
+    /// Set the tresor reference
+    /// </summary>
+    /// <param name="tresor"></param>
     public void SetTresor(Tresor tresor)
     {
         this.tresor = tresor;
     }
 
+    /// <summary>
+    /// set the coinsparent refernce form outside
+    /// </summary>
+    /// <param name="parent">transfrom</param>
     public void SetCoinParent(Transform parent)
     {
         coinsParent = parent;
@@ -113,6 +132,11 @@ public class Enemy : MonoBehaviour
         if (health <= 0) Die();
     }
 
+    /// <summary>
+    /// Coroutine for attacking the tresor
+    /// </summary>
+    /// <param name="attackspeed">time between attacks</param>
+    /// <returns></returns>
     private IEnumerator AttackTresor(float attackspeed)
     {
         while (true)
@@ -135,6 +159,7 @@ public class Enemy : MonoBehaviour
             Coin coin = coinObject.GetComponent<Coin>();
             coin.SetValue(1);
         }
+        gameManager.AddEnemyKilled();
         Destroy(gameObject);
     }
 

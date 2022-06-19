@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
 
+    [SerializeField] GameManager manager;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject bossPrefab;
     [SerializeField] Transform coinsParent;
@@ -30,6 +31,7 @@ public class Spawner : MonoBehaviour
         enemyClass.SetCheckPoints(checkpointsParent);
         enemyClass.SetTresor(tresor);
         enemyClass.SetCoinParent(coinsParent);
+        enemyClass.SetGameManager(manager);
     }
 
 }

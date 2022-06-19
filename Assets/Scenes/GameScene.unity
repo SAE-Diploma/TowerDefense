@@ -37020,6 +37020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d1125eaa4dec348abd9fb0437fd90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 465213590}
   enemyPrefab: {fileID: 3936276331223816418, guid: 31e199fca7a284f4abe05f85f1da007f, type: 3}
   bossPrefab: {fileID: 6491060369193897908, guid: fcb8ea73bcf7cac48b1279ca47554f3b, type: 3}
   coinsParent: {fileID: 661188447}
