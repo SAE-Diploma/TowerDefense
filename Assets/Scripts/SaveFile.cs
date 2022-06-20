@@ -32,6 +32,11 @@ public class SaveFile : MonoBehaviour
 {
     private string filePath;
 
+    private bool loaded = false;
+
+    public bool Loaded => loaded;
+
+
     [SerializeField] private SerializableInt points = new SerializableInt(0);
     public int Points => points.Value;
     public void SetPoints(int newValue) { points.SetValue(newValue); }
@@ -47,15 +52,10 @@ public class SaveFile : MonoBehaviour
         permanentUpgrades = new PermanentUpgrade[3];
         InitializeDefaultValues();
 
-        if (File.Exists(filePath)) Load();
-        else
+        if (File.Exists(filePath))
         {
-            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-            }
-
-            Save();
+            Load();
+            loaded = true;
         }
     }
 
@@ -93,7 +93,11 @@ public class SaveFile : MonoBehaviour
     /// </summary>
     public void Save()
     {
-        Debug.Log("Save");
+        if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+        }
+
         string jsonString = string.Empty;
         jsonString += JsonUtility.ToJson(points, true) + ";";
         foreach (PermanentUpgrade towerUpgrades in permanentUpgrades)

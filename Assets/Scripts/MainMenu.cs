@@ -20,6 +20,12 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] RuntimeAnimatorController errorAnimationController;
 
+    [SerializeField] GameObject modalPrefab;
+
+    [Header("Main Menu Buttons")]
+    [SerializeField] Button continueButton;
+    [SerializeField] Button upgradesButton;
+
     [Header("Upgrade Panel References")]
     [SerializeField] GameObject tabButtons;
     [SerializeField] TextMeshProUGUI pointsText;
@@ -70,6 +76,12 @@ public class MainMenu : MonoBehaviour
             rangeLevelButtonText,
             projectileSpeedLevelButtonText
         };
+
+        if (saveFile.Loaded)
+        {
+            continueButton.interactable = true;
+            upgradesButton.interactable = true;
+        }
     }
 
     /// <summary>

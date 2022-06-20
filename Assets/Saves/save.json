@@ -2,7 +2,7 @@
     "value": 0
 };{
     "unlocked": true,
-    "attackSpeedValueLevel": 3,
+    "attackSpeedValueLevel": 1,
     "attackSpeedMaxLevel": 1,
     "damageValueLevel": 1,
     "damageMaxLevel": 1,
@@ -11,12 +11,12 @@
     "projectileSpeedValueLevel": 1,
     "projectileSpeedMaxLevel": 1
 };{
-    "unlocked": true,
+    "unlocked": false,
     "attackSpeedValueLevel": 1,
     "attackSpeedMaxLevel": 1,
     "damageValueLevel": 1,
     "damageMaxLevel": 1,
-    "rangeValueLevel": 2,
+    "rangeValueLevel": 1,
     "rangeMaxLevel": 1,
     "projectileSpeedValueLevel": 1,
     "projectileSpeedMaxLevel": 1

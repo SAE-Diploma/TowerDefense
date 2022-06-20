@@ -10666,7 +10666,7 @@ MonoBehaviour:
   maxWaves: 1
   startEnemyCount: 10
   enemyCountMultiplier: 1.5
-  timeBetweenWaves: 60
+  timeBetweenWaves: 30
   spawnInterval: 0.5
   spawnIntervalMutliplier: 0.9
   pointsPerEnemy: 2
