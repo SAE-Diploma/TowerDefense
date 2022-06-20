@@ -12,8 +12,11 @@ public class Modal : MonoBehaviour
     [SerializeField] Button agreeButton;
     [SerializeField] Button disagreeButton;
 
-    [SerializeField] UnityEvent OnAgreed = new UnityEvent();
-    [SerializeField] UnityEvent OnDisagreed = new UnityEvent();
+    [SerializeField] UnityEvent onAgreed = new UnityEvent();
+    public UnityEvent OnAgreed => onAgreed;
+
+    [SerializeField] UnityEvent onDisagreed = new UnityEvent();
+    public UnityEvent OnDisagreed => onDisagreed;
 
     void Start()
     {
@@ -40,7 +43,7 @@ public class Modal : MonoBehaviour
     }
 
     private void OnAgreeButtonClicked() { OnAgreed.Invoke(); }
-    private void OnDisgreeButtonClicked() { OnDisagreed.Invoke(); }
+    private void OnDisgreeButtonClicked() { onDisagreed.Invoke(); }
 
 
 }

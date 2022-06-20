@@ -82,6 +82,7 @@ public class MainMenu : MonoBehaviour
             continueButton.interactable = true;
             upgradesButton.interactable = true;
         }
+
     }
 
     /// <summary>
@@ -89,13 +90,16 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void StartGame(bool newGame)
     {
-        //Show warning
         if (newGame)
         {
-            saveFile.InitializeDefaultValues();
-            saveFile.Save();
+            if (saveFile.Loaded) ShowNewGameModal();
+            else
+            {
+                saveFile.Save();
+                SceneManager.LoadScene(1);
+            }
         }
-        SceneManager.LoadScene(1);
+        else SceneManager.LoadScene(1);
     }
 
     /// <summary>
@@ -215,7 +219,7 @@ public class MainMenu : MonoBehaviour
             }
             btn.colors = colorBlock;
         }
-        
+
     }
 
     /// <summary>
@@ -268,4 +272,18 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads the Modal to warn about overwriting the existing save
+    /// </summary>
+    public void ShowNewGameModal()
+    {
+        GameObject modal = Instantiate(modalPrefab, transform);
+        Modal modalClass = modal.GetComponent<Modal>();
+        modalClass.OnAgreed.AddListener(() =>
+        {
+            saveFile.Save();
+            StartGame(false);
+        });
+        modalClass.OnDisagreed.AddListener(() => Destroy(modal));
+    }
 }
