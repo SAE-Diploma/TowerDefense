@@ -47,8 +47,12 @@ public class SaveFile : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        init();
+    }
+
+    public void init()
+    {
         filePath = Application.dataPath + "/Saves/save.json";
-        Debug.Log(filePath);
         permanentUpgrades = new PermanentUpgrade[3];
         InitializeDefaultValues();
 
@@ -68,24 +72,24 @@ public class SaveFile : MonoBehaviour
 
         // Balliste
         permanentUpgrades[0] = new PermanentUpgrade(Towers.Balliste, true,
-            0.5f, 0.5f, 25, 35,     // Attackspeed
-            10, 2, 40, 50,     // Damage
-            7.5f, 2.5f, 30, 40,     // Range
-            6, 1.5f, 40, 50);    // ProjectileSpeed
+            1f, 0.5f, 25, 35,     // Attackspeed
+            10, 2, 40, 50,        // Damage
+            7.5f, 2.5f, 30, 40,   // Range
+            20, 1.5f, 40, 50);    // ProjectileSpeed
 
         // Minigun
         permanentUpgrades[1] = new PermanentUpgrade(Towers.Minigun, false,
-            2f, 0.5f, 25, 35,      // Attackspeed
+            10f, 1.5f, 25, 35,      // Attackspeed
             5, 1, 50, 60,      // Damage
             5, 1.5f, 40, 50,      // Range
-            6, 1.5f, 30, 40);     // ProjectileSpeed
+            10, 1.5f, 30, 40);     // ProjectileSpeed
 
         // Sniper
         permanentUpgrades[2] = new PermanentUpgrade(Towers.Sniper, false,
-            0.4f, 0.5f, 50, 60,      // Attackspeed
+            0.8f, 0.5f, 50, 60,      // Attackspeed
             20, 5, 30, 40,      // Damage
             15, 5f, 25, 35,      // Range
-            10, 2, 30, 40);     // ProjectileSpeed
+            15, 2, 30, 40);     // ProjectileSpeed
     }
 
     /// <summary>

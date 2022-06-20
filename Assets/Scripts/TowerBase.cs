@@ -8,56 +8,56 @@ public class TowerBase : MonoBehaviour
     private float attackSpeed; // rounds per seconds
     public float AttackSpeed => attackSpeed;
 
-    private int attackSpeedLevel = 1;
+    private int attackSpeedLevel = 0;
     public int AttackSpeedLevel
     {
         get { return attackSpeedLevel; }
         private set { attackSpeedLevel = value; }
     }
 
-    private int attackSpeedMaxLevel = 2;
+    private int attackSpeedMaxLevel = 1;
     public int AttackSpeedMaxLevel => attackSpeedMaxLevel;
 
     // Damage
     private int damage;
     public int Damage => damage;
 
-    private int damageLevel = 1;
+    private int damageLevel = 0;
     public int DamageLevel
     {
         get { return damageLevel; }
         private set { damageLevel = value; }
     }
 
-    private int damageMaxLevel = 5;
+    private int damageMaxLevel = 1;
     public int DamageMaxLevel => damageMaxLevel;
 
     // Range
     private float range;
     public float Range => range;
 
-    private int rangeLevel = 1;
+    private int rangeLevel = 0;
     public int RangeLevel
     {
         get { return rangeLevel; }
         private set { rangeLevel = value; }
     }
 
-    private int rangeMaxLevel = 5;
+    private int rangeMaxLevel = 1;
     public int RangeMaxLevel => rangeMaxLevel;
 
     // ProjectileSpeed
     private float projectileSpeed;
     public float ProjectileSpeed => projectileSpeed;
 
-    private int projectileSpeedLevel = 1;
+    private int projectileSpeedLevel = 0;
     public int ProjectileSpeedLevel
     {
         get { return projectileSpeedLevel; }
         private set { projectileSpeedLevel = value; }
     }
 
-    private int projectileSpeedMaxLevel = 5;
+    private int projectileSpeedMaxLevel = 1;
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
 
     private Tower tower;
@@ -126,10 +126,14 @@ public class TowerBase : MonoBehaviour
     /// <param name="towerSpecs">TowerObject</param>
     private void Initialize(Tower towerSpecs)
     {
-        range = towerSpecs.Range;
-        damage = towerSpecs.Damage;
         attackSpeed = towerSpecs.Attackspeed;
+        attackSpeedMaxLevel = towerSpecs.AttackspeedMaxLevel;
+        damage = towerSpecs.Damage;
+        damageMaxLevel = towerSpecs.DamageMaxLevel;
+        range = towerSpecs.Range;
+        rangeMaxLevel = towerSpecs.RangeMaxLevel;
         projectileSpeed = towerSpecs.ProjectileSpeed;
+        projectileSpeedMaxLevel = towerSpecs.ProjectileSpeedMaxLevel;
         projectilePrefab = towerSpecs.ProjectilePrefab;
         totalCoinsSpent = towerSpecs.Cost;
     }
@@ -203,44 +207,44 @@ public class TowerBase : MonoBehaviour
         switch (stat)
         {
             case TowerStat.Attackspeed:
-                cost = (AttackSpeedLevel) * this.Tower.AttackspeedUpgradeCost;
+                cost = (AttackSpeedLevel + 1) * Tower.AttackspeedUpgradeCost;
                 if (coins >= cost)
                 {
                     attackSpeedLevel++;
-                    attackSpeed += this.Tower.AttackspeedUpgradeValue;
+                    attackSpeed += Tower.AttackspeedUpgradeValue;
                     totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }
 
             case TowerStat.Damage:
-                cost = (DamageLevel) * this.Tower.DamageUpgradeCost;
+                cost = (DamageLevel + 1) * Tower.DamageUpgradeCost;
                 if (coins >= cost)
                 {
                     damageLevel++;
-                    damage += this.Tower.DamageUpgradeValue;
+                    damage += Tower.DamageUpgradeValue;
                     totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }
 
             case TowerStat.Range:
-                cost = (RangeLevel) * this.Tower.RangeUpgradeCost;
+                cost = (RangeLevel + 1) * Tower.RangeUpgradeCost;
                 if (coins >= cost)
                 {
                     RangeLevel++;
-                    range += this.Tower.RangeUpgradeValue;
+                    range += Tower.RangeUpgradeValue;
                     totalCoinsSpent += cost;
                     return coins - cost;
                 }
                 else { return -1; }
 
             case TowerStat.ProjectileSpeed:
-                cost = (ProjectileSpeedLevel) * this.Tower.ProjectileSpeedUpgradeCost;
+                cost = (ProjectileSpeedLevel + 1) * Tower.ProjectileSpeedUpgradeCost;
                 if (coins >= cost)
                 {
                     ProjectileSpeedLevel++;
-                    projectileSpeed += this.Tower.ProjectileSpeedUpgradeValue;
+                    projectileSpeed += Tower.ProjectileSpeedUpgradeValue;
                     totalCoinsSpent += cost;
                     return coins - cost;
                 }

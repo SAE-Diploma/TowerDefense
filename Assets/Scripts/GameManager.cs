@@ -65,6 +65,15 @@ public class GameManager : MonoBehaviour
         {
             saveFile = saveFileObject.GetComponent<SaveFile>();
         }
+        else
+        {
+            saveFile = new SaveFile();
+            saveFile.init();
+            if (!saveFile.Loaded)
+            {
+                saveFile.Save();
+            }
+        }
 
         Coins += 100;
         CurrentWave = 1;
@@ -142,6 +151,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void BackToMenuModal()
+    {
+        uiManager.ShowBackToMenuModal(() => BackToMainMenu());
+    }
+
     /// <summary>
     /// reload the game scene
     /// </summary>
@@ -157,6 +171,7 @@ public class GameManager : MonoBehaviour
     {
         OpenMenu(Menus.LooseMenu);
         saveFile.SetPoints(saveFile.Points + enemiesKilled * pointsPerEnemy);
+        Debug.Log(enemiesKilled * pointsPerEnemy);
         saveFile.Save();
     }
 
@@ -232,9 +247,9 @@ public class GameManager : MonoBehaviour
             {
                 if (Coins >= towerToSpawn.Cost)
                 {
+                    ApplyPermanentUpgrades(towerToSpawn);
                     GameObject tower = Instantiate(towerToSpawn.TowerPrefab, Player.PlaceTower.Place.position, Quaternion.identity, towerParent);
                     TowerBase towerBase = tower.GetComponent<TowerBase>();
-                    ApplyPermanentUpgrades(towerToSpawn);
                     towerBase.SetTower(towerToSpawn);
                     Player.PlaceTower.SetTower(tower);
                     Coins -= towerToSpawn.Cost;
@@ -352,6 +367,14 @@ public class GameManager : MonoBehaviour
     public void UpdateWaveCounter()
     {
         uiManager.UpdateWaveCounter(CurrentWave, maxWaves);
+    }
+
+    /// <summary>
+    /// show the interaction e
+    /// </summary>
+    public void ShowInteractionE()
+    {
+        uiManager.SetInteractionVisibility(Player.CurrentInteraction != Interactions.None);
     }
 
     #endregion

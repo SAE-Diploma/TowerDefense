@@ -20,7 +20,6 @@ public class Modal : MonoBehaviour
 
     void Start()
     {
-        SetValues("start new game", "All your progress will be overwritten!\nDo you still want to continue?");
         agreeButton.onClick.AddListener(OnAgreeButtonClicked);
         disagreeButton.onClick.AddListener(OnDisgreeButtonClicked);
     }

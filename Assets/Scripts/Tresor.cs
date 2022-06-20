@@ -8,6 +8,7 @@ public class Tresor : MonoBehaviour
 {
     [SerializeField] private int health = 100;
     [SerializeField] Slider healthBar;
+    private bool isDestroyed = false;
 
     public int Health
     {
@@ -43,7 +44,11 @@ public class Tresor : MonoBehaviour
         else
         {
             Health -= health;
-            Destroyed();
+            if (!isDestroyed)
+            {
+                Destroyed();
+                isDestroyed = true;
+            }
         }
     }
 

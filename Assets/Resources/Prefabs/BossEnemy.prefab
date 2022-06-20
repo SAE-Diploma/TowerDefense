@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1000
-  moveSpeed: 4
+  moveSpeed: 3
   randomOffset: 1.5
   attackSpeed: 1
   damage: 25

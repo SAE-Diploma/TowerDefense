@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject interactionPanel;
     [SerializeField] List<Image> menus;
+    [SerializeField] GameObject modalPrefab;
 
     [Header("TowerUpgradePanel")]
     [SerializeField] TextMeshProUGUI towerName;
@@ -69,16 +71,16 @@ public class UIManager : MonoBehaviour
         towerName.text = tower.Tower.name;
         attackSpeedValue.text = $"Level {tower.AttackSpeedLevel}: {tower.AttackSpeed} rps";
         if (tower.AttackSpeedLevel == tower.AttackSpeedMaxLevel && attackSpeedButton.interactable) DisableUpgradeButton(attackSpeedButton);
-        attackSpeedCost.text = ((tower.AttackSpeedLevel) * tower.Tower.AttackspeedUpgradeCost).ToString();
+        attackSpeedCost.text = ((tower.AttackSpeedLevel + 1) * tower.Tower.AttackspeedUpgradeCost).ToString();
         damageValue.text = $"Level {tower.DamageLevel}: {tower.Damage} hp";
         if (tower.DamageLevel == tower.DamageMaxLevel && damageButton.interactable) DisableUpgradeButton(damageButton);
-        damageCost.text = ((tower.DamageLevel) * tower.Tower.DamageUpgradeCost).ToString();
+        damageCost.text = ((tower.DamageLevel + 1) * tower.Tower.DamageUpgradeCost).ToString();
         rangeValue.text = $"Level {tower.RangeLevel}: {tower.Range} m";
         if (tower.RangeLevel == tower.RangeMaxLevel && rangeButton.interactable) DisableUpgradeButton(rangeButton);
-        rangeCost.text = ((tower.RangeLevel) * tower.Tower.RangeUpgradeCost).ToString();
+        rangeCost.text = ((tower.RangeLevel + 1) * tower.Tower.RangeUpgradeCost).ToString();
         projectileSpeedValue.text = $"Level {tower.ProjectileSpeedLevel}: {tower.ProjectileSpeed} m/s";
         if (tower.ProjectileSpeedLevel == tower.ProjectileSpeedMaxLevel && projectileSpeedButton.interactable) DisableUpgradeButton(projectileSpeedButton);
-        projectileSpeedCost.text = ((tower.ProjectileSpeedLevel) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
+        projectileSpeedCost.text = ((tower.ProjectileSpeedLevel + 1) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
     }
 
     /// <summary>
@@ -159,5 +161,19 @@ public class UIManager : MonoBehaviour
     public void SetCoins(int coins)
     {
         coinsText.text = coins.ToString();
+    }
+
+    /// <summary>
+    /// Shows the modal before going back to the main menu without saving
+    /// </summary>
+    /// <param name="action">agreed function</param>
+    public void ShowBackToMenuModal(UnityAction action)
+    {
+        GameObject modalObject = Instantiate(modalPrefab, transform);
+        Modal modalClass = modalObject.GetComponent<Modal>();
+        modalClass.SetValues("Quit the round", "The progress from this round will not be saved!\nNo points will be gained.");
+        modalClass.SetButtonTexts("Back", "MainMenu");
+        modalClass.OnAgreed.AddListener(action);
+        modalClass.OnDisagreed.AddListener(() => Destroy(modalObject));
     }
 }

@@ -13,7 +13,6 @@ public enum Interactions
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameManager manager;
-    [SerializeField] UIManager uiManager;
     Player_Movement movement;
     Camera playerCamera;
 
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour
         private set
         {
             _currentInteraction = value;
-            uiManager.SetInteractionVisibility(_currentInteraction != Interactions.None);
+            manager.ShowInteractionE();
         }
     }
 

@@ -5259,73 +5259,6 @@ Transform:
   m_Father: {fileID: 1850466644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &212564362
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 212564364}
-  - component: {fileID: 212564363}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &212564363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212564362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c61f6cda5cb28e46b4f19c99f82bf42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionPanel: {fileID: 1247331544}
-  menus:
-  - {fileID: 752586743}
-  - {fileID: 1183518458}
-  - {fileID: 1297868536}
-  - {fileID: 929872888}
-  - {fileID: 821786158}
-  towerName: {fileID: 1026080559}
-  attackSpeedValue: {fileID: 155538161}
-  attackSpeedButton: {fileID: 592666025}
-  attackSpeedCost: {fileID: 859749857}
-  damageValue: {fileID: 826417562}
-  damageButton: {fileID: 1279347910}
-  damageCost: {fileID: 437822140}
-  rangeValue: {fileID: 1557608096}
-  rangeButton: {fileID: 540039686}
-  rangeCost: {fileID: 154827815}
-  projectileSpeedValue: {fileID: 1614245990}
-  projectileSpeedButton: {fileID: 2013913664}
-  projectileSpeedCost: {fileID: 1897043415}
-  coinsText: {fileID: 1106677328}
-  currentWaveText: {fileID: 2094892594}
-  timer: {fileID: 928278477}
---- !u!4 &212564364
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212564362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 837.1063, y: 526.39825, z: 4.119292}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &213155224
 GameObject:
   m_ObjectHideFlags: 0
@@ -5860,7 +5793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50.000854}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 600, y: 80}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &253379863
@@ -8130,7 +8063,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 465213590}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+        m_MethodName: BackToMenuModal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8298,7 +8231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -50}
+  m_AnchoredPosition: {x: -20, y: -20}
   m_SizeDelta: {x: 211.5032, y: 80}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &371005393
@@ -10659,15 +10592,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultCursorVisibility: 0
-  uiManager: {fileID: 212564363}
+  uiManager: {fileID: 861396932}
   Player: {fileID: 1971291952}
   towerParent: {fileID: 1585322111}
   spawner: {fileID: 1396180871}
-  maxWaves: 1
+  maxWaves: 45
   startEnemyCount: 10
-  enemyCountMultiplier: 1.5
-  timeBetweenWaves: 30
-  spawnInterval: 0.5
+  enemyCountMultiplier: 1.2
+  timeBetweenWaves: 20
+  spawnInterval: 1
   spawnIntervalMutliplier: 0.9
   pointsPerEnemy: 2
 --- !u!1 &469016664
@@ -14269,7 +14202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 854.73535, y: -168.56285}
+  m_AnchoredPosition: {x: 512.8412, y: -168.56285}
   m_SizeDelta: {x: 260, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &594086389
@@ -15367,7 +15300,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &632755820
 GameObject:
@@ -15911,7 +15844,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &661950705
 GameObject:
@@ -16797,7 +16730,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691770271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77.887, y: 1, z: -43}
+  m_LocalPosition: {x: 64.28, y: 1, z: -43}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17559,7 +17492,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 13.836, y: 128.078, z: 101.861}
 --- !u!1 &705871328
 GameObject:
@@ -20979,6 +20912,7 @@ GameObject:
   - component: {fileID: 861396930}
   - component: {fileID: 861396929}
   - component: {fileID: 861396928}
+  - component: {fileID: 861396932}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -21015,10 +20949,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -21074,6 +21008,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &861396932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861396927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c61f6cda5cb28e46b4f19c99f82bf42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionPanel: {fileID: 1247331544}
+  menus:
+  - {fileID: 752586743}
+  - {fileID: 1183518458}
+  - {fileID: 1297868536}
+  - {fileID: 929872888}
+  - {fileID: 821786158}
+  modalPrefab: {fileID: 2436455292295527982, guid: 3ab5d775e58dd294f9a97affaf1ef5c1, type: 3}
+  towerName: {fileID: 1026080559}
+  attackSpeedValue: {fileID: 155538161}
+  attackSpeedButton: {fileID: 592666025}
+  attackSpeedCost: {fileID: 859749857}
+  damageValue: {fileID: 826417562}
+  damageButton: {fileID: 1279347910}
+  damageCost: {fileID: 437822140}
+  rangeValue: {fileID: 1557608096}
+  rangeButton: {fileID: 540039686}
+  rangeCost: {fileID: 154827815}
+  projectileSpeedValue: {fileID: 1614245990}
+  projectileSpeedButton: {fileID: 2013913664}
+  projectileSpeedCost: {fileID: 1897043415}
+  coinsText: {fileID: 1106677328}
+  currentWaveText: {fileID: 2094892594}
+  timer: {fileID: 928278477}
 --- !u!1 &862123417
 GameObject:
   m_ObjectHideFlags: 0
@@ -28231,7 +28201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 50}
+  m_AnchoredPosition: {x: -20, y: 20}
   m_SizeDelta: {x: 360, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1122206661
@@ -29738,7 +29708,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!1 &1182340394
 GameObject:
@@ -31876,14 +31846,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -33409,14 +33379,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 0.5019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -36343,7 +36313,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1396180871
 MonoBehaviour:
@@ -41249,7 +41219,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594338911
 GameObject:
@@ -42978,7 +42948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 512.8412, y: -168.56285}
+  m_AnchoredPosition: {x: 854.73535, y: -168.56285}
   m_SizeDelta: {x: 260, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1661967205
@@ -43321,7 +43291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 0.9019608}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -48644,7 +48614,7 @@ Transform:
   - {fileID: 1952010473}
   - {fileID: 431004161}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852744309
 GameObject:
@@ -52269,7 +52239,7 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -149.998, z: 0}
 --- !u!114 &1971291950
 MonoBehaviour:
@@ -52317,7 +52287,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 465213590}
-  uiManager: {fileID: 212564363}
   rayDistance: 2
   coinAttractionRange: 3
   coinAttractionSpeed: 10
