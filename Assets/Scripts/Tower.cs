@@ -32,8 +32,8 @@ public class Tower : ScriptableObject
     [SerializeField, Tooltip("Added Cost per upgrade level")] private int attackspeedUpgradeCost;
     public int AttackspeedUpgradeCost => attackspeedUpgradeCost;
 
-    [SerializeField, Tooltip("Added Value per upgrade level")] private int attackspeedUpgradeValue;
-    public int AttackspeedUpgradeValue => attackspeedUpgradeValue;
+    [SerializeField, Tooltip("Added Value per upgrade level")] private float attackspeedUpgradeValue;
+    public float AttackspeedUpgradeValue => attackspeedUpgradeValue;
 
     [SerializeField, Tooltip("Maximum attackspeed Level")] private int attackspeedMaxLevel;
     public int AttackspeedMaxLevel => attackspeedMaxLevel;

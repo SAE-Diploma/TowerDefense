@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
     /// Spawns an enemy and sets its start values
     /// </summary>
     /// <param name="boss">if a boss should be spawned</param>
-    public void SpawnEnemy(bool boss = false)
+    public void SpawnEnemy(float speed,bool boss = false)
     {
         GameObject enemy;
         if (boss)
@@ -28,6 +28,7 @@ public class Spawner : MonoBehaviour
             enemy = Instantiate(enemyPrefab, transform.position,Quaternion.identity,transform);
         }
         Enemy enemyClass = enemy.GetComponent<Enemy>();
+        enemyClass.SetSpeed(speed);
         enemyClass.SetCheckPoints(checkpointsParent);
         enemyClass.SetTresor(tresor);
         enemyClass.SetCoinParent(coinsParent);

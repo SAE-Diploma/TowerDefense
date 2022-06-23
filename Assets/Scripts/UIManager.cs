@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Image> menus;
     [SerializeField] GameObject modalPrefab;
 
-    [Header("TowerUpgradePanel")]
+    [Header("TowerUpgrade Menu")]
     [SerializeField] TextMeshProUGUI towerName;
     [SerializeField] TextMeshProUGUI attackSpeedValue;
     [SerializeField] Button attackSpeedButton;
@@ -41,6 +41,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI coinsText;
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI timer;
+
+    [Header("WinLoose Menus")]
+    [SerializeField] TextMeshProUGUI winStats;
+    [SerializeField] TextMeshProUGUI looseStats;
 
     /// <summary>
     /// Sets the visibility of the given Menu
@@ -68,18 +72,23 @@ public class UIManager : MonoBehaviour
     /// <param name="tower">referenced tower</param>
     public void UpdateTowerUpgradePanel(TowerBase tower)
     {
+        Debug.Log(tower.gameObject.name);
         towerName.text = tower.Tower.name;
         attackSpeedValue.text = $"Level {tower.AttackSpeedLevel}: {tower.AttackSpeed} rps";
-        if (tower.AttackSpeedLevel == tower.AttackSpeedMaxLevel && attackSpeedButton.interactable) DisableUpgradeButton(attackSpeedButton);
+        if (tower.AttackSpeedLevel == tower.AttackSpeedMaxLevel) SetButtonInteractible(attackSpeedButton, false);
+        else SetButtonInteractible(attackSpeedButton, true);
         attackSpeedCost.text = ((tower.AttackSpeedLevel + 1) * tower.Tower.AttackspeedUpgradeCost).ToString();
         damageValue.text = $"Level {tower.DamageLevel}: {tower.Damage} hp";
-        if (tower.DamageLevel == tower.DamageMaxLevel && damageButton.interactable) DisableUpgradeButton(damageButton);
+        if (tower.DamageLevel == tower.DamageMaxLevel) SetButtonInteractible(damageButton, false);
+        else SetButtonInteractible(damageButton, true);
         damageCost.text = ((tower.DamageLevel + 1) * tower.Tower.DamageUpgradeCost).ToString();
         rangeValue.text = $"Level {tower.RangeLevel}: {tower.Range} m";
-        if (tower.RangeLevel == tower.RangeMaxLevel && rangeButton.interactable) DisableUpgradeButton(rangeButton);
+        if (tower.RangeLevel == tower.RangeMaxLevel) SetButtonInteractible(rangeButton, false);
+        else SetButtonInteractible(rangeButton, true);
         rangeCost.text = ((tower.RangeLevel + 1) * tower.Tower.RangeUpgradeCost).ToString();
         projectileSpeedValue.text = $"Level {tower.ProjectileSpeedLevel}: {tower.ProjectileSpeed} m/s";
-        if (tower.ProjectileSpeedLevel == tower.ProjectileSpeedMaxLevel && projectileSpeedButton.interactable) DisableUpgradeButton(projectileSpeedButton);
+        if (tower.ProjectileSpeedLevel == tower.ProjectileSpeedMaxLevel) SetButtonInteractible(projectileSpeedButton, false);
+        else SetButtonInteractible(projectileSpeedButton, true);
         projectileSpeedCost.text = ((tower.ProjectileSpeedLevel + 1) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
     }
 
@@ -87,11 +96,11 @@ public class UIManager : MonoBehaviour
     /// disable an upgrade button and show the max text
     /// </summary>
     /// <param name="upgradeButton">upgrade button to disable</param>
-    private void DisableUpgradeButton(Button upgradeButton)
+    private void SetButtonInteractible(Button upgradeButton, bool interactable)
     {
-        upgradeButton.interactable = false;
-        upgradeButton.transform.GetChild(1).gameObject.SetActive(true);
-        upgradeButton.transform.GetChild(0).gameObject.SetActive(false);
+        upgradeButton.interactable = interactable;
+        upgradeButton.transform.GetChild(0).gameObject.SetActive(interactable);
+        upgradeButton.transform.GetChild(1).gameObject.SetActive(!interactable);
     }
 
     /// <summary>
@@ -175,5 +184,12 @@ public class UIManager : MonoBehaviour
         modalClass.SetButtonTexts("Back", "MainMenu");
         modalClass.OnAgreed.AddListener(action);
         modalClass.OnDisagreed.AddListener(() => Destroy(modalObject));
+    }
+
+    public void SetStatsText(int waves, int enemies, int points)
+    {
+        string stats = $"{waves}\n{enemies}\n{points}";
+        winStats.text = stats;
+        looseStats.text = stats;
     }
 }

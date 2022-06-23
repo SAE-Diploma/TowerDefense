@@ -123,6 +123,15 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets the movement speed of the enemy
+    /// </summary>
+    /// <param name="speed">movement speed</param>
+    public void SetSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+
+    /// <summary>
     /// Decrease health or die if low on health
     /// </summary>
     /// <param name="damage">incomming damage</param>

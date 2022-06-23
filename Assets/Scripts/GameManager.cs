@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("In Seconds")] int timeBetweenWaves;
     [SerializeField] float spawnInterval;
     [SerializeField] float spawnIntervalMutliplier;
+    [SerializeField] float enemyStartSpeed;
+    [SerializeField] float enemyMaxSpeed;
     [SerializeField] int pointsPerEnemy;
 
     private SaveFile saveFile;
@@ -56,6 +58,8 @@ public class GameManager : MonoBehaviour
     private int enemiesKilled = 0;
     public void AddEnemyKilled() { enemiesKilled++; }
 
+    public int Points => enemiesKilled * pointsPerEnemy + Coins;
+
     void Start()
     {
         Cursor.visible = defaultCursorVisibility;
@@ -72,10 +76,11 @@ public class GameManager : MonoBehaviour
             if (!saveFile.Loaded)
             {
                 saveFile.Save();
+                Debug.Log("New save created");
             }
         }
 
-        Coins += 100;
+        Coins += 200;
         CurrentWave = 1;
         StartCoroutine(WaitForNextWave(timeBetweenWaves));
     }
@@ -106,9 +111,11 @@ public class GameManager : MonoBehaviour
         {
             if (spawner.transform.childCount == 0)
             {
+                uiManager.SetStatsText(_currentWave - 1, enemiesKilled, Points);
                 OpenMenu(Menus.WinMenu);
-                saveFile.SetPoints(saveFile.Points + enemiesKilled * pointsPerEnemy);
+                saveFile.SetPoints(saveFile.Points + Points);
                 saveFile.Save();
+                PauseGame(false);
             }
         }
     }
@@ -127,9 +134,9 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Pause the game and show the pause overlay
     /// </summary>
-    public void PauseGame()
+    public void PauseGame(bool showMenu = true)
     {
-        OpenMenu(Menus.PauseMenu);
+        if (showMenu) OpenMenu(Menus.PauseMenu);
         Time.timeScale = 0;
     }
 
@@ -169,10 +176,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LooseGame()
     {
+        uiManager.SetStatsText(_currentWave - 1, enemiesKilled, Points);
         OpenMenu(Menus.LooseMenu);
-        saveFile.SetPoints(saveFile.Points + enemiesKilled * pointsPerEnemy);
+        saveFile.SetPoints(saveFile.Points + Points);
         Debug.Log(enemiesKilled * pointsPerEnemy);
         saveFile.Save();
+        PauseGame(false);
     }
 
     #endregion
@@ -207,17 +216,19 @@ public class GameManager : MonoBehaviour
     private IEnumerator SpawnWave(float spawnDelay, int enemyCount)
     {
         bool isLastWave = CurrentWave == maxWaves;
+        float enemySpeed = enemyStartSpeed + (1f / maxWaves * CurrentWave) * (enemyMaxSpeed - enemyStartSpeed);
+        Debug.Log(enemySpeed);
 
         for (int i = 0; i < enemyCount; i++)
         {
             yield return new WaitForSeconds(spawnDelay);
             if (isLastWave && i == enemyCount - 1)
             {
-                spawner.SpawnEnemy(true);
+                spawner.SpawnEnemy(enemySpeed,true);
             }
             else
             {
-                spawner.SpawnEnemy();
+                spawner.SpawnEnemy(enemySpeed);
             }
         }
         if (CurrentWave < maxWaves)
@@ -297,11 +308,8 @@ public class GameManager : MonoBehaviour
     /// <param name="towerObject">towerObejct</param>
     private void ApplyPermanentUpgrades(Tower towerObject)
     {
-        if (saveFile != null)
-        {
-            PermanentUpgrade upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
-            towerObject.ApplyPermanentUpgrade(upgrade);
-        }
+        PermanentUpgrade upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
+        towerObject.ApplyPermanentUpgrade(upgrade);
     }
 
     #endregion
