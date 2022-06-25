@@ -72,10 +72,10 @@ public class SaveFile : MonoBehaviour
 
         // Balliste
         permanentUpgrades[0] = new PermanentUpgrade(Towers.Balliste, true,
-            1f, 0.5f, 25, 35,     // Attackspeed
+            1f, 0.5f, 50, 35,     // Attackspeed
             10, 2, 40, 50,        // Damage
             7.5f, 2.5f, 30, 40,   // Range
-            20, 1.5f, 40, 50);    // ProjectileSpeed
+            20, 10f, 40, 50);    // ProjectileSpeed
 
         // Minigun
         permanentUpgrades[1] = new PermanentUpgrade(Towers.Minigun, false,

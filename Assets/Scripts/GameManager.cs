@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float enemyStartSpeed;
     [SerializeField] float enemyMaxSpeed;
     [SerializeField] int pointsPerEnemy;
+    private Coroutine waitForNextWaveRoutine;
 
     private SaveFile saveFile;
     public SaveFile SaveFile => saveFile;
@@ -79,10 +80,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log("New save created");
             }
         }
+        uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
 
         Coins += 200;
         CurrentWave = 1;
-        StartCoroutine(WaitForNextWave(timeBetweenWaves));
+        waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
     }
 
     void Update()
@@ -215,6 +217,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SpawnWave(float spawnDelay, int enemyCount)
     {
+        waitForNextWaveRoutine = null;
         bool isLastWave = CurrentWave == maxWaves;
         float enemySpeed = enemyStartSpeed + (1f / maxWaves * CurrentWave) * (enemyMaxSpeed - enemyStartSpeed);
         Debug.Log(enemySpeed);
@@ -233,12 +236,22 @@ public class GameManager : MonoBehaviour
         }
         if (CurrentWave < maxWaves)
         {
-            StartCoroutine(WaitForNextWave(timeBetweenWaves));
+            waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
             CurrentWave++;
         }
         else
         {
             lastWaveSpawned = true;
+        }
+    }
+
+    public void StartNextWave()
+    {
+        if (waitForNextWaveRoutine != null)
+        {
+            uiManager.ShowRemainingTime(0);
+            StopCoroutine(waitForNextWaveRoutine);
+            StartCoroutine(SpawnWave(spawnInterval * Mathf.Pow(spawnIntervalMutliplier, CurrentWave - 1), Mathf.RoundToInt(startEnemyCount * Mathf.Pow(enemyCountMultiplier, CurrentWave - 1))));
         }
     }
 

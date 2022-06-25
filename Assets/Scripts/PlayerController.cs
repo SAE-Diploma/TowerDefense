@@ -7,7 +7,8 @@ using UnityEngine.Events;
 public enum Interactions
 {
     None,
-    TowerPlace
+    TowerPlace,
+    StartNextWave
 }
 
 public class PlayerController : MonoBehaviour
@@ -73,6 +74,13 @@ public class PlayerController : MonoBehaviour
                 CurrentInteraction = Interactions.TowerPlace;
                 placeTower = hit.transform.GetComponent<TowerPlace>();
             }
+            else if (hit.transform.tag == "InteractibleShield")
+            {
+                if (hit.transform.name == "StartNextWave")
+                {
+                    CurrentInteraction = Interactions.StartNextWave;
+                }
+            }
             else
             {
                 CurrentInteraction = Interactions.None;
@@ -114,6 +122,9 @@ public class PlayerController : MonoBehaviour
                 {
                     manager.OpenMenu(Menus.TowerUpgrades);
                 }
+                break;
+            case Interactions.StartNextWave:
+                manager.StartNextWave();
                 break;
         }
     }

@@ -18,19 +18,19 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1156803670215244, guid: 65d7e2f41d2be8e48995bb4070bbeca1, type: 3}
   cost: 50
   unlockCost: 1000
-  attackspeed: 1
+  attackspeed: 3
   attackspeedUpgradeCost: 25
   attackspeedUpgradeValue: 0.25
-  attackspeedMaxLevel: 1
-  damage: 10
+  attackspeedMaxLevel: 2
+  damage: 14
   damageUpgradeCost: 40
   damageUpgradeValue: 5
-  damageMaxLevel: 1
-  range: 7.5
+  damageMaxLevel: 2
+  range: 15
   rangeUpgradeCost: 30
   rangeUpgradeValue: 5
-  rangeMaxLevel: 1
+  rangeMaxLevel: 2
   projectileSpeed: 20
   projectileSpeedUpgradeCost: 20
-  projectileSpeedUpgradeValue: 5
+  projectileSpeedUpgradeValue: 10
   projectileSpeedMaxLevel: 1

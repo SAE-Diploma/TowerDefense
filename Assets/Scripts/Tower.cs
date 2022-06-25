@@ -46,7 +46,7 @@ public class Tower : ScriptableObject
     public int DamageUpgradeCost => damageUpgradeCost;
 
     [SerializeField, Tooltip("Added Value per upgrade level")] private int damageUpgradeValue;
-    public int DamageUpgradeValue => damageMaxLevel;
+    public int DamageUpgradeValue => damageUpgradeValue;
 
     [SerializeField, Tooltip("Maximum damage Level")] private int damageMaxLevel;
     public int DamageMaxLevel => damageMaxLevel;
@@ -59,7 +59,7 @@ public class Tower : ScriptableObject
     public int RangeUpgradeCost => rangeUpgradeCost;
 
     [SerializeField, Tooltip("Added Value per upgrade level")] private int rangeUpgradeValue;
-    public int RangeUpgradeValue => rangeMaxLevel;
+    public int RangeUpgradeValue => rangeUpgradeValue;
 
     [SerializeField, Tooltip("Maximum range Level")] private int rangeMaxLevel;
     public int RangeMaxLevel => rangeMaxLevel;
@@ -72,7 +72,7 @@ public class Tower : ScriptableObject
     public int ProjectileSpeedUpgradeCost => projectileSpeedUpgradeCost;
 
     [SerializeField, Tooltip("Added Value per upgrade level")] private int projectileSpeedUpgradeValue;
-    public int ProjectileSpeedUpgradeValue => projectileSpeedMaxLevel;
+    public int ProjectileSpeedUpgradeValue => projectileSpeedUpgradeValue;
 
     [SerializeField, Tooltip("Maximum projectileSpeed Level")] private int projectileSpeedMaxLevel;
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;

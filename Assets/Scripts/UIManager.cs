@@ -22,6 +22,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Image> menus;
     [SerializeField] GameObject modalPrefab;
 
+    [Header("Buy Tower Menu")]
+    [SerializeField] Button[] buyTowerButtons;
+
     [Header("TowerUpgrade Menu")]
     [SerializeField] TextMeshProUGUI towerName;
     [SerializeField] TextMeshProUGUI attackSpeedValue;
@@ -186,10 +189,31 @@ public class UIManager : MonoBehaviour
         modalClass.OnDisagreed.AddListener(() => Destroy(modalObject));
     }
 
+    /// <summary>
+    /// Set the stat values of the current round
+    /// </summary>
+    /// <param name="waves">waves defeated</param>
+    /// <param name="enemies">enemies killed</param>
+    /// <param name="points">points gained in the round</param>
     public void SetStatsText(int waves, int enemies, int points)
     {
         string stats = $"{waves}\n{enemies}\n{points}";
         winStats.text = stats;
         looseStats.text = stats;
     }
+
+    /// <summary>
+    /// Make the the buttons to buy towers interactible if they are unlocked
+    /// </summary>
+    /// <param name="permanentUpgrades">permanent upgrades from savefile</param>
+    public void SetTowerLockedState(PermanentUpgrade[] permanentUpgrades)
+    {
+        for (int i = 0; i < buyTowerButtons.Length; i++)
+        {
+            buyTowerButtons[i].interactable = permanentUpgrades[i].Unlocked;
+            buyTowerButtons[i].transform.GetChild(1).gameObject.SetActive(permanentUpgrades[i].Unlocked);
+            buyTowerButtons[i].transform.GetChild(2).gameObject.SetActive(!permanentUpgrades[i].Unlocked);
+        }
+    }
+
 }
