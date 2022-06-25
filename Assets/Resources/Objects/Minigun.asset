@@ -17,7 +17,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 7082900090185293696, guid: 579b4b846df647a4e9c2e09ce8f2b35c, type: 3}
   projectilePrefab: {fileID: 4309222024364041835, guid: 028cecaa336baa040ab737061858c06d, type: 3}
   cost: 50
-  unlockCost: 1000
+  unlockCost: 500
   attackspeed: 20
   attackspeedUpgradeCost: 50
   attackspeedUpgradeValue: 5

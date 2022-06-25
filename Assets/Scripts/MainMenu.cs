@@ -101,11 +101,17 @@ public class MainMenu : MonoBehaviour
             if (saveFile.Loaded) ShowNewGameModal();
             else
             {
+                saveFile.InitializeDefaultValues();
                 saveFile.Save();
-                SceneManager.LoadScene(1);
+                if (tutorial.isOn) SceneManager.LoadScene(1);
+                else SceneManager.LoadScene(2);
             }
         }
-        else SceneManager.LoadScene(1);
+        else
+        {
+            if (tutorial.isOn) SceneManager.LoadScene(1);
+            else SceneManager.LoadScene(2);
+        }
     }
 
     /// <summary>
@@ -285,8 +291,10 @@ public class MainMenu : MonoBehaviour
     {
         GameObject modal = Instantiate(modalPrefab, transform);
         Modal modalClass = modal.GetComponent<Modal>();
+        modalClass.SetValues("New save", "With starting a new game all your progress will be lost.\nDo you still want to continue?");
         modalClass.OnAgreed.AddListener(() =>
         {
+            saveFile.InitializeDefaultValues();
             saveFile.Save();
             StartGame(false);
         });
