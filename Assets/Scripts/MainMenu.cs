@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
     [Header("Main Menu Buttons")]
     [SerializeField] Button continueButton;
     [SerializeField] Button upgradesButton;
+    [SerializeField] Toggle tutorial;
 
     [Header("Upgrade Panel References")]
     [SerializeField] GameObject tabButtons;
@@ -81,6 +82,11 @@ public class MainMenu : MonoBehaviour
         {
             continueButton.interactable = true;
             upgradesButton.interactable = true;
+            tutorial.isOn = false;
+        }
+        else
+        {
+            tutorial.isOn = true;
         }
 
     }

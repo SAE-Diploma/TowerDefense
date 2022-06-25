@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         Coins += 200;
         CurrentWave = 1;
         waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
+
     }
 
     void Update()
@@ -227,7 +228,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
             if (isLastWave && i == enemyCount - 1)
             {
-                spawner.SpawnEnemy(enemySpeed,true);
+                spawner.SpawnEnemy(enemySpeed, true);
             }
             else
             {
