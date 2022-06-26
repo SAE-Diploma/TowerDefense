@@ -65,13 +65,15 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = defaultCursorVisibility;
         if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
-        GameObject saveFileObject = GameObject.Find("SaveManager");
+        GameObject saveFileObject = GameObject.Find("SaveManager(Clone)");
         if (saveFileObject != null)
         {
+            Debug.Log("Found savefile");
             saveFile = saveFileObject.GetComponent<SaveFile>();
         }
         else
         {
+            Debug.Log("Loaded savefile");
             saveFile = new SaveFile();
             saveFile.init();
             if (!saveFile.Loaded)
@@ -182,7 +184,6 @@ public class GameManager : MonoBehaviour
         uiManager.SetStatsText(_currentWave - 1, enemiesKilled, Points);
         OpenMenu(Menus.LooseMenu);
         saveFile.SetPoints(saveFile.Points + Points);
-        Debug.Log(enemiesKilled * pointsPerEnemy);
         saveFile.Save();
         PauseGame(false);
     }
@@ -221,7 +222,6 @@ public class GameManager : MonoBehaviour
         waitForNextWaveRoutine = null;
         bool isLastWave = CurrentWave == maxWaves;
         float enemySpeed = enemyStartSpeed + (1f / maxWaves * CurrentWave) * (enemyMaxSpeed - enemyStartSpeed);
-        Debug.Log(enemySpeed);
 
         for (int i = 0; i < enemyCount; i++)
         {

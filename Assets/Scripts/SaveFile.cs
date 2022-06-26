@@ -36,7 +36,6 @@ public class SaveFile : MonoBehaviour
 
     public bool Loaded => loaded;
 
-
     [SerializeField] private SerializableInt points = new SerializableInt(0);
     public int Points => points.Value;
     public void SetPoints(int newValue) { points.SetValue(newValue); }

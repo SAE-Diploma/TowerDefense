@@ -14,7 +14,8 @@ public enum MainMenus
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] SaveFile saveFile;
+    SaveFile saveFile;
+    [SerializeField] GameObject saveManagerPrefab;
 
     [SerializeField] List<GameObject> menus;
 
@@ -65,18 +66,13 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        ShowMenu((int)MainMenus.MenuButtons);
-        buttonTextArray = new TextMeshProUGUI[]
+        GameObject saveManager = GameObject.Find("SaveManager(Clone)");
+        if (saveManager != null) saveFile = saveManager.GetComponent<SaveFile>();
+        else
         {
-            attackspeedButtonText,
-            damageValueButtonText,
-            rangeValueButtonText,
-            projectileSpeedValueButtonText,
-            attackspeedLevelButtonText,
-            damageLevelButtonText,
-            rangeLevelButtonText,
-            projectileSpeedLevelButtonText
-        };
+            saveManager = Instantiate(saveManagerPrefab);
+            saveFile = saveManager.GetComponent<SaveFile>();
+        }
 
         if (saveFile.Loaded)
         {
@@ -88,6 +84,20 @@ public class MainMenu : MonoBehaviour
         {
             tutorial.isOn = true;
         }
+
+        buttonTextArray = new TextMeshProUGUI[]
+        {
+            attackspeedButtonText,
+            damageValueButtonText,
+            rangeValueButtonText,
+            projectileSpeedValueButtonText,
+            attackspeedLevelButtonText,
+            damageLevelButtonText,
+            rangeLevelButtonText,
+            projectileSpeedLevelButtonText
+        };
+        ShowMenu((int)MainMenus.MenuButtons);
+        UpdatePointsText();
 
     }
 
@@ -137,7 +147,6 @@ public class MainMenu : MonoBehaviour
         {
             UpdateUpgradePanel(defaultTower);
         }
-        UpdatePointsText();
 
     }
 
