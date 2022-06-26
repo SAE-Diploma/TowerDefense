@@ -9,6 +9,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] float airSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] bool moveInAir;
+
     private bool isGrounded;
     private bool isMoving;
     private bool canMove = true;
@@ -31,7 +32,7 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        
+
         inputDir = (forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")).normalized;
 
         // multiply inputDir with correct speed
@@ -45,7 +46,8 @@ public class Player_Movement : MonoBehaviour
             {
                 inputDir *= speed;
             }
-        } else { inputDir *= airSpeed; }
+        }
+        else { inputDir *= airSpeed; }
 
     }
 
@@ -55,7 +57,7 @@ public class Player_Movement : MonoBehaviour
         if (!canMove) return;
 
         // check for the ground and set the forward vector parallel to it
-        if (Physics.Raycast(transform.position, -transform.up, out groundHit,rayLength))
+        if (Physics.Raycast(transform.position, -transform.up, out groundHit, rayLength))
         {
             forward = Vector3.Cross(transform.right, groundHit.normal);
             if (groundHit.transform.gameObject.tag == "Ground")
@@ -86,14 +88,15 @@ public class Player_Movement : MonoBehaviour
                 isMoving = true;
                 m_rigidbody.MovePosition(transform.position + inputDir * Time.deltaTime);
             }
-        } else { isMoving = false; }
+        }
+        else { isMoving = false; }
 
         // jumping when on the ground
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             if (isMoving)
             {
-                m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized*jumpForce, ForceMode.Impulse);
+                m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized * jumpForce, ForceMode.Impulse);
             }
             else
             {
