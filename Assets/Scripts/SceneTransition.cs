@@ -22,6 +22,7 @@ public class SceneTransition : MonoBehaviour
     /// <param name="sceneIndex">index of the scene to load</param>
     public void TransitionTo(int sceneIndex)
     {
+        sceneTransition.gameObject.SetActive(true);
         sceneTransition.transform.SetAsLastSibling();
         StartCoroutine(Transition(() => SceneManager.LoadScene(sceneIndex)));
     }
@@ -31,6 +32,7 @@ public class SceneTransition : MonoBehaviour
     /// </summary>
     public void ExitGame()
     {
+        sceneTransition.gameObject.SetActive(true);
         sceneTransition.transform.SetAsLastSibling();
         StartCoroutine(Transition(() => Application.Quit()));
     }
