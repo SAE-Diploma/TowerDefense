@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             Interact();
         }
+        if (transform.position.y < -50)
+        {
+            transform.position = new Vector3(38,1,6);
+        }
     }
 
     private void FixedUpdate()

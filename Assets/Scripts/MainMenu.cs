@@ -219,7 +219,6 @@ public class MainMenu : MonoBehaviour
     /// <param name="index">Towers Enum index</param>
     private void SelectTabButton(int index)
     {
-        Debug.Log(index);
         for (int i = 0; i < 3; i++)
         {
             Button btn = tabButtons.transform.GetChild(i).GetComponent<Button>();
