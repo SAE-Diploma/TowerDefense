@@ -8,6 +8,7 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField, Tooltip("in seconds")] float autoProgressTime;
     [SerializeField] private List<GameObject> states;
+    private SceneTransition transition;
 
     private Coroutine autoProgressRoutine;
 
@@ -31,6 +32,7 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
+        transition = GetComponent<SceneTransition>();
         autoProgressRoutine = StartCoroutine(AutoProgress(autoProgressTime));
         ShowState(0);
     }
@@ -60,7 +62,7 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(2);
+            transition.TransitionTo(2);
         }
     }
 

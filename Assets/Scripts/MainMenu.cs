@@ -23,6 +23,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] GameObject modalPrefab;
 
+    SceneTransition transition;
+
     [Header("Main Menu Buttons")]
     [SerializeField] Button continueButton;
     [SerializeField] Button upgradesButton;
@@ -67,6 +69,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         GameObject saveManager = GameObject.Find("SaveManager(Clone)");
+        transition = GetComponent<SceneTransition>();
         if (saveManager != null) saveFile = saveManager.GetComponent<SaveFile>();
         else
         {
@@ -113,14 +116,14 @@ public class MainMenu : MonoBehaviour
             {
                 saveFile.InitializeDefaultValues();
                 saveFile.Save();
-                if (tutorial.isOn) SceneManager.LoadScene(1);
-                else SceneManager.LoadScene(2);
+                if (tutorial.isOn) transition.TransitionTo(1);
+                else transition.TransitionTo(2);
             }
         }
         else
         {
-            if (tutorial.isOn) SceneManager.LoadScene(1);
-            else SceneManager.LoadScene(2);
+            if (tutorial.isOn) transition.TransitionTo(1);
+            else transition.TransitionTo(2);
         }
     }
 
@@ -129,7 +132,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
-        Application.Quit();
+        transition.ExitGame();
     }
 
     /// <summary>

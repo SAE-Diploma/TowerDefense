@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool defaultCursorVisibility;
     [SerializeField] UIManager uiManager;
     [SerializeField] PlayerController Player;
+    private SceneTransition transition;
 
     [Header("Towers")]
     [SerializeField] Transform towerParent;
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = defaultCursorVisibility;
         if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
+        transition = GetComponent<SceneTransition>();
+
         GameObject saveFileObject = GameObject.Find("SaveManager(Clone)");
         if (saveFileObject != null)
         {
@@ -160,7 +163,7 @@ public class GameManager : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        transition.TransitionTo(0);
     }
 
     public void BackToMenuModal()
@@ -246,6 +249,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the next wave
+    /// </summary>
     public void StartNextWave()
     {
         if (waitForNextWaveRoutine != null)

@@ -44,6 +44,11 @@ public class Player_Mouselook : MonoBehaviour
         transform.localRotation = originalCamRotation * quaternionY;
     }
 
+    /// <summary>
+    /// make sure the rotation value is between -360 and 360
+    /// </summary>
+    /// <param name="rotation"></param>
+    /// <returns></returns>
     private float CapRotation(float rotation)
     {
         if (rotation > 360) return rotation - 360;

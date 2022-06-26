@@ -10,7 +10,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float randomOffset;
 
-
     [Header("Attacking")]
     [SerializeField] float attackSpeed;
     [SerializeField] int damage;

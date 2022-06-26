@@ -49,6 +49,9 @@ public class SaveFile : MonoBehaviour
         init();
     }
 
+    /// <summary>
+    /// Initialize start values
+    /// </summary>
     public void init()
     {
         filePath = Application.dataPath + "/Saves/save.json";

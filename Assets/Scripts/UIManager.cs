@@ -75,7 +75,6 @@ public class UIManager : MonoBehaviour
     /// <param name="tower">referenced tower</param>
     public void UpdateTowerUpgradePanel(TowerBase tower)
     {
-        Debug.Log(tower.gameObject.name);
         towerName.text = tower.Tower.name;
         attackSpeedValue.text = $"Level {tower.AttackSpeedLevel}: {tower.AttackSpeed} rps";
         if (tower.AttackSpeedLevel == tower.AttackSpeedMaxLevel) SetButtonInteractible(attackSpeedButton, false);
