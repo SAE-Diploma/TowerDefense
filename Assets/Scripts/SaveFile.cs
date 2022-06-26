@@ -112,6 +112,7 @@ public class SaveFile : MonoBehaviour
         }
         jsonString = jsonString.Substring(0, jsonString.Length - 1);
         File.WriteAllText(filePath, jsonString);
+        loaded = true;
     }
 
     /// <summary>
