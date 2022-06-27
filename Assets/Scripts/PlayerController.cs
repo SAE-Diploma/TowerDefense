@@ -30,14 +30,27 @@ public class PlayerController : MonoBehaviour
         get { return _currentInteraction; }
         private set
         {
-            _currentInteraction = value;
-            manager.ShowInteractionE();
+            if (canInteract)
+            {
+                _currentInteraction = value;
+                manager.ShowInteractionE();
+            }
+            else
+            {
+                _currentInteraction = Interactions.None;
+            }
         }
+    }
+
+    private bool canInteract = true;
+    public void SetCanInteract(bool canInteract)
+    {
+        this.canInteract = canInteract;
+        if (!canInteract) CurrentInteraction = Interactions.None;
     }
 
     private TowerPlace placeTower;
     public TowerPlace PlaceTower => placeTower;
-
 
     void Start()
     {
@@ -53,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.y < -50)
         {
-            transform.position = new Vector3(38,1,6);
+            transform.position = new Vector3(38, 1, 6);
         }
     }
 

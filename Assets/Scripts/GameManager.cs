@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             if (currentOpenMenu.Count > 0)
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
                 {
                     ResumeGame();
                 }
-                else
+                else if (topMostMenu != Menus.LooseMenu && topMostMenu != Menus.WinMenu)
                 {
                     CloseMenu(topMostMenu);
                 }
@@ -120,6 +121,9 @@ public class GameManager : MonoBehaviour
             if (spawner.transform.childCount == 0)
             {
                 uiManager.SetStatsText(_currentWave - 1, enemiesKilled, Points);
+                Player.SetCanInteract(false);
+                CloseAllMenus();
+                uiManager.SetInteractionVisibility(false);
                 OpenMenu(Menus.WinMenu);
                 saveFile.SetPoints(saveFile.Points + Points);
                 saveFile.Save();
@@ -185,7 +189,10 @@ public class GameManager : MonoBehaviour
     public void LooseGame()
     {
         uiManager.SetStatsText(_currentWave - 1, enemiesKilled, Points);
+        Player.SetCanInteract(false);
+        CloseAllMenus();
         OpenMenu(Menus.LooseMenu);
+        uiManager.SetInteractionVisibility(false);
         saveFile.SetPoints(saveFile.Points + Points);
         saveFile.Save();
         PauseGame(false);
@@ -387,6 +394,17 @@ public class GameManager : MonoBehaviour
     public void CloseMenu(int enumIndex)
     {
         CloseMenu((Menus)enumIndex);
+    }
+
+    /// <summary>
+    /// Closes all current open Menus
+    /// </summary>
+    public void CloseAllMenus()
+    {
+        for (int i = 0; i < currentOpenMenu.Count; i++)
+        {
+            CloseMenu(currentOpenMenu.Peek());
+        }
     }
 
     /// <summary>
