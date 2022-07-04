@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TowerBase : MonoBehaviour
 {
+    #region upgradeStats
     // Attackspeed
     private float attackSpeed; // rounds per seconds
     public float AttackSpeed => attackSpeed;
@@ -59,6 +60,7 @@ public class TowerBase : MonoBehaviour
 
     private int projectileSpeedMaxLevel = 1;
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
+    #endregion
 
     private Tower tower;
     public Tower Tower
@@ -77,7 +79,7 @@ public class TowerBase : MonoBehaviour
 
     private GameObject projectilePrefab;
     private GameObject enemiesParent;
-    private List<GameObject> enemiesInRange;
+    private List<Enemy> enemiesInRange;
     private GameObject turret;
     private Shoot turretShoot;
     private bool shot = false;
@@ -90,7 +92,7 @@ public class TowerBase : MonoBehaviour
             Debug.LogError("Enemies parent not found!");
             return;
         }
-        enemiesInRange = new List<GameObject>();
+        enemiesInRange = new List<Enemy>();
         turret = GetTurret();
         turretShoot = turret.GetComponent<Shoot>();
     }
@@ -108,14 +110,16 @@ public class TowerBase : MonoBehaviour
         GetEnemiesInRange(ref enemiesInRange);
         if (enemiesInRange.Count > 0)
         {
-            GameObject enemy = GetProritizedEnemy(enemiesInRange);
-            Debug.DrawLine(transform.position, enemy.transform.position, Color.red, Time.deltaTime);
-            turret.transform.LookAt(enemy.transform);
-            if (!shot)
+            Enemy enemy = GetProritizedEnemy(enemiesInRange);
+            if (enemy != null)
             {
-                turretShoot.ShootAt(enemy, projectilePrefab, damage, projectileSpeed);
-                shot = true;
-                StartCoroutine(ShootCooldown(1 / attackSpeed));
+                turret.transform.LookAt(enemy.transform);
+                if (!shot)
+                {
+                    turretShoot.ShootAt(enemy, projectilePrefab, damage, projectileSpeed);
+                    shot = true;
+                    StartCoroutine(ShootCooldown(1 / attackSpeed));
+                }
             }
         }
     }
@@ -142,7 +146,7 @@ public class TowerBase : MonoBehaviour
     /// get all enemies that are in range.
     /// </summary>
     /// <param name="enemies">reference to the enemiesInRange list</param>
-    private void GetEnemiesInRange(ref List<GameObject> enemies)
+    private void GetEnemiesInRange(ref List<Enemy> enemies)
     {
         enemies.Clear();
         foreach (Transform enemy in enemiesParent.transform)
@@ -150,7 +154,7 @@ public class TowerBase : MonoBehaviour
             Vector3 dir = new Vector3(enemy.position.x, 0, enemy.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
             if (dir.sqrMagnitude < Mathf.Pow(range, 2))
             {
-                enemies.Add(enemy.gameObject);
+                enemies.Add(enemy.GetComponent<Enemy>());
             }
         }
     }
@@ -160,11 +164,18 @@ public class TowerBase : MonoBehaviour
     /// </summary>
     /// <param name="enemiesInRange">all enemies in Range</param>
     /// <returns>Enemy to shoot at</returns>
-    private GameObject GetProritizedEnemy(List<GameObject> enemiesInRange)
+    private Enemy GetProritizedEnemy(List<Enemy> enemiesInRange)
     {
         // ToDoo:
         // Consider aming on the enemy that has the highes progression score
-        return enemiesInRange[0];
+        foreach (Enemy enemy in enemiesInRange)
+        {
+            if (enemy.IncommingDamage < enemy.MaxHealth)
+            {
+                return enemy;
+            }
+        }
+        return null;
     }
 
     /// <summary>

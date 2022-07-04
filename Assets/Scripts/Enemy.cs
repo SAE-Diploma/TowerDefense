@@ -6,6 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int health;
 
+    private int maxHealth = 1000;
+    public int MaxHealth => maxHealth;
+
+    private int incommingDamage = 0;
+    public int IncommingDamage => incommingDamage;
+
     [Header("Movement")]
     [SerializeField] float moveSpeed;
     [SerializeField] float randomOffset;
@@ -30,9 +36,11 @@ public class Enemy : MonoBehaviour
     List<Vector3> checkpoints = new List<Vector3>();
     int currentCheckpointIndex = 0;
 
+
     private void Start()
     {
         transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
+        maxHealth = health;
     }
 
     void Update()
@@ -169,6 +177,15 @@ public class Enemy : MonoBehaviour
         }
         gameManager.AddEnemyKilled();
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// adds damage to the incomming damage
+    /// </summary>
+    /// <param name="incommingDamage">incomming projectile damage</param>
+    public void addIncommingDamage(int incommingDamage)
+    {
+        this.incommingDamage += incommingDamage;
     }
 
 }
