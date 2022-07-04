@@ -255,7 +255,7 @@ public class MainMenu : MonoBehaviour
             if (saveFile.Points >= currentTower.UnlockCost)
             {
                 saveFile.PermanentUpgrades[(int)currentTower.TowerType].Unlock();
-                saveFile.SetPoints(saveFile.Points - 1000);
+                saveFile.SetPoints(saveFile.Points - currentTower.UnlockCost);
                 UpdatePointsText();
                 saveFile.Save();
                 UpdateUpgradePanel(currentTower);
