@@ -73,7 +73,7 @@ public class SaveFile : MonoBehaviour
         points.SetValue(0);
 
         // Balliste
-        permanentUpgrades[0] = new PermanentUpgrade(Towers.Balliste, true,
+        permanentUpgrades[0] = new PermanentUpgrade(Towers.Ballista, true,
             1f, 0.5f, 50, 35,     // Attackspeed
             10, 2, 40, 50,        // Damage
             7.5f, 2.5f, 30, 40,   // Range

@@ -78,7 +78,7 @@ public class Player_Movement : MonoBehaviour
             {
                 if (moveInAir)
                 {
-                    m_rigidbody.MovePosition(transform.position + inputDir * Time.deltaTime);
+                    m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
                     isMoving = true;
                 }
                 else { isMoving = false; }
@@ -86,7 +86,7 @@ public class Player_Movement : MonoBehaviour
             else
             {
                 isMoving = true;
-                m_rigidbody.MovePosition(transform.position + inputDir * Time.deltaTime);
+                m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
             }
         }
         else { isMoving = false; }

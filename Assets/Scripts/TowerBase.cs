@@ -74,6 +74,10 @@ public class TowerBase : MonoBehaviour
     }
     public void SetTower(Tower tower) { Tower = tower; }
 
+    private TowerPlace place;
+    public TowerPlace Place => place;
+    public void SetTowerPlace(TowerPlace place) { this.place = place; }
+
     private int totalCoinsSpent = 0;
     public int TotalCoinsSpent => totalCoinsSpent;
 
@@ -83,6 +87,7 @@ public class TowerBase : MonoBehaviour
     private GameObject turret;
     private Shoot turretShoot;
     private bool shot = false;
+
 
     private void Start()
     {

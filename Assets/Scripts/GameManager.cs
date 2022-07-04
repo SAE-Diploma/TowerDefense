@@ -289,6 +289,7 @@ public class GameManager : MonoBehaviour
                     GameObject tower = Instantiate(towerToSpawn.TowerPrefab, Player.PlaceTower.Place.position, Quaternion.identity, towerParent);
                     TowerBase towerBase = tower.GetComponent<TowerBase>();
                     towerBase.SetTower(towerToSpawn);
+                    towerBase.SetTowerPlace(Player.PlaceTower);
                     Player.PlaceTower.SetTower(tower);
                     Coins -= towerToSpawn.Cost;
                     CloseMenu(Menus.ChooseTower);
@@ -322,6 +323,7 @@ public class GameManager : MonoBehaviour
         {
             Coins = newCoinValue;
             uiManager.UpdateTowerUpgradePanel(towerBase);
+            towerBase.Place.UpdateUI();
         }
         else
         {

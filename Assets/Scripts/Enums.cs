@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Towers
 {
-    Balliste = 0,
+    Ballista = 0,
     Minigun = 1,
     Sniper = 2
 }
