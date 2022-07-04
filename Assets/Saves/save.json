@@ -1,5 +1,5 @@
 {
-    "value": 594
+    "value": 9
 };{
     "unlocked": true,
     "attackSpeedValueLevel": 5,
@@ -24,10 +24,10 @@
     "unlocked": true,
     "attackSpeedValueLevel": 4,
     "attackSpeedMaxLevel": 1,
-    "damageValueLevel": 1,
+    "damageValueLevel": 4,
     "damageMaxLevel": 1,
-    "rangeValueLevel": 3,
+    "rangeValueLevel": 4,
     "rangeMaxLevel": 2,
-    "projectileSpeedValueLevel": 1,
+    "projectileSpeedValueLevel": 4,
     "projectileSpeedMaxLevel": 1
 }

@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private int _currentWave;
+    private int _currentWave = 0;
     public int CurrentWave
     {
         get { return _currentWave; }
@@ -87,8 +87,8 @@ public class GameManager : MonoBehaviour
         }
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
 
+        CurrentWave = 0;
         Coins += 200;
-        CurrentWave = 1;
         waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
 
     }
@@ -229,6 +229,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SpawnWave(float spawnDelay, int enemyCount)
     {
+        CurrentWave++;
         waitForNextWaveRoutine = null;
         bool isLastWave = CurrentWave == maxWaves;
         float enemySpeed = enemyStartSpeed + (1f / maxWaves * CurrentWave) * (enemyMaxSpeed - enemyStartSpeed);
@@ -248,7 +249,6 @@ public class GameManager : MonoBehaviour
         if (CurrentWave < maxWaves)
         {
             waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
-            CurrentWave++;
         }
         else
         {
