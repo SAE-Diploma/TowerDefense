@@ -49,6 +49,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI winStats;
     [SerializeField] TextMeshProUGUI looseStats;
 
+
+    private void Start()
+    {
+        UI_Manager manager = UI_Manager.Get();
+        manager.RefreshUIComponent("Component1", new Dictionary<string, string> {
+            { "Title", "Test" } ,
+            { "Sprite", "UI/3DTowerIcon" }
+        });
+        manager.RefreshUIComponent("Component2", new Dictionary<string, string> {
+            { "Title", "Component2" } ,
+            { "Sprite", "UI/Attackspeed" }
+        });
+    }
+
+
     /// <summary>
     /// Sets the visibility of the given Menu
     /// </summary>

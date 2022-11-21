@@ -32,7 +32,6 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-
         inputDir = (forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")).normalized;
 
         // multiply inputDir with correct speed
