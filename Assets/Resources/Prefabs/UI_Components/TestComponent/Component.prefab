@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 
-  title: {fileID: 8236054101735566789}
+  titleText: {fileID: 8236054101735566789}
   image: {fileID: 9116393768550141374}
 --- !u!1 &6654872451307358527
 GameObject:

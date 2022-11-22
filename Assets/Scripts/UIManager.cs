@@ -52,17 +52,8 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        UI_Manager manager = UI_Manager.Get();
-        manager.RefreshUIComponent("Component1", new Dictionary<string, string> {
-            { "Title", "Test" } ,
-            { "Sprite", "UI/3DTowerIcon" }
-        });
-        manager.RefreshUIComponent("Component2", new Dictionary<string, string> {
-            { "Title", "Component2" } ,
-            { "Sprite", "UI/Attackspeed" }
-        });
+        UI_Manager.Get().RefreshUIComponent("123", new Dictionary<string, string> { { "Visible", "true" },{ "Title", "HelloWorld" } });
     }
-
 
     /// <summary>
     /// Sets the visibility of the given Menu
@@ -92,9 +83,12 @@ public class UIManager : MonoBehaviour
     {
         towerName.text = tower.Tower.TowerType.ToString();
         attackSpeedValue.text = $"Level {tower.AttackSpeedLevel}: {tower.AttackSpeed} rps";
+
         if (tower.AttackSpeedLevel == tower.AttackSpeedMaxLevel) SetButtonInteractible(attackSpeedButton, false);
         else SetButtonInteractible(attackSpeedButton, true);
+
         attackSpeedCost.text = ((tower.AttackSpeedLevel + 1) * tower.Tower.AttackspeedUpgradeCost).ToString();
+
         damageValue.text = $"Level {tower.DamageLevel}: {tower.Damage} hp";
         if (tower.DamageLevel == tower.DamageMaxLevel) SetButtonInteractible(damageButton, false);
         else SetButtonInteractible(damageButton, true);

@@ -8,31 +8,22 @@ using UnityEngine.UI;
 
 public class MyComponent : UIComponent
 {
-    [SerializeField] TextMeshProUGUI title;
+    [SerializeField] TextMeshProUGUI titleText;
     [SerializeField] Image image;
 
-    private void Start()
+    protected override void Start()
     {
-        if (!string.IsNullOrEmpty(Id))
-        {
-            Debug.Log(Id);
-        }
+        base.Start();
+        actions.Add("Title", SetTitle);
     }
 
     public override void Refresh(Dictionary<string, string> request)
     {
-        foreach (string key in request.Keys)
-        {
-            switch (key)
-            {
-                case "Title":
-                    title.text = request[key];
-                    break;
-                case "Sprite":
-                    Sprite sprite = Resources.Load<Sprite>(request[key]);
-                    if (sprite != null) image.sprite = sprite; 
-                    break;
-            }
-        }
+        base.Refresh(request);
+    }
+
+    private void SetTitle(string title)
+    {
+        titleText.text = title;
     }
 }
