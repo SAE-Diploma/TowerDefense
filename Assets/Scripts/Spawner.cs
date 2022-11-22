@@ -11,6 +11,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform coinsParent;
     [SerializeField] GameObject checkpointsParent;
     [SerializeField] Tresor tresor;
+    [SerializeField] List<Transform> checkpoints;
+
 
     /// <summary>
     /// Spawns an enemy and sets its start values
