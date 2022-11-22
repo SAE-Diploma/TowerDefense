@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
         transition = GetComponent<SceneTransition>();
 
+        /*
         GameObject saveFileObject = GameObject.Find("SaveManager(Clone)");
         if (saveFileObject != null)
         {
@@ -86,10 +87,14 @@ public class GameManager : MonoBehaviour
             }
         }
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
+        */
+
+        EnemyCollection[] distribution = WaveController.Instance.GetDistribution(5);
+
 
         CurrentWave = 0;
         Coins += 200;
-        waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
+        //waitForNextWaveRoutine = StartCoroutine(WaitForNextWave(timeBetweenWaves));
 
     }
 
