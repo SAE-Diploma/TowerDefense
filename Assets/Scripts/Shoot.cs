@@ -22,6 +22,6 @@ public class Shoot : MonoBehaviour
         projectileScript.SetDamage(damage);
         projectileScript.SetSpeed(speed);
         projectileScript.SetEnemy(enemy.gameObject);
-        enemy.addIncommingDamage(damage);
+        enemy.AddIncommingDamage(damage);
     }
 }

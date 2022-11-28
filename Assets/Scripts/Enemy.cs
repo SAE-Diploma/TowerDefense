@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] EnemyStats stats;
+
     [SerializeField] int health;
 
     private int maxHealth = 1000;
@@ -40,7 +42,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
-        maxHealth = health;
+        maxHealth = stats.Health;
     }
 
     void Update()
@@ -183,7 +185,7 @@ public class Enemy : MonoBehaviour
     /// adds damage to the incomming damage
     /// </summary>
     /// <param name="incommingDamage">incomming projectile damage</param>
-    public void addIncommingDamage(int incommingDamage)
+    public void AddIncommingDamage(int incommingDamage)
     {
         this.incommingDamage += incommingDamage;
     }
