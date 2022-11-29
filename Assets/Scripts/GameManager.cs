@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
         */
 
-        EnemyCollection[] distribution = WaveController.Instance.GetDistribution(5);
+        WaveController.Instance.CurrentWave++;
 
 
         CurrentWave = 0;
@@ -242,14 +242,12 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < enemyCount; i++)
         {
             yield return new WaitForSeconds(spawnDelay);
-            if (isLastWave && i == enemyCount - 1)
-            {
-                spawner.SpawnEnemy(enemySpeed, true);
-            }
-            else
-            {
-                spawner.SpawnEnemy(enemySpeed);
-            }
+            //if (isLastWave && i == enemyCount - 1)
+            //{
+            //}
+            //else
+            //{
+            //}
         }
         if (CurrentWave < maxWaves)
         {

@@ -19,6 +19,9 @@ public class EnemyStats : ScriptableObject
     [SerializeField] private int damage;
     public int Damage => damage;
 
+    [SerializeField] private float attackSpeed;
+    public float AttackSpeed => attackSpeed;
+
     [SerializeField] private int coins;
     public int Coins => coins;
 

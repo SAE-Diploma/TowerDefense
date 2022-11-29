@@ -5,8 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyStats stats;
+    [SerializeField] GameObject coinPrefab;
 
-    [SerializeField] int health;
+    private int health;
 
     private int maxHealth = 1000;
     public int MaxHealth => maxHealth;
@@ -15,18 +16,12 @@ public class Enemy : MonoBehaviour
     public int IncommingDamage => incommingDamage;
 
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
-    [SerializeField] float randomOffset;
+    float randomOffset = 1f;
 
     [Header("Attacking")]
-    [SerializeField] float attackSpeed;
-    [SerializeField] int damage;
     Tresor tresor;
     private bool isAttacking = false;
 
-    [Header("On Death")]
-    [SerializeField] int coinsDropped;
-    [SerializeField] GameObject coinPrefab;
     GameManager gameManager;
     Transform coinsParent;
     float randomDropDistance = 0.5f;
@@ -35,14 +30,14 @@ public class Enemy : MonoBehaviour
     float sqrDistToNextPoint;
     float progress = 0;
 
-    List<Vector3> checkpoints = new List<Vector3>();
+    protected List<Vector3> checkpoints = new List<Vector3>();
     int currentCheckpointIndex = 0;
 
-
-    private void Start()
+    protected virtual void Start()
     {
         transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
         maxHealth = stats.Health;
+        health = maxHealth;
     }
 
     void Update()
@@ -57,7 +52,7 @@ public class Enemy : MonoBehaviour
             {
                 if (!isAttacking)
                 {
-                    StartCoroutine(AttackTresor(attackSpeed));
+                    StartCoroutine(AttackTresor(stats.AttackSpeed));
                     isAttacking = true;
                 }
             }
@@ -71,7 +66,7 @@ public class Enemy : MonoBehaviour
     private void MoveToCheckpoint(Vector3 checkpoint)
     {
         transform.LookAt(checkpoint);
-        transform.position = transform.position + transform.forward * moveSpeed * Time.deltaTime;
+        transform.position = transform.position + transform.forward * stats.Speed * Time.deltaTime;
         Vector3 direction = checkpoint - transform.position;
         float squareDist = Vector3.SqrMagnitude(direction);
         CalculateProgress(squareDist);
@@ -92,13 +87,9 @@ public class Enemy : MonoBehaviour
         progress = 1f / (checkpoints.Count - 1) * (currentCheckpointIndex - 1 + percToNextPoint);
     }
 
-    /// <summary>
-    /// Set the checkpoint positions from the enemyspawner
-    /// </summary>
-    /// <param name="cpParent"></param>
-    public void SetCheckPoints(GameObject cpParent)
+    public virtual void SetCheckPoints(List<Transform> checkPoints)
     {
-        foreach (Transform t in cpParent.transform)
+        foreach (Transform t in checkPoints)
         {
             checkpoints.Add(new Vector3(t.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, t.position.z + Random.Range(-randomOffset, randomOffset)));
         }
@@ -132,15 +123,6 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the movement speed of the enemy
-    /// </summary>
-    /// <param name="speed">movement speed</param>
-    public void SetSpeed(float speed)
-    {
-        moveSpeed = speed;
-    }
-
-    /// <summary>
     /// Decrease health or die if low on health
     /// </summary>
     /// <param name="damage">incomming damage</param>
@@ -160,7 +142,7 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(attackspeed);
-            if (tresor != null) tresor.TakeDamage(damage);
+            if (tresor != null) tresor.TakeDamage(stats.Damage);
             else { break; }
         }
     }
@@ -170,7 +152,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        for (int i = 0; i < coinsDropped; i++)
+        for (int i = 0; i < stats.Coins; i++)
         {
             Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
             GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity, coinsParent);
