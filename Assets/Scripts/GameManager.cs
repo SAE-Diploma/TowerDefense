@@ -62,6 +62,30 @@ public class GameManager : MonoBehaviour
 
     public int Points => enemiesKilled * pointsPerEnemy + Coins;
 
+    [SerializeField] Enemy testEnemy;
+    [SerializeField] StatusEffect testEffect;
+    [SerializeField] StatusEffect testEffect2;
+
+    private IEnumerator effectTest()
+    {
+        for (int i = 0;i< 10; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    testEnemy.AddStatusEffect(testEffect);
+                    break;
+                case 1:
+                    testEnemy.AddStatusEffect(testEffect);
+                    break;
+                case 2:
+                    testEnemy.AddStatusEffect(testEffect);
+                    break;
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+
     void Start()
     {
         Cursor.visible = defaultCursorVisibility;
@@ -89,8 +113,8 @@ public class GameManager : MonoBehaviour
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
         */
 
-        WaveController.Instance.CurrentWave++;
-
+        //WaveController.Instance.CurrentWave++;
+        StartCoroutine(effectTest());
 
         CurrentWave = 0;
         Coins += 200;

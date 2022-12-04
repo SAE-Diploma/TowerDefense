@@ -16,3 +16,11 @@ public enum TowerStat
     Range = 2,
     ProjectileSpeed = 3
 }
+
+public enum EnemyStat
+{
+    Health = 0,
+    Speed = 1,
+    Damage = 2,
+    Armor = 3,
+}

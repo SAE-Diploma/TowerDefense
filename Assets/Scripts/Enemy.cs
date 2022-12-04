@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyStats stats;
     [SerializeField] GameObject coinPrefab;
+    Dictionary<EnemyStat,StatusEffect> activeStatusEffects = new Dictionary<EnemyStat,StatusEffect>();
+    Coroutine statusEffectCoroutine;
 
     private int health;
 
@@ -15,10 +19,8 @@ public class Enemy : MonoBehaviour
     private int incommingDamage = 0;
     public int IncommingDamage => incommingDamage;
 
-    [Header("Movement")]
     float randomOffset = 1f;
 
-    [Header("Attacking")]
     Tresor tresor;
     private bool isAttacking = false;
 
@@ -159,7 +161,7 @@ public class Enemy : MonoBehaviour
             Coin coin = coinObject.GetComponent<Coin>();
             coin.SetValue(1);
         }
-        gameManager.AddEnemyKilled();
+        //gameManager.AddEnemyKilled();
         Destroy(gameObject);
     }
 
@@ -170,6 +172,91 @@ public class Enemy : MonoBehaviour
     public void AddIncommingDamage(int incommingDamage)
     {
         this.incommingDamage += incommingDamage;
+    }
+
+    // Status Effects
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        if (!activeStatusEffects.ContainsKey(effect.EffectType))
+        {
+            // not stackable
+            StatusEffect copy = Instantiate(effect);
+            if (copy.Stackable) copy.AddStack();
+            activeStatusEffects.Add(copy.EffectType,copy); // store copy of the effect
+        }
+        else
+        {
+            // add stack or reset duration
+            StatusEffect activeEffect = activeStatusEffects[effect.EffectType];
+            if (activeEffect.Stackable)
+            {
+                activeEffect.AddStack();
+            }
+            else
+            {
+                activeEffect.SetDuration(effect.Duration);
+            }
+
+        }
+        if (statusEffectCoroutine == null)
+        {
+            statusEffectCoroutine = StartCoroutine(ApplyStatusEffects());
+        }
+    }
+
+    private void RemoveStatusEffect(StatusEffect effect)
+    {
+        activeStatusEffects.Remove(effect.EffectType);
+        if (activeStatusEffects.Count == 0 && statusEffectCoroutine != null)
+        {
+            StopCoroutine(statusEffectCoroutine);
+            statusEffectCoroutine = null;
+        }
+    }
+
+    private IEnumerator ApplyStatusEffects()
+    {
+        StatusEffect effect;
+        while (true)
+        {
+            EnemyStat[] keys = activeStatusEffects.Keys.ToArray();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                effect = activeStatusEffects[keys[i]];
+                ApplyStatusEffect(effect, 1);
+                effect.CountDownOneSecond();
+                if (effect.Duration <= 0)
+                {
+                    RemoveStatusEffect(effect);
+                }
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void ApplyStatusEffect(StatusEffect effect, int duration)
+    {
+        //Debug.Log($"applying status effect to {effect.EffectType}");
+        switch (effect.EffectType)
+        {
+            case EnemyStat.Health:
+                TakeDamage(duration * effect.GetIntValue());
+                Debug.Log($"Took {duration * effect.GetIntValue()} poison damage");
+                break;
+            case EnemyStat.Speed: 
+            case EnemyStat.Damage: 
+            case EnemyStat.Armor:
+                if (effect.Duration > 0)
+                {
+                    stats.DecreaseStat(effect.EffectType, effect.Value);
+                }
+                else
+                {
+                    stats.ResetStat(effect.EffectType);
+                }
+                break;
+        }
     }
 
 }

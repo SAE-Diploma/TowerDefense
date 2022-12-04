@@ -16,5 +16,6 @@ MonoBehaviour:
   armor: 0
   speed: 0.8
   damage: 15
+  attackSpeed: 0.8
   coins: 4
   difficulty: 4
