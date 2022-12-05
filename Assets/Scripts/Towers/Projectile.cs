@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour
     Quaternion offsetRotation;
 
     [SerializeField] StatusEffect statusEffect;
+    [SerializeField] int maxPenetrations = 0;
+    int penetrations = 0;
 
     void Start()
     {
@@ -21,20 +23,16 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         // rotate towards the enemy
-        if (enemy != null)
+        if (transform.position.y > 0)
         {
-            transform.LookAt(enemy.transform);
-            transform.rotation *= offsetRotation;
+            if (penetrations == 0 && enemy != null)
+            {
+                transform.LookAt(enemy.transform);
+                transform.rotation *= offsetRotation;
+            }
 
             // Move towards enemy
             transform.localPosition += transform.up * speed * Time.deltaTime;
-
-            // Check if hit enemy
-            Vector3 dir = enemy.transform.position - transform.position;
-            if (dir.sqrMagnitude < Mathf.Pow(hitDistance, 2))
-            {
-                EnemyHit();
-            }
         }
         else
         {
@@ -43,13 +41,34 @@ public class Projectile : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("hit");
+        if (other.gameObject.tag == "Enemy")
+        {
+            EnemyHit(other.gameObject.GetComponentInParent<Enemy>());
+        }
+        else if(other.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     /// <summary>
     /// runs when the projectile hit the enemy
     /// </summary>
-    private void EnemyHit()
+    private void EnemyHit(Enemy enemyClass)
     {
         // inflict damage to enemy
-        Enemy enemyClass = enemy.GetComponent<Enemy>();
         if (enemyClass != null)
         {
             enemyClass.TakeDamage(damage);
@@ -58,8 +77,17 @@ public class Projectile : MonoBehaviour
                 enemyClass.AddStatusEffect(statusEffect);
             }
         }
-        Destroy(gameObject);
+        if (penetrations >= maxPenetrations)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            penetrations++;
+        }
     }
+
+    
 
     /// <summary>
     /// set the enemy GameObject to home towards

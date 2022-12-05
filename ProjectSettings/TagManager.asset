@@ -8,6 +8,7 @@ TagManager:
   - coin
   - towerPlace
   - InteractibleShield
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1156803670215244, guid: 65d7e2f41d2be8e48995bb4070bbeca1, type: 3}
   cost: 50
   unlockCost: 100
-  attackspeed: 0.2
+  attackspeed: 1
   attackspeedUpgradeCost: 25
   attackspeedUpgradeValue: 0.25
   attackspeedMaxLevel: 2

@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
+        //transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
         maxHealth = Stats.Health;
         health = maxHealth;
     }
