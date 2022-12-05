@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 {
 
     [SerializeField] private GameManager manager;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Transform enemiesParent;
     [SerializeField] private GameObject bossPrefab;
     [SerializeField] private Transform coinsParent;
     [SerializeField] private GameObject checkpointsParent;
@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
         {
             if (enemyPrefabs[type] != null)
             {
-                Enemy enemy = Instantiate(enemyPrefabs[type], transform.position, Quaternion.identity);
+                Enemy enemy = Instantiate(enemyPrefabs[type], transform.position, Quaternion.identity, enemiesParent);
                 enemy.SetCheckPoints(checkpoints);
                 enemy.SetTresor(tresor);
                 enemy.SetCoinParent(coinsParent);

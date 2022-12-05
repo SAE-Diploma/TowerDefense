@@ -142,11 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0020963b6eff6f94e80e0d0226362687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 2648c289b9a404f4299036d97f648d5a, type: 2}
-  health: 100
-  moveSpeed: 2
-  randomOffset: 1
-  attackSpeed: 1
-  damage: 5
-  coinsDropped: 5
+  statsObject: {fileID: 11400000, guid: 2648c289b9a404f4299036d97f648d5a, type: 2}
   coinPrefab: {fileID: 1498403948531744, guid: fa2c57d3f28a5e6419393e8bc3eeb32a, type: 3}

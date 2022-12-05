@@ -121,7 +121,7 @@ public class WaveController
         {20, new EnemyCollection(){ Standard=40, Fast=15, Tank=20, Warrior=15,Flying=10 } },
     };
 
-    private int currentWave = 19;
+    private int currentWave = 0;
     public int CurrentWave
     {
         get { return currentWave; }
@@ -272,7 +272,7 @@ public class WaveController
     {
         foreach(Spawner spawner in GetAllSpawners())
         {
-            spawner.StartSpawning(0.5f);
+            spawner.StartSpawning(2f);
         }
     }
 

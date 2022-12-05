@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7b540882a3cc440b472ba63ae92400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: e95eea5451891a74e87c8adf4bd97cf9, type: 2}
+  statsObject: {fileID: 11400000, guid: e95eea5451891a74e87c8adf4bd97cf9, type: 2}
   coinPrefab: {fileID: 1498403948531744, guid: fa2c57d3f28a5e6419393e8bc3eeb32a, type: 3}

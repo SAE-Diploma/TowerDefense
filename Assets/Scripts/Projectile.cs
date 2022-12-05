@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     GameObject enemy;
     Quaternion offsetRotation;
 
+    [SerializeField] StatusEffect statusEffect;
+
     void Start()
     {
         offsetRotation = Quaternion.AngleAxis(90, transform.right);
@@ -47,9 +49,16 @@ public class Projectile : MonoBehaviour
     private void EnemyHit()
     {
         // inflict damage to enemy
-        Destroy(gameObject);
         Enemy enemyClass = enemy.GetComponent<Enemy>();
-        if (enemyClass != null) enemyClass.TakeDamage(damage);
+        if (enemyClass != null)
+        {
+            enemyClass.TakeDamage(damage);
+            if (statusEffect != null)
+            {
+                enemyClass.AddStatusEffect(statusEffect);
+            }
+        }
+        Destroy(gameObject);
     }
 
     /// <summary>

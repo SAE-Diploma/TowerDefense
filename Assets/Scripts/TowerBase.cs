@@ -62,6 +62,8 @@ public class TowerBase : MonoBehaviour
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
     #endregion
 
+    [SerializeField] Tower towerObject;
+
     private Tower tower;
     public Tower Tower
     {
@@ -100,6 +102,7 @@ public class TowerBase : MonoBehaviour
         enemiesInRange = new List<Enemy>();
         turret = GetTurret();
         turretShoot = turret.GetComponent<Shoot>();
+        Tower = towerObject;
     }
 
     private void Update()

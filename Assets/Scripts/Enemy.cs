@@ -6,7 +6,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] EnemyStats stats;
+    [SerializeField] EnemyStats statsObject;
+    private EnemyStats stats;
+    private EnemyStats Stats { 
+        get 
+        { 
+            if (stats == null)
+            {
+                stats = Instantiate(statsObject);
+            }
+            return stats; 
+        } 
+    }
+
     [SerializeField] GameObject coinPrefab;
     Dictionary<EnemyStat,StatusEffect> activeStatusEffects = new Dictionary<EnemyStat,StatusEffect>();
     Coroutine statusEffectCoroutine;
@@ -38,7 +50,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
-        maxHealth = stats.Health;
+        maxHealth = Stats.Health;
         health = maxHealth;
     }
 
@@ -54,7 +66,7 @@ public class Enemy : MonoBehaviour
             {
                 if (!isAttacking)
                 {
-                    StartCoroutine(AttackTresor(stats.AttackSpeed));
+                    StartCoroutine(AttackTresor(Stats.AttackSpeed));
                     isAttacking = true;
                 }
             }
@@ -68,7 +80,7 @@ public class Enemy : MonoBehaviour
     private void MoveToCheckpoint(Vector3 checkpoint)
     {
         transform.LookAt(checkpoint);
-        transform.position = transform.position + transform.forward * stats.Speed * Time.deltaTime;
+        transform.position = transform.position + transform.forward * Stats.Speed * Time.deltaTime;
         Vector3 direction = checkpoint - transform.position;
         float squareDist = Vector3.SqrMagnitude(direction);
         CalculateProgress(squareDist);
@@ -144,7 +156,7 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(attackspeed);
-            if (tresor != null) tresor.TakeDamage(stats.Damage);
+            if (tresor != null) tresor.TakeDamage(Stats.Damage);
             else { break; }
         }
     }
@@ -154,7 +166,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        for (int i = 0; i < stats.Coins; i++)
+        for (int i = 0; i < Stats.Coins; i++)
         {
             Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
             GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity, coinsParent);
@@ -180,14 +192,13 @@ public class Enemy : MonoBehaviour
     {
         if (!activeStatusEffects.ContainsKey(effect.EffectType))
         {
-            // not stackable
+            Debug.Log($"add effect {effect.EffectType}");
             StatusEffect copy = Instantiate(effect);
             if (copy.Stackable) copy.AddStack();
             activeStatusEffects.Add(copy.EffectType,copy); // store copy of the effect
         }
         else
         {
-            // add stack or reset duration
             StatusEffect activeEffect = activeStatusEffects[effect.EffectType];
             if (activeEffect.Stackable)
             {
@@ -249,11 +260,11 @@ public class Enemy : MonoBehaviour
             case EnemyStat.Armor:
                 if (effect.Duration > 0)
                 {
-                    stats.DecreaseStat(effect.EffectType, effect.Value);
+                    Stats.DecreaseStat(effect.EffectType, effect.Value);
                 }
                 else
                 {
-                    stats.ResetStat(effect.EffectType);
+                    Stats.ResetStat(effect.EffectType);
                 }
                 break;
         }
