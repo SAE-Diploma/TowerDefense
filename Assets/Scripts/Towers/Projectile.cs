@@ -13,6 +13,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] int maxPenetrations = 0;
     int penetrations = 0;
 
+    List<Enemy> ignoredEnemies = new List<Enemy>();
+    LayerMask mask;
+
+    private void Awake()
+    {
+        mask = LayerMask.GetMask("Enemy");
+    }
+
     void Start()
     {
         offsetRotation = Quaternion.AngleAxis(90, transform.right);
@@ -40,24 +48,16 @@ public class Projectile : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        Debug.Log("hit");
-        if (other.gameObject.tag == "Enemy")
+        if (Physics.Raycast(transform.position, transform.up * 0.4f, out RaycastHit hitInfo,0.4f, mask))
         {
-            EnemyHit(other.gameObject.GetComponentInParent<Enemy>());
-        }
-        else if(other.gameObject.tag == "Ground")
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            Destroy(gameObject);
+            Enemy enemy = hitInfo.transform.GetComponentInParent<Enemy>();
+            if (enemy != null && !ignoredEnemies.Contains(enemy))
+            {
+                EnemyHit(enemy);
+                ignoredEnemies.Add(enemy);
+            }
         }
     }
 

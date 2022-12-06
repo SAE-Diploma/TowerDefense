@@ -30,7 +30,7 @@ MonoBehaviour:
   rangeUpgradeCost: 30
   rangeUpgradeValue: 5
   rangeMaxLevel: 2
-  projectileSpeed: 20
+  projectileSpeed: 1
   projectileSpeedUpgradeCost: 20
   projectileSpeedUpgradeValue: 10
   projectileSpeedMaxLevel: 1
