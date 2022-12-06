@@ -21,7 +21,7 @@ public class Shoot : MonoBehaviour
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.SetDamage(damage);
         projectileScript.SetSpeed(speed);
-        projectileScript.SetEnemy(enemy.gameObject);
+        projectileScript.SetEnemy(enemy);
         enemy.AddIncommingDamage(damage);
     }
 }

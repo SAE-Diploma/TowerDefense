@@ -8,19 +8,20 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] EnemyStats statsObject;
     private EnemyStats stats;
-    private EnemyStats Stats { 
-        get 
-        { 
+    private EnemyStats Stats
+    {
+        get
+        {
             if (stats == null)
             {
                 stats = Instantiate(statsObject);
             }
-            return stats; 
-        } 
+            return stats;
+        }
     }
 
     [SerializeField] GameObject coinPrefab;
-    Dictionary<EnemyStat,StatusEffect> activeStatusEffects = new Dictionary<EnemyStat,StatusEffect>();
+    Dictionary<EnemyStat, StatusEffect> activeStatusEffects = new Dictionary<EnemyStat, StatusEffect>();
     Coroutine statusEffectCoroutine;
 
     private int health;
@@ -46,6 +47,27 @@ public class Enemy : MonoBehaviour
 
     protected List<Vector3> checkpoints = new List<Vector3>();
     int currentCheckpointIndex = 0;
+
+    Transform hitPosition;
+    public Transform HitPosition
+    {
+        get
+        {
+            if (hitPosition == null)
+            {
+                foreach (Transform t in transform)
+                {
+                    if (t.tag == "Target")
+                    {
+                        hitPosition = t;
+                        break;
+                    }
+                }
+                if (hitPosition == null) hitPosition = transform;
+            }
+            return hitPosition;
+        }
+    }
 
     protected virtual void Start()
     {
@@ -195,7 +217,7 @@ public class Enemy : MonoBehaviour
             Debug.Log($"add effect {effect.EffectType}");
             StatusEffect copy = Instantiate(effect);
             if (copy.Stackable) copy.AddStack();
-            activeStatusEffects.Add(copy.EffectType,copy); // store copy of the effect
+            activeStatusEffects.Add(copy.EffectType, copy); // store copy of the effect
         }
         else
         {
@@ -255,8 +277,8 @@ public class Enemy : MonoBehaviour
                 TakeDamage(duration * effect.GetIntValue());
                 Debug.Log($"Took {duration * effect.GetIntValue()} poison damage");
                 break;
-            case EnemyStat.Speed: 
-            case EnemyStat.Damage: 
+            case EnemyStat.Speed:
+            case EnemyStat.Damage:
             case EnemyStat.Armor:
                 if (effect.Duration > 0)
                 {

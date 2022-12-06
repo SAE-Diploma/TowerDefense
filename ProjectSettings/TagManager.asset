@@ -9,6 +9,7 @@ TagManager:
   - towerPlace
   - InteractibleShield
   - Enemy
+  - Target
   layers:
   - Default
   - TransparentFX

@@ -6,8 +6,7 @@ public class Projectile : MonoBehaviour
 {
     float speed = 6f;
     int damage = 50;
-    float hitDistance = 1f;
-    GameObject enemy;
+    Enemy enemy;
     Quaternion offsetRotation;
 
     [SerializeField] StatusEffect statusEffect;
@@ -27,7 +26,7 @@ public class Projectile : MonoBehaviour
         {
             if (penetrations == 0 && enemy != null)
             {
-                transform.LookAt(enemy.transform);
+                transform.LookAt(enemy.HitPosition);
                 transform.rotation *= offsetRotation;
             }
 
@@ -62,7 +61,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// runs when the projectile hit the enemy
     /// </summary>
@@ -87,13 +85,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    
-
     /// <summary>
     /// set the enemy GameObject to home towards
     /// </summary>
     /// <param name="enemy"></param>
-    public void SetEnemy(GameObject enemy)
+    public void SetEnemy(Enemy enemy)
     {
         this.enemy = enemy;
     }
