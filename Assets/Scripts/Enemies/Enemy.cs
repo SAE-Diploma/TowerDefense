@@ -214,7 +214,6 @@ public class Enemy : MonoBehaviour
     {
         if (!activeStatusEffects.ContainsKey(effect.EffectType))
         {
-            Debug.Log($"add effect {effect.EffectType}");
             StatusEffect copy = Instantiate(effect);
             if (copy.Stackable) copy.AddStack();
             activeStatusEffects.Add(copy.EffectType, copy); // store copy of the effect

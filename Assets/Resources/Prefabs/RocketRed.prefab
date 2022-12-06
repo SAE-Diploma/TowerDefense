@@ -98,3 +98,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusEffect: {fileID: 11400000, guid: 8d5fa4d473fef9645a3ad5ac096a9f51, type: 2}
   maxPenetrations: 2
+  damageReduction: 5

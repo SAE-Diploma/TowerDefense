@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] StatusEffect statusEffect;
     [SerializeField] int maxPenetrations = 0;
+    [SerializeField] int damageReduction = 10;
     int penetrations = 0;
 
     List<Enemy> ignoredEnemies = new List<Enemy>();
@@ -70,6 +71,7 @@ public class Projectile : MonoBehaviour
         if (enemyClass != null)
         {
             enemyClass.TakeDamage(damage);
+            Debug.Log($"inflicted {damage} damage");
             if (statusEffect != null)
             {
                 enemyClass.AddStatusEffect(statusEffect);
@@ -82,6 +84,8 @@ public class Projectile : MonoBehaviour
         else
         {
             penetrations++;
+            damage -= damageReduction;
+            if (damage < 0) damage = 0;
         }
     }
 
