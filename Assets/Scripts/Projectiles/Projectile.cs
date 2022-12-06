@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    float speed = 6f;
-    int damage = 50;
+    protected float speed = 6f;
+    protected int damage = 50;
     Enemy enemy;
     Quaternion offsetRotation;
+    List<Enemy> ignoredEnemies = new List<Enemy>();
+    protected LayerMask enemyLayer;
 
     [SerializeField] StatusEffect statusEffect;
-    [SerializeField] int maxPenetrations = 0;
-    [SerializeField] int damageReduction = 10;
-    int penetrations = 0;
-
-    List<Enemy> ignoredEnemies = new List<Enemy>();
-    LayerMask mask;
 
     private void Awake()
     {
-        mask = LayerMask.GetMask("Enemy");
+        enemyLayer = LayerMask.GetMask("Enemy");
     }
 
     void Start()
@@ -33,30 +29,26 @@ public class Projectile : MonoBehaviour
         // rotate towards the enemy
         if (transform.position.y > 0)
         {
-            if (penetrations == 0 && enemy != null)
-            {
-                transform.LookAt(enemy.HitPosition);
-                transform.rotation *= offsetRotation;
-            }
+            TrackEnemy(enemy);
 
             // Move towards enemy
             transform.localPosition += transform.up * speed * Time.deltaTime;
         }
         else
         {
-            Destroy(gameObject);
+            OnGroundHit();
         }
 
     }
 
     private void FixedUpdate()
     {
-        if (Physics.Raycast(transform.position, transform.up * 0.4f, out RaycastHit hitInfo,0.4f, mask))
+        if (Physics.Raycast(transform.position, transform.up * 0.4f, out RaycastHit hitInfo,0.4f, enemyLayer))
         {
             Enemy enemy = hitInfo.transform.GetComponentInParent<Enemy>();
             if (enemy != null && !ignoredEnemies.Contains(enemy))
             {
-                EnemyHit(enemy);
+                EnemyHit(enemy, damage);
                 ignoredEnemies.Add(enemy);
             }
         }
@@ -65,27 +57,32 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// runs when the projectile hit the enemy
     /// </summary>
-    private void EnemyHit(Enemy enemyClass)
+    protected virtual void EnemyHit(Enemy enemy, int damage)
     {
         // inflict damage to enemy
-        if (enemyClass != null)
+        if (enemy != null)
         {
-            enemyClass.TakeDamage(damage);
-            Debug.Log($"inflicted {damage} damage");
+            enemy.TakeDamage(damage);
+            //Debug.Log($"inflicted {damage} damage to {enemy.name}");
             if (statusEffect != null)
             {
-                enemyClass.AddStatusEffect(statusEffect);
+                enemy.AddStatusEffect(statusEffect);
             }
         }
-        if (penetrations >= maxPenetrations)
+        
+    }
+
+    protected virtual void OnGroundHit()
+    {
+        Destroy(gameObject);
+    }
+
+    protected virtual void TrackEnemy(Enemy enemy)
+    {
+        if (enemy != null)
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            penetrations++;
-            damage -= damageReduction;
-            if (damage < 0) damage = 0;
+            transform.LookAt(enemy.HitPosition);
+            transform.rotation *= offsetRotation;
         }
     }
 

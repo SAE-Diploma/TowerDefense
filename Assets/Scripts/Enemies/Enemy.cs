@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     Dictionary<EnemyStat, StatusEffect> activeStatusEffects = new Dictionary<EnemyStat, StatusEffect>();
     Coroutine statusEffectCoroutine;
 
+    DamageIndicator damageIndicator;
+
     private int health;
 
     private int maxHealth = 1000;
@@ -74,6 +76,7 @@ public class Enemy : MonoBehaviour
         //transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
         maxHealth = Stats.Health;
         health = maxHealth;
+        damageIndicator = GetComponentInChildren<DamageIndicator>();
     }
 
     void Update()
@@ -165,6 +168,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        damageIndicator.AddDamageNumber(damage);
         if (health <= 0) Die();
     }
 
