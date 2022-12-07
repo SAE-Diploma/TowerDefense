@@ -8,8 +8,8 @@ using UnityEngine;
 [System.Serializable]
 public class StatusEffect : ScriptableObject
 {
-    [SerializeField] EnemyStat effectType;
-    public EnemyStat EffectType => effectType;
+    [SerializeField] EffectType effectType;
+    public EffectType EffectType => effectType;
 
     [SerializeField, Tooltip("In Seconds")] int duration;
     public int Duration

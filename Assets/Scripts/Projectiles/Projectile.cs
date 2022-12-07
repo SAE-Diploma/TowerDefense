@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         // rotate towards the enemy
-        if (transform.position.y > 0)
+        if (transform.position.y > 0 && transform.position.y < 30)
         {
             TrackEnemy(enemy);
 
@@ -59,17 +59,18 @@ public class Projectile : MonoBehaviour
     /// </summary>
     protected virtual void EnemyHit(Enemy enemy, int damage)
     {
-        // inflict damage to enemy
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
-            //Debug.Log($"inflicted {damage} damage to {enemy.name}");
-            if (statusEffect != null)
-            {
-                enemy.AddStatusEffect(statusEffect);
-            }
+            if (statusEffect != null) enemy.AddStatusEffect(statusEffect); 
+            AfterEnemyHit();
         }
         
+    }
+
+    protected virtual void AfterEnemyHit()
+    {
+        Destroy(gameObject);
     }
 
     protected virtual void OnGroundHit()

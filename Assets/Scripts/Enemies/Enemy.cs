@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     }
 
     [SerializeField] GameObject coinPrefab;
-    Dictionary<EnemyStat, StatusEffect> activeStatusEffects = new Dictionary<EnemyStat, StatusEffect>();
+    Dictionary<EffectType, StatusEffect> activeStatusEffects = new Dictionary<EffectType, StatusEffect>();
     Coroutine statusEffectCoroutine;
 
     DamageIndicator damageIndicator;
@@ -165,10 +165,10 @@ public class Enemy : MonoBehaviour
     /// Decrease health or die if low on health
     /// </summary>
     /// <param name="damage">incomming damage</param>
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, EffectType type = EffectType.None)
     {
         health -= damage;
-        damageIndicator.AddDamageNumber(damage);
+        damageIndicator.AddDamageNumber(damage, type);
         if (health <= 0) Die();
     }
 
@@ -256,7 +256,7 @@ public class Enemy : MonoBehaviour
         StatusEffect effect;
         while (true)
         {
-            EnemyStat[] keys = activeStatusEffects.Keys.ToArray();
+            EffectType[] keys = activeStatusEffects.Keys.ToArray();
             for (int i = 0; i < keys.Length; i++)
             {
                 effect = activeStatusEffects[keys[i]];
@@ -276,13 +276,13 @@ public class Enemy : MonoBehaviour
         //Debug.Log($"applying status effect to {effect.EffectType}");
         switch (effect.EffectType)
         {
-            case EnemyStat.Health:
-                TakeDamage(duration * effect.GetIntValue());
-                Debug.Log($"Took {duration * effect.GetIntValue()} poison damage");
+            case EffectType.Fire:
+                TakeDamage(duration * effect.GetIntValue(), effect.EffectType);
                 break;
-            case EnemyStat.Speed:
-            case EnemyStat.Damage:
-            case EnemyStat.Armor:
+            case EffectType.Poison:
+                TakeDamage(duration * effect.GetIntValue(), effect.EffectType);
+                break;
+            case EffectType.Slowness:
                 if (effect.Duration > 0)
                 {
                     Stats.DecreaseStat(effect.EffectType, effect.Value);

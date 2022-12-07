@@ -14,7 +14,6 @@ public class ExplodingProjectile : Projectile
     {
         List<Collider> enemies = Physics.OverlapSphere(transform.position, radius, enemyLayer).ToList();
         Explode();
-        base.EnemyHit(enemyClass, damage);
         foreach (Collider c in enemies)
         {
             Enemy enemy = c.transform.GetComponentInParent<Enemy>();
@@ -24,7 +23,7 @@ public class ExplodingProjectile : Projectile
                 base.EnemyHit(enemy, CalcDamage(distance));
             }
         }
-        Destroy(gameObject);
+        base.EnemyHit(enemyClass, damage);
     }
 
     protected override void OnGroundHit()

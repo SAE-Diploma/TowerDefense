@@ -9,6 +9,13 @@ public class DamageIndicator : MonoBehaviour
     Camera mainCamera;
     Canvas canvas;
 
+    private Color[] damageColors = new Color[]
+    {
+        Color.white,
+        Color.red,
+        new Color(0.25f,0.99f,0.078f),
+    };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +30,21 @@ public class DamageIndicator : MonoBehaviour
         transform.LookAt(mainCamera.transform.position);
     }
 
-    public void AddDamageNumber(int damage)
+    public void AddDamageNumber(int damage, EffectType type)
     {
         if (textPrefab != null)
         {
             DamageNumber damageNumber = Instantiate(textPrefab, transform);
-            damageNumber.Initialize(damage, Color.red);
+            damageNumber.Initialize(damage, GetDamageColor(type));
         }
+    }
+
+    private Color GetDamageColor(EffectType damageType)
+    {
+        if ((int)damageType < damageColors.Length && (int)damageType >= 0)
+        {
+            return damageColors[(int)damageType];
+        }
+        else return Color.white;
     }
 }

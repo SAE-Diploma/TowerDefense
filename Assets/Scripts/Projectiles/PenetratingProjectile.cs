@@ -8,12 +8,11 @@ public class PenetratingProjectile : Projectile
     [SerializeField] int damageReduction = 10;
     int penetrations = 0;
 
-    protected override void EnemyHit(Enemy enemy, int damage)
+    protected override void AfterEnemyHit()
     {
-        base.EnemyHit(enemy, damage);
         if (penetrations >= maxPenetrations)
         {
-            Destroy(gameObject);
+            base.AfterEnemyHit();
         }
         else
         {

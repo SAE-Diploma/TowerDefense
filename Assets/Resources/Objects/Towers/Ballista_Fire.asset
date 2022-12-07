@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9521c55c9ed55414b939d3d3c3c0f217, type: 3}
-  m_Name: Ballista
+  m_Name: Ballista_Fire
   m_EditorClassIdentifier: 
   towerType: 0
   icon: {fileID: 21300000, guid: 712b58eb9f858ff499418373dfb6a11d, type: 3}
   towerPrefab: {fileID: 1326093064322132, guid: a425124410f363a43adb6788601cc3e0, type: 3}
-  projectilePrefab: {fileID: 1156803670215244, guid: 65d7e2f41d2be8e48995bb4070bbeca1, type: 3}
+  projectilePrefab: {fileID: 1156803670215244, guid: e00bb34e7e6b8fc43bbaf1aa6ea69ca6, type: 3}
   cost: 50
   unlockCost: 100
-  attackspeed: 1
+  attackspeed: 0.5
   attackspeedUpgradeCost: 25
   attackspeedUpgradeValue: 0.25
   attackspeedMaxLevel: 2
-  damage: 2
+  damage: 1
   damageUpgradeCost: 40
   damageUpgradeValue: 5
   damageMaxLevel: 2

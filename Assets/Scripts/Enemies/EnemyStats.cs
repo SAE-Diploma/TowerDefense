@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyStats : ScriptableObject
 {
-    private Dictionary<EnemyStat,float> tempValues = new Dictionary<EnemyStat,float>();
+    private Dictionary<EffectType,float> tempValues = new Dictionary<EffectType,float>();
 
     [SerializeField] private int health;
     public int Health => health;
@@ -30,43 +30,29 @@ public class EnemyStats : ScriptableObject
     [SerializeField] private int difficulty;
     public int Difficulty => difficulty;
 
-    public void DecreaseStat(EnemyStat stat, float newValue)
+    public void DecreaseStat(EffectType stat, float newValue)
     {
         if (!tempValues.ContainsKey(stat))
         {
             switch (stat)
             {
-                case EnemyStat.Speed:
+                case EffectType.Slowness:
                     tempValues.Add(stat, speed);
                     speed = newValue;
-                    break;
-                case EnemyStat.Damage:
-                    tempValues.Add(stat, damage);
-                    damage = Mathf.RoundToInt(newValue);
-                    break;
-                case EnemyStat.Armor:
-                    tempValues.Add(stat, armor);
-                    damage = Mathf.RoundToInt(newValue);
                     break;
             }
         }
     }
 
-    public void ResetStat(EnemyStat stat)
+    public void ResetStat(EffectType stat)
     {
         if (tempValues.ContainsKey(stat))
         {
             float value = tempValues[stat];
             switch (stat)
             {
-                case EnemyStat.Speed:
+                case EffectType.Slowness:
                     speed = value;
-                    break;
-                case EnemyStat.Damage:
-                    damage = Mathf.RoundToInt(value);
-                    break;
-                case EnemyStat.Armor:
-                    armor = Mathf.RoundToInt(value);
                     break;
             }
             tempValues.Remove(stat);

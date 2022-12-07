@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,10 @@ public enum TowerStat
     ProjectileSpeed = 3
 }
 
-public enum EnemyStat
+public enum EffectType
 {
-    Health = 0,
-    Speed = 1,
-    Damage = 2,
-    Armor = 3,
+    None,
+    Fire,
+    Poison,
+    Slowness,
 }
