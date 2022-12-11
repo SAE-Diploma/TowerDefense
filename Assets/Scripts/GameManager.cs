@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
         */
 
-        //WaveController.Instance.CurrentWave++;
+        WaveController.Instance.CurrentWave++;
 
         CurrentWave = 0;
         Coins += 200;

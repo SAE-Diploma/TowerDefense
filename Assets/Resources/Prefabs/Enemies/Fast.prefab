@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2901716532604709694}
   - component: {fileID: 2901716532604709681}
   - component: {fileID: 2901716532604709680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,8 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0020963b6eff6f94e80e0d0226362687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsObject: {fileID: 11400000, guid: c316383103469854e99937f5648ebd3b, type: 2}
+  stats: {fileID: 11400000, guid: c316383103469854e99937f5648ebd3b, type: 2}
+  type: 0
   coinPrefab: {fileID: 1498403948531744, guid: fa2c57d3f28a5e6419393e8bc3eeb32a, type: 3}
+  progress: 0
 --- !u!1 &5149487775939378422
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,24 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] EnemyStats statsObject;
-    private EnemyStats stats;
-    private EnemyStats Stats
-    {
-        get
-        {
-            if (stats == null)
-            {
-                stats = Instantiate(statsObject);
-            }
-            return stats;
-        }
-    }
+    [SerializeField] EnemyStats stats;
+    public EnemyStats Stats => stats;
+
+    [SerializeField] EnemyType type;
+    public EnemyType Type => type;
 
     [SerializeField] GameObject coinPrefab;
     Dictionary<EffectType, StatusEffect> activeStatusEffects = new Dictionary<EffectType, StatusEffect>();
@@ -26,13 +21,14 @@ public class Enemy : MonoBehaviour
 
     DamageIndicator damageIndicator;
 
-    private int health;
-
-    private int maxHealth = 1000;
-    public int MaxHealth => maxHealth;
+    private int currentHealth;
+    public int CurrentHealth => currentHealth;
 
     private int incommingDamage = 0;
     public int IncommingDamage => incommingDamage;
+
+    private float slowness = 1;
+    public float CurrentSpeed => slowness * Stats.Speed;
 
     float randomOffset = 1f;
 
@@ -45,7 +41,8 @@ public class Enemy : MonoBehaviour
 
     // Checkpoints
     float sqrDistToNextPoint;
-    float progress = 0;
+    [SerializeField] float progress = 0;
+    public float Progress => progress;
 
     protected List<Vector3> checkpoints = new List<Vector3>();
     int currentCheckpointIndex = 0;
@@ -74,8 +71,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         //transform.position = new Vector3(transform.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, transform.position.z + Random.Range(-randomOffset, randomOffset));
-        maxHealth = Stats.Health;
-        health = maxHealth;
+        currentHealth = Stats.Health;
         damageIndicator = GetComponentInChildren<DamageIndicator>();
     }
 
@@ -105,7 +101,7 @@ public class Enemy : MonoBehaviour
     private void MoveToCheckpoint(Vector3 checkpoint)
     {
         transform.LookAt(checkpoint);
-        transform.position = transform.position + transform.forward * Stats.Speed * Time.deltaTime;
+        transform.position = transform.position + transform.forward * CurrentSpeed * Time.deltaTime;
         Vector3 direction = checkpoint - transform.position;
         float squareDist = Vector3.SqrMagnitude(direction);
         CalculateProgress(squareDist);
@@ -130,7 +126,7 @@ public class Enemy : MonoBehaviour
     {
         foreach (Transform t in checkPoints)
         {
-            checkpoints.Add(new Vector3(t.position.x + Random.Range(-randomOffset, randomOffset), transform.position.y, t.position.z + Random.Range(-randomOffset, randomOffset)));
+            checkpoints.Add(new Vector3(t.position.x + UnityEngine.Random.Range(-randomOffset, randomOffset), transform.position.y, t.position.z + UnityEngine.Random.Range(-randomOffset, randomOffset)));
         }
     }
 
@@ -167,9 +163,9 @@ public class Enemy : MonoBehaviour
     /// <param name="damage">incomming damage</param>
     public void TakeDamage(int damage, EffectType type = EffectType.None)
     {
-        health -= damage;
+        currentHealth -= damage;
         damageIndicator.AddDamageNumber(damage, type);
-        if (health <= 0) Die();
+        if (currentHealth <= 0) Die();
     }
 
     /// <summary>
@@ -194,7 +190,7 @@ public class Enemy : MonoBehaviour
     {
         for (int i = 0; i < Stats.Coins; i++)
         {
-            Vector3 position = new Vector3(transform.position.x + Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + Random.Range(-randomDropDistance, randomDropDistance));
+            Vector3 position = new Vector3(transform.position.x + UnityEngine.Random.Range(-randomDropDistance, randomDropDistance), 0, transform.position.z + UnityEngine.Random.Range(-randomDropDistance, randomDropDistance));
             GameObject coinObject = Instantiate(coinPrefab, position, Quaternion.identity, coinsParent);
             Coin coin = coinObject.GetComponent<Coin>();
             coin.SetValue(1);
@@ -283,14 +279,8 @@ public class Enemy : MonoBehaviour
                 TakeDamage(duration * effect.GetIntValue(), effect.EffectType);
                 break;
             case EffectType.Slowness:
-                if (effect.Duration > 0)
-                {
-                    Stats.DecreaseStat(effect.EffectType, effect.Value);
-                }
-                else
-                {
-                    Stats.ResetStat(effect.EffectType);
-                }
+                if (effect.Duration > 0) slowness = effect.Value; 
+                else slowness = 1; 
                 break;
         }
     }

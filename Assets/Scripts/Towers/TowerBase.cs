@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class TowerBase : MonoBehaviour
@@ -63,6 +64,8 @@ public class TowerBase : MonoBehaviour
     #endregion
 
     [SerializeField] Tower towerObject;
+
+    [SerializeField] Priority priority;
 
     private Tower tower;
     public Tower Tower
@@ -159,10 +162,14 @@ public class TowerBase : MonoBehaviour
         enemies.Clear();
         foreach (Transform enemy in enemiesParent.transform)
         {
-            Vector3 dir = new Vector3(enemy.position.x, 0, enemy.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
-            if (dir.sqrMagnitude < Mathf.Pow(range, 2))
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            if (enemyComponent.Type == towerObject.EnemyType || towerObject.EnemyType == EnemyType.Both)
             {
-                enemies.Add(enemy.GetComponent<Enemy>());
+                Vector3 dir = new Vector3(enemy.position.x, 0, enemy.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
+                if (dir.sqrMagnitude < Mathf.Pow(range, 2))
+                {
+                    enemies.Add(enemyComponent);
+                }
             }
         }
     }
@@ -174,16 +181,39 @@ public class TowerBase : MonoBehaviour
     /// <returns>Enemy to shoot at</returns>
     private Enemy GetProritizedEnemy(List<Enemy> enemiesInRange)
     {
-        // ToDoo:
-        // Consider aming on the enemy that has the highes progression score
+        Enemy bestEnemy = enemiesInRange[0];
+        enemiesInRange.RemoveAt(0);
         foreach (Enemy enemy in enemiesInRange)
         {
-            if (enemy.IncommingDamage < enemy.MaxHealth)
+            switch (priority)
             {
-                return enemy;
+                case Priority.MostProgress:
+                    if (enemy.Progress > bestEnemy.Progress) bestEnemy = enemy;
+                    break;
+                case Priority.LeastProgress:
+                    if (enemy.Progress < bestEnemy.Progress) bestEnemy = enemy;
+                    break;
+                case Priority.MostSpeed:
+                    if (enemy.CurrentSpeed > bestEnemy.CurrentSpeed) bestEnemy = enemy;
+                    break;
+                case Priority.LeastSpeed:
+                    if (enemy.CurrentSpeed < bestEnemy.CurrentSpeed) bestEnemy = enemy;
+                    break;
+                case Priority.MostDamage:
+                    if (enemy.Stats.Damage > bestEnemy.Stats.Damage) bestEnemy = enemy;
+                    break;
+                case Priority.MostArmor:
+                    if (enemy.Stats.Armor > bestEnemy.Stats.Armor) bestEnemy = enemy;
+                    break;
+                case Priority.MostHealth:
+                    if (enemy.Stats.Armor > bestEnemy.Stats.Armor) bestEnemy = enemy;
+                    break;
+                case Priority.LeastHealth:
+                    if (enemy.CurrentHealth < bestEnemy.CurrentHealth) bestEnemy = enemy;
+                    break;
             }
         }
-        return null;
+        return bestEnemy;
     }
 
     /// <summary>

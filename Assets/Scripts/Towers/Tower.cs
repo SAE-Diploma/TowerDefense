@@ -9,6 +9,9 @@ public class Tower : ScriptableObject
     [SerializeField] private Towers towerType;
     public Towers TowerType => towerType;
 
+    [SerializeField] private EnemyType enemyType = EnemyType.Walking;
+    public EnemyType EnemyType => enemyType;
+
     [SerializeField] private Sprite icon;
     public Sprite Icon => icon;
 

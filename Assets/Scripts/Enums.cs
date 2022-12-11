@@ -25,3 +25,22 @@ public enum EffectType
     Poison,
     Slowness,
 }
+
+public enum Priority
+{
+    MostProgress,
+    LeastProgress,
+    MostSpeed,
+    LeastSpeed,
+    MostHealth,
+    LeastHealth,
+    MostArmor,
+    MostDamage
+}
+
+public enum EnemyType
+{
+    Walking,
+    Flying,
+    Both
+}

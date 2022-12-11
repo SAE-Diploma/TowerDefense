@@ -1,14 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "EnemyStat", fileName = "EnemyStat", order = 1)]
-
-
+[Serializable]
 public class EnemyStats : ScriptableObject
 {
-    private Dictionary<EffectType,float> tempValues = new Dictionary<EffectType,float>();
-
     [SerializeField] private int health;
     public int Health => health;
 
@@ -29,34 +27,4 @@ public class EnemyStats : ScriptableObject
 
     [SerializeField] private int difficulty;
     public int Difficulty => difficulty;
-
-    public void DecreaseStat(EffectType stat, float newValue)
-    {
-        if (!tempValues.ContainsKey(stat))
-        {
-            switch (stat)
-            {
-                case EffectType.Slowness:
-                    tempValues.Add(stat, speed);
-                    speed = newValue;
-                    break;
-            }
-        }
-    }
-
-    public void ResetStat(EffectType stat)
-    {
-        if (tempValues.ContainsKey(stat))
-        {
-            float value = tempValues[stat];
-            switch (stat)
-            {
-                case EffectType.Slowness:
-                    speed = value;
-                    break;
-            }
-            tempValues.Remove(stat);
-
-        }
-    }
 }

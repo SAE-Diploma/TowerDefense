@@ -114,7 +114,7 @@ public class WaveController
 {
     private Dictionary<int, EnemyCollection> fixedRatios = new Dictionary<int, EnemyCollection>()
     {
-        {1, new EnemyCollection(){ Standard=100, Fast=0, Tank=0, Warrior=0,Flying=0 } },
+        {1, new EnemyCollection(){ Standard=10, Fast=0, Tank=0, Warrior=0,Flying=90 } },
         {5, new EnemyCollection(){ Standard=80, Fast=20, Tank=0, Warrior=0,Flying=0 } },
         {10, new EnemyCollection(){ Standard=60, Fast=20, Tank=20, Warrior=0,Flying=0 } },
         {15, new EnemyCollection(){ Standard=60, Fast=10, Tank=15, Warrior=10,Flying=5 } },
