@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class UI_TowerButton : MonoBehaviour
 {
 
-    [SerializeField] private OLD_Tower tower;
+    //[SerializeField] private OLD_Tower tower;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] Image towerIcon;
     [SerializeField] TextMeshProUGUI towerCost;
 
     private void OnValidate()
     {
+        /*
         if (nameText != null && towerIcon != null && towerCost != null)
         {
             if (tower != null)
@@ -29,6 +30,7 @@ public class UI_TowerButton : MonoBehaviour
                 towerCost.text = "";
             }
         }
+        */
     }
 
 }

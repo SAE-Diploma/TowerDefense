@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
   m_Name: MortarStats
   m_EditorClassIdentifier: 
-  levelList: []
+  levelList:
+  - {fileID: 11400000, guid: 718af46507105114e8226fe1b08e747e, type: 2}
+  - {fileID: 11400000, guid: 247a9f747830de94e80fd5542b96ffdc, type: 2}
   buildCost: 0
   unlockCost: 0

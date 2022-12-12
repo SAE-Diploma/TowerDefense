@@ -40,6 +40,7 @@ public class TowerPlace : MonoBehaviour
         }
         else
         {
+            /*
             OLD_TowerBase towerBase = tower.GetComponent<OLD_TowerBase>();
             canvas.gameObject.SetActive(true);
             towerName.text = towerBase.Tower.TowerType.ToString();
@@ -51,6 +52,7 @@ public class TowerPlace : MonoBehaviour
             rangeLevel.text = $"Lv. {towerBase.RangeLevel + 1}";
             projectileSpeedValue.text = $"{towerBase.ProjectileSpeed} m/s";
             projectileSpeedLevel.text = $"Lv. {towerBase.ProjectileSpeedLevel + 1}";
+            */
         }
     }
 }

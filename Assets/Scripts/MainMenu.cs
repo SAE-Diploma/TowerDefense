@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject tabButtons;
     [SerializeField] TextMeshProUGUI pointsText;
 
-    [SerializeField] OLD_Tower defaultTower;
+    //[SerializeField] OLD_Tower defaultTower;
     [SerializeField] TextMeshProUGUI towerTypeText;
 
     [Header("Start values")]
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject levels;
     [SerializeField] GameObject locked;
     [SerializeField] TextMeshProUGUI lockedButtonText;
-    private OLD_Tower currentTower;
+    //private OLD_Tower currentTower;
 
     private TextMeshProUGUI[] buttonTextArray; // just makes it easier to refernce button text by enumindex
 
@@ -100,7 +100,7 @@ public class MainMenu : MonoBehaviour
             projectileSpeedLevelButtonText
         };
         ShowMenu((int)MainMenus.MenuButtons);
-        UpdatePointsText();
+        //UpdatePointsText();
 
     }
 
@@ -148,11 +148,11 @@ public class MainMenu : MonoBehaviour
         }
         if (enumIndex == 1)
         {
-            UpdateUpgradePanel(defaultTower);
+            //UpdateUpgradePanel(defaultTower);
         }
 
     }
-
+    /*
     /// <summary>
     /// updates the points text
     /// </summary>
@@ -215,7 +215,7 @@ public class MainMenu : MonoBehaviour
         locked.SetActive(true);
         locked.transform.GetChild(0).GetComponent<Image>().sprite = tower.Icon;
     }
-
+    */
     /// <summary>
     /// sets the colors of the tab buttons right
     /// </summary>
@@ -244,7 +244,7 @@ public class MainMenu : MonoBehaviour
         }
 
     }
-
+    /*
     /// <summary>
     /// Unlocks the currently showing tower. If not enough points -> error animation
     /// </summary>
@@ -294,6 +294,7 @@ public class MainMenu : MonoBehaviour
             animator.SetTrigger("Play");
         }
     }
+    */
 
     /// <summary>
     /// Loads the Modal to warn about overwriting the existing save

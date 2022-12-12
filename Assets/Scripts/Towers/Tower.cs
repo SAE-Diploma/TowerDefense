@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-
+    [SerializeField] EnemyType enemyType = EnemyType.Walking;
+    [SerializeField] Priority priority = Priority.MostProgress;
     [SerializeField] float damage = 10;
     [SerializeField] float attackSpeed = 1;
     [SerializeField] float range = 5;
@@ -13,9 +14,8 @@ public class Tower : MonoBehaviour
     [SerializeField] float projectileSpeed = 1;
     [SerializeField, Tooltip("In Degrees")] float maxAngleToShoot = 10;
     [SerializeField] int level = 1;
-    [SerializeField] EnemyType enemyType = EnemyType.Walking;
-    [SerializeField] Priority priority = Priority.MostProgress;
     [SerializeField] Projectile projectile;
+    [SerializeField] TowerStats towerStats;
 
     private LayerMask enemyMask;
     protected List<Enemy> enemiesInRange = new List<Enemy>();
@@ -23,6 +23,7 @@ public class Tower : MonoBehaviour
 
     protected Gun gun;
     private float angleDifference; // angle needed to turn until looking at enemy
+    private Quaternion initialRotation;
     private bool canShoot = true;
     private Coroutine cooldownCoroutine;
 
@@ -31,19 +32,21 @@ public class Tower : MonoBehaviour
         enemyMask = LayerMask.GetMask("Enemy");
         gun = GetComponentInChildren<Gun>();
         if (gun == null) Debug.LogError($"No Gun found on turret {name}");
+        initialRotation = transform.rotation;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetLevel(2);
     }
 
     // Update is called once per frame
     void Update()
     {
         GetEnemiesInRange(ref enemiesInRange);
-        if (prioritizedEnemy != null )
+        RotateTowardsEnemy(prioritizedEnemy);
+        if (prioritizedEnemy != null)
         {
             Shoot();
         }
@@ -59,7 +62,7 @@ public class Tower : MonoBehaviour
         prioritizedEnemy = null;
         Collider[] colliders = Physics.OverlapSphere(transform.position, range, enemyMask);
 
-        foreach(Collider collider in colliders)
+        foreach (Collider collider in colliders)
         {
             Enemy enemy = collider.GetComponentInParent<Enemy>();
             if (enemy.Type == enemyType || enemyType == EnemyType.Both)
@@ -123,6 +126,10 @@ public class Tower : MonoBehaviour
             gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
             angleDifference = Vector3.Angle(gun.transform.forward, dir);
         }
+        else
+        {
+            gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, initialRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 
     /// <summary>
@@ -130,7 +137,6 @@ public class Tower : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        RotateTowardsEnemy(prioritizedEnemy);
         if (canShoot)
         {
             if (angleDifference <= maxAngleToShoot)
@@ -151,8 +157,8 @@ public class Tower : MonoBehaviour
     /// </summary>
     private void SpawnProjectile()
     {
-        Projectile newProjectile = Instantiate(projectile,gun.MuzzleTransform.position,Quaternion.identity);
-        newProjectile.Initialize(prioritizedEnemy,damage,projectileSpeed);
+        Projectile newProjectile = Instantiate(projectile, gun.MuzzleTransform.position, Quaternion.identity);
+        newProjectile.Initialize(prioritizedEnemy, damage, projectileSpeed);
     }
 
     /// <summary>
@@ -164,7 +170,19 @@ public class Tower : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldown);
         canShoot = true;
-        Debug.Log($"Cooldown of {cooldown}s passed");
+    }
+
+    protected virtual void SetLevel(int newLevel)
+    {
+        if (newLevel > towerStats.LevelList.Count) return; 
+        Debug.Log($"Setting level {newLevel}");
+        level = newLevel;
+        TowerLevel levelObj = towerStats.LevelList[newLevel - 1];
+        damage = levelObj.Damage;
+        attackSpeed = levelObj.AttackSpeed;
+        range = levelObj.Range;
+        projectileSpeed = levelObj.ProjectileSpeed;
+        rotationSpeed = levelObj.RotationSpeed;
     }
 
 }

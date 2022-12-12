@@ -75,6 +75,7 @@ public class UIManager : MonoBehaviour
         interactionPanel.SetActive(visibility);
     }
 
+    /*
     /// <summary>
     /// Sets all the text and icons in the Tower Upgrade Menu
     /// </summary>
@@ -102,6 +103,7 @@ public class UIManager : MonoBehaviour
         else SetButtonInteractible(projectileSpeedButton, true);
         projectileSpeedCost.text = ((tower.ProjectileSpeedLevel + 1) * tower.Tower.ProjectileSpeedUpgradeCost).ToString();
     }
+    */
 
     /// <summary>
     /// disable an upgrade button and show the max text

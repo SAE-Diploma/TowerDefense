@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
         */
 
-        //WaveController.Instance.CurrentWave++;
+        WaveController.Instance.CurrentWave++;
 
         CurrentWave = 0;
         Coins += 200;
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Tower Logic
-
+    /*
     /// <summary>
     /// Places a tower at the currently looking at position. Called by ui button
     /// </summary>
@@ -342,7 +342,7 @@ public class GameManager : MonoBehaviour
         PermanentUpgrade upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
         towerObject.ApplyPermanentUpgrade(upgrade);
     }
-
+    */
     #endregion
 
     #region UI Menu Logic
@@ -364,7 +364,7 @@ public class GameManager : MonoBehaviour
         switch (menu)
         {
             case Menus.TowerUpgrades:
-                uiManager.UpdateTowerUpgradePanel(Player.PlaceTower.Tower.GetComponent<OLD_TowerBase>());
+                //uiManager.UpdateTowerUpgradePanel(Player.PlaceTower.Tower.GetComponent<OLD_TowerBase>());
                 break;
         }
     }
