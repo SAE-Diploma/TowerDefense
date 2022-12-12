@@ -60277,7 +60277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3936276331223816416, guid: 808fb15582a8f7245889f2df906f73bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.79
+      value: -20.95
       objectReference: {fileID: 0}
     - target: {fileID: 3936276331223816416, guid: 808fb15582a8f7245889f2df906f73bf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -60285,7 +60285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3936276331223816416, guid: 808fb15582a8f7245889f2df906f73bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 57.68
+      value: 55.99
       objectReference: {fileID: 0}
     - target: {fileID: 3936276331223816416, guid: 808fb15582a8f7245889f2df906f73bf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -72625,9 +72625,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   attackSpeed: 1
-  range: 5
+  range: 10
   rotationSpeed: 1
-  projectileSpeed: 1
+  projectileSpeed: 5
   maxAngleToShoot: 10
   level: 1
   enemyType: 0
