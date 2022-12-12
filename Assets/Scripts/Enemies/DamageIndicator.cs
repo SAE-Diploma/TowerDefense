@@ -30,7 +30,7 @@ public class DamageIndicator : MonoBehaviour
         transform.LookAt(mainCamera.transform.position);
     }
 
-    public void AddDamageNumber(int damage, EffectType type)
+    public void AddDamageNumber(float damage, EffectType type)
     {
         if (textPrefab != null)
         {

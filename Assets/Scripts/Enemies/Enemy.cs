@@ -21,11 +21,11 @@ public class Enemy : MonoBehaviour
 
     DamageIndicator damageIndicator;
 
-    private int currentHealth;
-    public int CurrentHealth => currentHealth;
+    private float currentHealth;
+    public float CurrentHealth => currentHealth;
 
-    private int incommingDamage = 0;
-    public int IncommingDamage => incommingDamage;
+    private float incommingDamage = 0;
+    public float IncommingDamage => incommingDamage;
 
     private float slowness = 1;
     public float CurrentSpeed => slowness * Stats.Speed;
@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour
     /// Decrease health or die if low on health
     /// </summary>
     /// <param name="damage">incomming damage</param>
-    public void TakeDamage(int damage, EffectType type = EffectType.None)
+    public void TakeDamage(float damage, EffectType type = EffectType.None)
     {
         currentHealth -= damage;
         damageIndicator.AddDamageNumber(damage, type);

@@ -1,103 +1,170 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower", fileName = "Tower", order = 1)]
-
-public class Tower : ScriptableObject
+public class Tower : MonoBehaviour
 {
-    [SerializeField] private Towers towerType;
-    public Towers TowerType => towerType;
 
-    [SerializeField] private EnemyType enemyType = EnemyType.Walking;
-    public EnemyType EnemyType => enemyType;
+    [SerializeField] float damage = 10;
+    [SerializeField] float attackSpeed = 1;
+    [SerializeField] float range = 5;
+    [SerializeField] float rotationSpeed = 1;
+    [SerializeField] float projectileSpeed = 1;
+    [SerializeField, Tooltip("In Degrees")] float maxAngleToShoot = 10;
+    [SerializeField] int level = 1;
+    [SerializeField] EnemyType enemyType = EnemyType.Walking;
+    [SerializeField] Priority priority = Priority.MostProgress;
+    [SerializeField] Projectile projectile;
 
-    [SerializeField] private Sprite icon;
-    public Sprite Icon => icon;
+    private LayerMask enemyMask;
+    protected List<Enemy> enemiesInRange = new List<Enemy>();
+    protected Enemy prioritizedEnemy;
 
-    [SerializeField] private GameObject towerPrefab;
-    public GameObject  TowerPrefab => towerPrefab;
+    protected Gun gun;
+    private float angleDifference; // angle needed to turn until looking at enemy
+    private bool canShoot = true;
+    private Coroutine cooldownCoroutine;
 
-    [SerializeField] private GameObject projectilePrefab;
-    public GameObject ProjectilePrefab => projectilePrefab;
+    private void Awake()
+    {
+        enemyMask = LayerMask.GetMask("Enemy");
+        gun = GetComponentInChildren<Gun>();
+        if (gun == null) Debug.LogError($"No Gun found on turret {name}");
+    }
 
-    [SerializeField] private int cost;
-    public int Cost => cost;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    [SerializeField] private int unlockCost;
-    public int UnlockCost => unlockCost;
-
-
-    [Header("AttackSpeed")]
-    [SerializeField, Tooltip("Rounds per second")] private float attackspeed;
-    public float Attackspeed => attackspeed;
-
-    [SerializeField, Tooltip("Added Cost per upgrade level")] private int attackspeedUpgradeCost;
-    public int AttackspeedUpgradeCost => attackspeedUpgradeCost;
-
-    [SerializeField, Tooltip("Added Value per upgrade level")] private float attackspeedUpgradeValue;
-    public float AttackspeedUpgradeValue => attackspeedUpgradeValue;
-
-    [SerializeField, Tooltip("Maximum attackspeed Level")] private int attackspeedMaxLevel;
-    public int AttackspeedMaxLevel => attackspeedMaxLevel;
-
-    [Header("Damage")]
-    [SerializeField] private int damage;
-    public int Damage => damage;
-
-    [SerializeField, Tooltip("Added Cost per upgrade level")] private int damageUpgradeCost;
-    public int DamageUpgradeCost => damageUpgradeCost;
-
-    [SerializeField, Tooltip("Added Value per upgrade level")] private int damageUpgradeValue;
-    public int DamageUpgradeValue => damageUpgradeValue;
-
-    [SerializeField, Tooltip("Maximum damage Level")] private int damageMaxLevel;
-    public int DamageMaxLevel => damageMaxLevel;
-
-    [Header("Range")]
-    [SerializeField, Tooltip("In meters")] private float range;
-    public float Range => range;
-
-    [SerializeField, Tooltip("Added Cost per upgrade level")] private int rangeUpgradeCost;
-    public int RangeUpgradeCost => rangeUpgradeCost;
-
-    [SerializeField, Tooltip("Added Value per upgrade level")] private int rangeUpgradeValue;
-    public int RangeUpgradeValue => rangeUpgradeValue;
-
-    [SerializeField, Tooltip("Maximum range Level")] private int rangeMaxLevel;
-    public int RangeMaxLevel => rangeMaxLevel;
-
-    [Header("ProjectileSpeed")]
-    [SerializeField, Tooltip("In meters per second")] private float projectileSpeed;
-    public float ProjectileSpeed => projectileSpeed;
-
-    [SerializeField, Tooltip("Added Cost per upgrade level")] private int projectileSpeedUpgradeCost;
-    public int ProjectileSpeedUpgradeCost => projectileSpeedUpgradeCost;
-
-    [SerializeField, Tooltip("Added Value per upgrade level")] private int projectileSpeedUpgradeValue;
-    public int ProjectileSpeedUpgradeValue => projectileSpeedUpgradeValue;
-
-    [SerializeField, Tooltip("Maximum projectileSpeed Level")] private int projectileSpeedMaxLevel;
-    public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
+    // Update is called once per frame
+    void Update()
+    {
+        GetEnemiesInRange(ref enemiesInRange);
+        if (prioritizedEnemy != null )
+        {
+            Shoot();
+        }
+    }
 
     /// <summary>
-    /// Apply the values read from the savefile
+    /// get all enemies that are in range.
     /// </summary>
-    /// <param name="upgrades">read PermanentUpgrade</param>
-    public void ApplyPermanentUpgrade(PermanentUpgrade upgrades)
+    /// <param name="enemies">reference to the enemiesInRange list</param>
+    private void GetEnemiesInRange(ref List<Enemy> enemies)
     {
-        attackspeed = upgrades.AttackSpeedStartValue;
-        attackspeedMaxLevel = upgrades.AttackSpeedMaxLevel;
+        enemies.Clear();
+        prioritizedEnemy = null;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range, enemyMask);
 
-        damage = upgrades.DamageStartValue;
-        damageMaxLevel = upgrades.DamageMaxLevel;
+        foreach(Collider collider in colliders)
+        {
+            Enemy enemy = collider.GetComponentInParent<Enemy>();
+            if (enemy.Type == enemyType || enemyType == EnemyType.Both)
+            {
+                enemies.Add(enemy);
+                if (prioritizedEnemy == null) prioritizedEnemy = enemy;
+                else prioritizedEnemy = GetPrioritized(prioritizedEnemy, enemy, priority);
+            }
+        }
+    }
 
-        range = upgrades.RangeStartValue;
-        rangeMaxLevel = upgrades.RangeMaxLevel;
+    /// <summary>
+    /// Get the enemy with the higher priority
+    /// </summary>
+    /// <param name="current">The currently highest prioritized enemy</param>
+    /// <param name="newEnemy">The enemy to compare to the current one</param>
+    /// <param name="priority">The priority to sort by</param>
+    /// <returns>The Enemy with the higher priority</returns>
+    private Enemy GetPrioritized(Enemy current, Enemy newEnemy, Priority priority)
+    {
+        Enemy better = current;
+        switch (priority)
+        {
+            case Priority.MostProgress:
+                if (newEnemy.Progress > current.Progress) better = newEnemy;
+                break;
+            case Priority.LeastProgress:
+                if (newEnemy.Progress < current.Progress) better = newEnemy;
+                break;
+            case Priority.MostSpeed:
+                if (newEnemy.CurrentSpeed > current.CurrentSpeed) better = newEnemy;
+                break;
+            case Priority.LeastSpeed:
+                if (newEnemy.CurrentSpeed < current.CurrentSpeed) better = newEnemy;
+                break;
+            case Priority.MostDamage:
+                if (newEnemy.Stats.Damage > current.Stats.Damage) better = newEnemy;
+                break;
+            case Priority.MostArmor:
+                if (newEnemy.Stats.Armor > current.Stats.Armor) better = newEnemy;
+                break;
+            case Priority.MostHealth:
+                if (newEnemy.Stats.Armor > current.Stats.Armor) better = newEnemy;
+                break;
+            case Priority.LeastHealth:
+                if (newEnemy.CurrentHealth < current.CurrentHealth) better = newEnemy;
+                break;
+        }
+        return better;
+    }
 
-        projectileSpeed = upgrades.ProjectileSpeedStartValue;
-        projectileSpeedMaxLevel = upgrades.ProjectileSpeedMaxLevel;
+    /// <summary>
+    /// Smoothly rotates towards an enemy
+    /// </summary>
+    /// <param name="enemy">enemy to rotate towards</param>
+    private void RotateTowardsEnemy(Enemy enemy)
+    {
+        if (enemy != null)
+        {
+            Vector3 dir = enemy.transform.position - gun.MuzzleTransform.position;
+            gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
+            angleDifference = Vector3.Angle(gun.transform.forward, dir);
+        }
+    }
 
+    /// <summary>
+    /// Shoots a projectile homing in to the prioritized enemy
+    /// </summary>
+    private void Shoot()
+    {
+        RotateTowardsEnemy(prioritizedEnemy);
+        if (canShoot)
+        {
+            if (angleDifference <= maxAngleToShoot)
+            {
+                canShoot = false;
+                cooldownCoroutine = null;
+                SpawnProjectile();
+            }
+        }
+        else if (cooldownCoroutine == null)
+        {
+            cooldownCoroutine = StartCoroutine(ShootCooldown(1 / attackSpeed));
+        }
+    }
+
+    /// <summary>
+    /// Spawns a projectile at the gun muzzle
+    /// </summary>
+    private void SpawnProjectile()
+    {
+        Projectile newProjectile = Instantiate(projectile,gun.MuzzleTransform.position,Quaternion.identity);
+        newProjectile.Initialize(prioritizedEnemy,damage,projectileSpeed);
+    }
+
+    /// <summary>
+    /// waits for the cooldown before reseting the canShoot variable
+    /// </summary>
+    /// <param name="cooldown">time in second to wait before reseting</param>
+    /// <returns></returns>
+    private IEnumerator ShootCooldown(float cooldown)
+    {
+        yield return new WaitForSeconds(cooldown);
+        canShoot = true;
+        Debug.Log($"Cooldown of {cooldown}s passed");
     }
 
 }

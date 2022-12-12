@@ -10,7 +10,7 @@ public class ExplodingProjectile : Projectile
     [SerializeField, Range(0f,1f)] float maxReduction = 0;
     [SerializeField] ExplosionParticleEffect EffectPrefab;
 
-    protected override void EnemyHit(Enemy enemyClass, int damage)
+    protected override void EnemyHit(Enemy enemyClass, float damage)
     {
         List<Collider> enemies = Physics.OverlapSphere(transform.position, radius, enemyLayer).ToList();
         Explode();

@@ -40,7 +40,7 @@ public class TowerPlace : MonoBehaviour
         }
         else
         {
-            TowerBase towerBase = tower.GetComponent<TowerBase>();
+            OLD_TowerBase towerBase = tower.GetComponent<OLD_TowerBase>();
             canvas.gameObject.SetActive(true);
             towerName.text = towerBase.Tower.TowerType.ToString();
             attackSpeedValue.text = $"{towerBase.AttackSpeed} rps";

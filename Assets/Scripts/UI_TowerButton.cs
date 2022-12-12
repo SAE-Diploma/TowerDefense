@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_TowerButton : MonoBehaviour
 {
 
-    [SerializeField] private Tower tower;
+    [SerializeField] private OLD_Tower tower;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] Image towerIcon;
     [SerializeField] TextMeshProUGUI towerCost;

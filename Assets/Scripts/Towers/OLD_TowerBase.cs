@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class TowerBase : MonoBehaviour
+public class OLD_TowerBase : MonoBehaviour
 {
     #region upgradeStats
     // Attackspeed
@@ -63,12 +63,12 @@ public class TowerBase : MonoBehaviour
     public int ProjectileSpeedMaxLevel => projectileSpeedMaxLevel;
     #endregion
 
-    [SerializeField] Tower towerObject;
+    [SerializeField] OLD_Tower towerObject;
 
     [SerializeField] Priority priority;
 
-    private Tower tower;
-    public Tower Tower
+    private OLD_Tower tower;
+    public OLD_Tower Tower
     {
         get { return tower; }
         private set
@@ -77,7 +77,7 @@ public class TowerBase : MonoBehaviour
             Initialize(tower);
         }
     }
-    public void SetTower(Tower tower) { Tower = tower; }
+    public void SetTower(OLD_Tower tower) { Tower = tower; }
 
     private TowerPlace place;
     public TowerPlace Place => place;
@@ -139,7 +139,7 @@ public class TowerBase : MonoBehaviour
     /// Set stats by a towerObject
     /// </summary>
     /// <param name="towerSpecs">TowerObject</param>
-    private void Initialize(Tower towerSpecs)
+    private void Initialize(OLD_Tower towerSpecs)
     {
         attackSpeed = towerSpecs.Attackspeed;
         attackSpeedMaxLevel = towerSpecs.AttackspeedMaxLevel;

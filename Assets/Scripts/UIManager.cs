@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
     /// Sets all the text and icons in the Tower Upgrade Menu
     /// </summary>
     /// <param name="tower">referenced tower</param>
-    public void UpdateTowerUpgradePanel(TowerBase tower)
+    public void UpdateTowerUpgradePanel(OLD_TowerBase tower)
     {
         towerName.text = tower.Tower.TowerType.ToString();
         attackSpeedValue.text = $"Level {tower.AttackSpeedLevel}: {tower.AttackSpeed} rps";

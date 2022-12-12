@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         uiManager.SetTowerLockedState(saveFile.PermanentUpgrades);
         */
 
-        WaveController.Instance.CurrentWave++;
+        //WaveController.Instance.CurrentWave++;
 
         CurrentWave = 0;
         Coins += 200;
@@ -279,7 +279,7 @@ public class GameManager : MonoBehaviour
     /// Places a tower at the currently looking at position. Called by ui button
     /// </summary>
     /// <param name="towerToSpawn">Tower Object to spawn</param>
-    public void PlaceTower(Tower towerToSpawn)
+    public void PlaceTower(OLD_Tower towerToSpawn)
     {
         if (Player.PlaceTower != null && towerToSpawn != null)
         {
@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour
                 {
                     ApplyPermanentUpgrades(towerToSpawn);
                     GameObject tower = Instantiate(towerToSpawn.TowerPrefab, Player.PlaceTower.Place.position, Quaternion.identity, towerParent);
-                    TowerBase towerBase = tower.GetComponent<TowerBase>();
+                    OLD_TowerBase towerBase = tower.GetComponent<OLD_TowerBase>();
                     towerBase.SetTower(towerToSpawn);
                     towerBase.SetTowerPlace(Player.PlaceTower);
                     Player.PlaceTower.SetTower(tower);
@@ -306,7 +306,7 @@ public class GameManager : MonoBehaviour
     public void DeleteTower()
     {
         TowerPlace towerPlace = Player.PlaceTower;
-        Coins += Mathf.RoundToInt(towerPlace.Tower.GetComponent<TowerBase>().TotalCoinsSpent * 0.75f);
+        Coins += Mathf.RoundToInt(towerPlace.Tower.GetComponent<OLD_TowerBase>().TotalCoinsSpent * 0.75f);
         Destroy(towerPlace.Tower);
         towerPlace.SetTower(null);
         CloseMenu(Menus.TowerUpgrades);
@@ -319,7 +319,7 @@ public class GameManager : MonoBehaviour
     public void UpgradeTower(int towerStatIndex)
     {
         TowerStat stat = (TowerStat)towerStatIndex;
-        TowerBase towerBase = Player.PlaceTower.Tower.GetComponent<TowerBase>();
+        OLD_TowerBase towerBase = Player.PlaceTower.Tower.GetComponent<OLD_TowerBase>();
         int newCoinValue = towerBase.UpgradeStat(stat, Coins);
         if (newCoinValue != -1)
         {
@@ -337,7 +337,7 @@ public class GameManager : MonoBehaviour
     /// applies the permanent upgrade stats to a tower object
     /// </summary>
     /// <param name="towerObject">towerObejct</param>
-    private void ApplyPermanentUpgrades(Tower towerObject)
+    private void ApplyPermanentUpgrades(OLD_Tower towerObject)
     {
         PermanentUpgrade upgrade = saveFile.PermanentUpgrades[(int)towerObject.TowerType];
         towerObject.ApplyPermanentUpgrade(upgrade);
@@ -364,7 +364,7 @@ public class GameManager : MonoBehaviour
         switch (menu)
         {
             case Menus.TowerUpgrades:
-                uiManager.UpdateTowerUpgradePanel(Player.PlaceTower.Tower.GetComponent<TowerBase>());
+                uiManager.UpdateTowerUpgradePanel(Player.PlaceTower.Tower.GetComponent<OLD_TowerBase>());
                 break;
         }
     }

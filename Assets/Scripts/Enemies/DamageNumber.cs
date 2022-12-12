@@ -46,7 +46,7 @@ public class DamageNumber : MonoBehaviour
 
     }
 
-    public void Initialize(int number, Color color)
+    public void Initialize(float number, Color color)
     {
         text.text = number.ToString();
         text.color = color;

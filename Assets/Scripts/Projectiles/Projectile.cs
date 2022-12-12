@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     protected float speed = 6f;
-    protected int damage = 50;
+    protected float damage = 50;
     Enemy enemy;
     Quaternion offsetRotation;
     List<Enemy> ignoredEnemies = new List<Enemy>();
@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// runs when the projectile hit the enemy
     /// </summary>
-    protected virtual void EnemyHit(Enemy enemy, int damage)
+    protected virtual void EnemyHit(Enemy enemy, float damage)
     {
         if (enemy != null)
         {
@@ -112,5 +112,12 @@ public class Projectile : MonoBehaviour
     public void SetDamage(int damage)
     {
         this.damage = damage;
+    }
+
+    public void Initialize(Enemy enemy,float damage, float speed)
+    {
+        this.enemy = enemy;
+        this.damage = damage;
+        this.speed = speed;
     }
 }

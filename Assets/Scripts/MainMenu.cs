@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject tabButtons;
     [SerializeField] TextMeshProUGUI pointsText;
 
-    [SerializeField] Tower defaultTower;
+    [SerializeField] OLD_Tower defaultTower;
     [SerializeField] TextMeshProUGUI towerTypeText;
 
     [Header("Start values")]
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject levels;
     [SerializeField] GameObject locked;
     [SerializeField] TextMeshProUGUI lockedButtonText;
-    private Tower currentTower;
+    private OLD_Tower currentTower;
 
     private TextMeshProUGUI[] buttonTextArray; // just makes it easier to refernce button text by enumindex
 
@@ -165,7 +165,7 @@ public class MainMenu : MonoBehaviour
     /// updates all references in the upgrades panel with the infos in the tower and savefile
     /// </summary>
     /// <param name="tower">tower reference</param>
-    public void UpdateUpgradePanel(Tower tower)
+    public void UpdateUpgradePanel(OLD_Tower tower)
     {
         PermanentUpgrade upgrades = saveFile.PermanentUpgrades[(int)tower.TowerType];
         currentTower = tower;
@@ -208,7 +208,7 @@ public class MainMenu : MonoBehaviour
     /// shows the locked tower panel
     /// </summary>
     /// <param name="tower">tower object</param>
-    private void ShowLocked(Tower tower)
+    private void ShowLocked(OLD_Tower tower)
     {
         startValues.SetActive(false);
         levels.SetActive(false);
