@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PenetratingProjectile : Projectile
 {
-    [SerializeField] int maxPenetrations = 0;
-    [SerializeField] int damageReduction = 10;
+    [SerializeField] public int maxPenetrations = 0;
+    [SerializeField] public int damageReduction = 10;
     int penetrations = 0;
 
     protected override void AfterEnemyHit()

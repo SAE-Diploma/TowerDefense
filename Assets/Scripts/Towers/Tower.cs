@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] EnemyType enemyType = EnemyType.Walking;
-    [SerializeField] Priority priority = Priority.MostProgress;
-    [SerializeField] float damage = 10;
-    [SerializeField] float attackSpeed = 1;
-    [SerializeField] float range = 5;
-    [SerializeField] float rotationSpeed = 1;
-    [SerializeField] float projectileSpeed = 1;
-    [SerializeField, Tooltip("In Degrees")] float maxAngleToShoot = 10;
-    [SerializeField] int level = 1;
-    [SerializeField] Projectile projectile;
-    [SerializeField] TowerStats towerStats;
+    [SerializeField] protected EnemyType enemyType = EnemyType.Walking;
+    [SerializeField] protected Priority priority = Priority.MostProgress;
+    [SerializeField] protected float damage = 10;
+    [SerializeField] protected float attackSpeed = 1;
+    [SerializeField] protected float range = 5;
+    [SerializeField] protected float rotationSpeed = 1;
+    [SerializeField] protected float projectileSpeed = 1;
+    [SerializeField, Tooltip("In Degrees")] protected float maxAngleToShoot = 10;
+    [SerializeField] protected int level = 1;
+    [SerializeField] protected Projectile projectile;
+    [SerializeField] protected TowerStats towerStats;
 
     private LayerMask enemyMask;
     protected List<Enemy> enemiesInRange = new List<Enemy>();
@@ -27,6 +27,8 @@ public class Tower : MonoBehaviour
     private bool canShoot = true;
     private Coroutine cooldownCoroutine;
 
+    protected TowerLevel currentLevelObj;
+
     private void Awake()
     {
         enemyMask = LayerMask.GetMask("Enemy");
@@ -36,13 +38,13 @@ public class Tower : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        SetLevel(2);
+        SetLevel(level);
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         GetEnemiesInRange(ref enemiesInRange);
         RotateTowardsEnemy(prioritizedEnemy);
@@ -143,7 +145,8 @@ public class Tower : MonoBehaviour
             {
                 canShoot = false;
                 cooldownCoroutine = null;
-                SpawnProjectile();
+                Projectile newProjectile = Instantiate(projectile, gun.MuzzleTransform.position, Quaternion.identity);
+                InitializeProjectile(newProjectile);
             }
         }
         else if (cooldownCoroutine == null)
@@ -155,9 +158,8 @@ public class Tower : MonoBehaviour
     /// <summary>
     /// Spawns a projectile at the gun muzzle
     /// </summary>
-    private void SpawnProjectile()
+    protected virtual void InitializeProjectile(Projectile newProjectile)
     {
-        Projectile newProjectile = Instantiate(projectile, gun.MuzzleTransform.position, Quaternion.identity);
         newProjectile.Initialize(prioritizedEnemy, damage, projectileSpeed);
     }
 
@@ -177,12 +179,12 @@ public class Tower : MonoBehaviour
         if (newLevel > towerStats.LevelList.Count) return; 
         Debug.Log($"Setting level {newLevel}");
         level = newLevel;
-        TowerLevel levelObj = towerStats.LevelList[newLevel - 1];
-        damage = levelObj.Damage;
-        attackSpeed = levelObj.AttackSpeed;
-        range = levelObj.Range;
-        projectileSpeed = levelObj.ProjectileSpeed;
-        rotationSpeed = levelObj.RotationSpeed;
+        currentLevelObj = towerStats.LevelList[newLevel - 1];
+        damage = currentLevelObj.Damage;
+        attackSpeed = currentLevelObj.AttackSpeed;
+        range = currentLevelObj.Range;
+        projectileSpeed = currentLevelObj.ProjectileSpeed;
+        rotationSpeed = currentLevelObj.RotationSpeed;
     }
 
 }

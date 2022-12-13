@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffect: {fileID: 0}
-  radius: 5
+  radius: 1
   maxReduction: 0
   EffectPrefab: {fileID: -158381109496173604, guid: 1d89c0f3c72715b4c97dd734e43faef7, type: 3}

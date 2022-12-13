@@ -6,8 +6,8 @@ using UnityEngine;
 public class ExplodingProjectile : Projectile
 {
 
-    [SerializeField] float radius = 1f;
-    [SerializeField, Range(0f,1f)] float maxReduction = 0;
+    [SerializeField] public float radius = 1f;
+    [SerializeField, Range(0f, 1f)] float maxReduction = 0;
     [SerializeField] ExplosionParticleEffect EffectPrefab;
 
     protected override void EnemyHit(Enemy enemyClass, float damage)
@@ -20,7 +20,8 @@ public class ExplodingProjectile : Projectile
             if (enemy != enemyClass)
             {
                 float distance = Vector3.Distance(transform.position, c.transform.position);
-                base.EnemyHit(enemy, CalcDamage(distance));
+                float calcDamage = CalcDamage(distance);
+                if (calcDamage > 0) base.EnemyHit(enemy, calcDamage);
             }
         }
         base.EnemyHit(enemyClass, damage);
@@ -32,13 +33,14 @@ public class ExplodingProjectile : Projectile
         base.OnGroundHit();
     }
 
-    private int CalcDamage(float distance)
+    private float CalcDamage(float distance)
     {
-        return Mathf.RoundToInt((1 - (1 - maxReduction) / radius * distance) * (float)damage);
+        return Mathf.Round((1 - (1 - maxReduction) / radius * distance) * (float)damage);
     }
 
     private void Explode()
     {
         if (EffectPrefab != null) Instantiate(EffectPrefab, transform.position, Quaternion.identity);
     }
+
 }

@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a60355899ebb94883c11b8e113328c, type: 3}
-  m_Name: Mortar_Level_1
+  m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
+  m_Name: SniperStats
   m_EditorClassIdentifier: 
-  damage: 10
-  attackSpeed: 1
-  range: 10
-  projectileSpeed: 5
-  rotationSpeed: 1
-  explosionRadius: 5
-  explosionDamage: 1
+  levelList:
+  - {fileID: 11400000, guid: cec2e3ef44a9a8745b19c58b9e8a345e, type: 2}
+  - {fileID: 11400000, guid: 3c69b120585b74242bddeec83df8cb56, type: 2}
+  buildCost: 50
+  unlockCost: 1500

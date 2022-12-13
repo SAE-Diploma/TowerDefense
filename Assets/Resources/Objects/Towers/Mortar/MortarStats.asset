@@ -15,5 +15,5 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: 718af46507105114e8226fe1b08e747e, type: 2}
   - {fileID: 11400000, guid: 247a9f747830de94e80fd5542b96ffdc, type: 2}
-  buildCost: 0
-  unlockCost: 0
+  buildCost: 30
+  unlockCost: 500
