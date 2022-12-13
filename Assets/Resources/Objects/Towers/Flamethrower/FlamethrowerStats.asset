@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
+  m_Name: FlamethrowerStats
+  m_EditorClassIdentifier: 
+  levelList:
+  - {fileID: 11400000, guid: ac6a44ae945bcae4e89ee9a9e448cf4a, type: 2}
+  - {fileID: 11400000, guid: 68cd02d8daa7dbb44b97e6311ba32514, type: 2}
+  buildCost: 40
+  unlockCost: 750

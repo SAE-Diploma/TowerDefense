@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
+  m_Name: DartTrapStats
+  m_EditorClassIdentifier: 
+  levelList:
+  - {fileID: 11400000, guid: 3ab3b40c6753a324b92a8b78ddec484f, type: 2}
+  - {fileID: 11400000, guid: da7ac05484e3ce84d9f8deb5b2963f7c, type: 2}
+  buildCost: 750
+  unlockCost: 40

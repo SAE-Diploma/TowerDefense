@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
+  m_Name: SnowCanonStats
+  m_EditorClassIdentifier: 
+  levelList:
+  - {fileID: 11400000, guid: 6236d252b34fdcb49b6786062f270398, type: 2}
+  - {fileID: 11400000, guid: 6172a3c6588b30a42898c3233489b289, type: 2}
+  buildCost: 900
+  unlockCost: 50
