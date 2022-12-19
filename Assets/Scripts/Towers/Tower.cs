@@ -125,8 +125,9 @@ public class Tower : MonoBehaviour
         if (enemy != null)
         {
             Vector3 dir = enemy.transform.position - gun.MuzzleTransform.position;
-            gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
-            angleDifference = Vector3.Angle(gun.transform.forward, dir);
+            Quaternion destination = Quaternion.LookRotation(dir);
+            gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, Quaternion.Euler(0,destination.eulerAngles.y,0), rotationSpeed * Time.deltaTime);
+            angleDifference = Vector3.Angle(gun.transform.forward, new Vector3(dir.x, 0, dir.z));
         }
         else
         {
