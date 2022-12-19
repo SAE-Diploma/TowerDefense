@@ -7,19 +7,19 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "a3cc91e5-b84d-45c8-87dd-8ade6e73940a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "Forward",
-                    "id": "de7ed04a-ac17-4a0a-9427-4f745b54202b",
-                    "path": "1DAxis",
+                    "name": "Vector2",
+                    "id": "0c55ca57-325b-463c-898c-0110f71eea65",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -28,22 +28,44 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "efd5dea4-43e8-4b11-b8d4-36ab85bf0c7c",
-                    "path": "<Keyboard>/s",
+                    "name": "up",
+                    "id": "d4f86c22-1bd0-41f3-83b6-260ad7bc52e0",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "Invert",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "f99dfa40-a9c9-493f-a3ca-a771fb018598",
-                    "path": "<Keyboard>/w",
+                    "name": "down",
+                    "id": "a219d61c-27d1-4226-bab7-ccbe0c95dd46",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "522b49c8-969b-4979-9d89-093791aa1a36",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f400df61-d659-46a3-bbdb-bac7df48263f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "Invert",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": false,

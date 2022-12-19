@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class Player_Movement : MonoBehaviour
     CapsuleCollider m_collider;
     float rayLength;
 
+    private InputMaster inputMaster;
+    private void Awake()
+    {
+        inputMaster = new InputMaster();
+        inputMaster.Player.Enable();
+        //inputMaster.Player.Movement.performed += Movement;
+    }
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -32,6 +40,10 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
+        Vector2 moveDir = inputMaster.Player.Movement.ReadValue<Vector2>();
+        inputDir = new Vector3(-moveDir.x, 0, -moveDir.y);
+        m_rigidbody.MovePosition(transform.position + inputDir * 2 * Time.fixedDeltaTime);
+
         //inputDir = (forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")).normalized;
 
         //// multiply inputDir with correct speed
@@ -111,6 +123,11 @@ public class Player_Movement : MonoBehaviour
     public void CanPlayerMove(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public void Movement(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
     }
 
 }
