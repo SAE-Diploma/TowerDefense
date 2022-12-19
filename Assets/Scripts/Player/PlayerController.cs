@@ -60,14 +60,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
-        if (transform.position.y < -50)
-        {
-            transform.position = new Vector3(38, 1, 6);
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Interact();
+        //}
+        //if (transform.position.y < -50)
+        //{
+        //    transform.position = new Vector3(38, 1, 6);
+        //}
     }
 
     private void FixedUpdate()

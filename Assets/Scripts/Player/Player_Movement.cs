@@ -32,21 +32,21 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        inputDir = (forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")).normalized;
+        //inputDir = (forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")).normalized;
 
-        // multiply inputDir with correct speed
-        if (isGrounded)
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                inputDir *= runSpeed;
-            }
-            else
-            {
-                inputDir *= speed;
-            }
-        }
-        else { inputDir *= airSpeed; }
+        //// multiply inputDir with correct speed
+        //if (isGrounded)
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift))
+        //    {
+        //        inputDir *= runSpeed;
+        //    }
+        //    else
+        //    {
+        //        inputDir *= speed;
+        //    }
+        //}
+        //else { inputDir *= airSpeed; }
 
     }
 
@@ -70,38 +70,38 @@ public class Player_Movement : MonoBehaviour
             isGrounded = false;
         }
 
-        // movement
-        if (inputDir != Vector3.zero)
-        {
-            if (!isGrounded)
-            {
-                if (moveInAir)
-                {
-                    m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
-                    isMoving = true;
-                }
-                else { isMoving = false; }
-            }
-            else
-            {
-                isMoving = true;
-                m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
-            }
-        }
-        else { isMoving = false; }
+        //// movement
+        //if (inputDir != Vector3.zero)
+        //{
+        //    if (!isGrounded)
+        //    {
+        //        if (moveInAir)
+        //        {
+        //            m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
+        //            isMoving = true;
+        //        }
+        //        else { isMoving = false; }
+        //    }
+        //    else
+        //    {
+        //        isMoving = true;
+        //        m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
+        //    }
+        //}
+        //else { isMoving = false; }
 
-        // jumping when on the ground
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
-        {
-            if (isMoving)
-            {
-                m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized * jumpForce, ForceMode.Impulse);
-            }
-            else
-            {
-                m_rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            }
-        }
+        //// jumping when on the ground
+        //if (Input.GetKey(KeyCode.Space) && isGrounded)
+        //{
+        //    if (isMoving)
+        //    {
+        //        m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized * jumpForce, ForceMode.Impulse);
+        //    }
+        //    else
+        //    {
+        //        m_rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //    }
+        //}
     }
 
     /// <summary>

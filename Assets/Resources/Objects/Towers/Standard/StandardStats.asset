@@ -17,3 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6aa12fd9d11c2144ca886c457763acba, type: 2}
   buildCost: 25
   unlockCost: 100
+  isUnlocked: 1
+  towerPrefab: {fileID: 6659852332058942141, guid: 451add44248964c44884d1de8a8ca36b, type: 3}
+  towerBlueprintPrefab: {fileID: 1131783226813674370, guid: dfaa561bea861fe4397cf9b3efa29317, type: 3}

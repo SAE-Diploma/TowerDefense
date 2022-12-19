@@ -30,18 +30,18 @@ public class Player_Mouselook : MonoBehaviour
     void Update()
     {
 
-        // Mouselook logic
-        if (movement.CanMove)
-        {
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationX = CapRotation(rotationX);
-            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-        }
-        Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
-        Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
-        player.localRotation = originalPlayerRotation * quaternionX;
-        transform.localRotation = originalCamRotation * quaternionY;
+        //// Mouselook logic
+        //if (movement.CanMove)
+        //{
+        //    rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+        //    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+        //    rotationX = CapRotation(rotationX);
+        //    rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+        //}
+        //Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
+        //Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
+        //player.localRotation = originalPlayerRotation * quaternionX;
+        //transform.localRotation = originalCamRotation * quaternionY;
     }
 
     /// <summary>

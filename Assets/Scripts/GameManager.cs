@@ -100,25 +100,25 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            if (currentOpenMenu.Count > 0)
-            {
-                Menus topMostMenu = currentOpenMenu.Peek();
-                if (topMostMenu == Menus.PauseMenu)
-                {
-                    ResumeGame();
-                }
-                else if (topMostMenu != Menus.LooseMenu && topMostMenu != Menus.WinMenu)
-                {
-                    CloseMenu(topMostMenu);
-                }
-            }
-            else
-            {
-                PauseGame();
-            }
-        }
+        //if (Input.GetKeyUp(KeyCode.Escape))
+        //{
+        //    if (currentOpenMenu.Count > 0)
+        //    {
+        //        Menus topMostMenu = currentOpenMenu.Peek();
+        //        if (topMostMenu == Menus.PauseMenu)
+        //        {
+        //            ResumeGame();
+        //        }
+        //        else if (topMostMenu != Menus.LooseMenu && topMostMenu != Menus.WinMenu)
+        //        {
+        //            CloseMenu(topMostMenu);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        PauseGame();
+        //    }
+        //}
 
         if (lastWaveSpawned)
         {
