@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Player_Movement : MonoBehaviour
     private bool isGrounded;
     private bool isMoving;
     private bool canMove = true;
+    private bool jump = false;
+    private bool isRunning = false;
     public bool CanMove => canMove;
 
     Vector3 inputDir;
@@ -23,13 +26,18 @@ public class Player_Movement : MonoBehaviour
     CapsuleCollider m_collider;
     float rayLength;
 
-    private InputMaster inputMaster;
+    public InputMaster inputMaster { get; private set; }
     private void Awake()
     {
         inputMaster = new InputMaster();
         inputMaster.Player.Enable();
-        //inputMaster.Player.Movement.performed += Movement;
+        inputMaster.Player.Jump.performed += OnJump;
+        inputMaster.Player.Run.started += OnStartRunning;
+        inputMaster.Player.Run.canceled += OnStopRunning;
     }
+
+
+
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -41,24 +49,21 @@ public class Player_Movement : MonoBehaviour
     void Update()
     {
         Vector2 moveDir = inputMaster.Player.Movement.ReadValue<Vector2>();
-        inputDir = new Vector3(-moveDir.x, 0, -moveDir.y);
-        m_rigidbody.MovePosition(transform.position + inputDir * 2 * Time.fixedDeltaTime);
+        inputDir = transform.right * moveDir.x + transform.forward * moveDir.y;
 
-        //inputDir = (forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")).normalized;
-
-        //// multiply inputDir with correct speed
-        //if (isGrounded)
-        //{
-        //    if (Input.GetKey(KeyCode.LeftShift))
-        //    {
-        //        inputDir *= runSpeed;
-        //    }
-        //    else
-        //    {
-        //        inputDir *= speed;
-        //    }
-        //}
-        //else { inputDir *= airSpeed; }
+        // multiply inputDir with correct speed
+        if (isGrounded)
+        {
+            if (isRunning)
+            {
+                inputDir *= runSpeed;
+            }
+            else
+            {
+                inputDir *= speed;
+            }
+        }
+        else { inputDir *= airSpeed; }
 
     }
 
@@ -82,38 +87,39 @@ public class Player_Movement : MonoBehaviour
             isGrounded = false;
         }
 
-        //// movement
-        //if (inputDir != Vector3.zero)
-        //{
-        //    if (!isGrounded)
-        //    {
-        //        if (moveInAir)
-        //        {
-        //            m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
-        //            isMoving = true;
-        //        }
-        //        else { isMoving = false; }
-        //    }
-        //    else
-        //    {
-        //        isMoving = true;
-        //        m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
-        //    }
-        //}
-        //else { isMoving = false; }
+        // movement
+        if (inputDir != Vector3.zero)
+        {
+            if (!isGrounded)
+            {
+                if (moveInAir)
+                {
+                    isMoving = true;
+                    m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
+                }
+                else { isMoving = false; }
+            }
+            else
+            {
+                isMoving = true;
+                m_rigidbody.MovePosition(transform.position + inputDir * Time.fixedDeltaTime);
+            }
+        }
+        else { isMoving = false; }
 
-        //// jumping when on the ground
-        //if (Input.GetKey(KeyCode.Space) && isGrounded)
-        //{
-        //    if (isMoving)
-        //    {
-        //        m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized * jumpForce, ForceMode.Impulse);
-        //    }
-        //    else
-        //    {
-        //        m_rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        //    }
-        //}
+        // jumping when on the ground
+        if (jump && isGrounded)
+        {
+            if (isMoving)
+            {
+                m_rigidbody.AddForce(Vector3.up * jumpForce + inputDir.normalized * jumpForce, ForceMode.Impulse);
+            }
+            else
+            {
+                m_rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
+            jump = false;
+        }
     }
 
     /// <summary>
@@ -125,9 +131,10 @@ public class Player_Movement : MonoBehaviour
         this.canMove = canMove;
     }
 
-    public void Movement(InputAction.CallbackContext context)
-    {
-        Debug.Log(context);
-    }
+    private void OnJump(InputAction.CallbackContext obj) { jump = true; }
+
+    private void OnStartRunning(InputAction.CallbackContext obj) { isRunning = true; }
+
+    private void OnStopRunning(InputAction.CallbackContext obj) { isRunning = false; }
 
 }
