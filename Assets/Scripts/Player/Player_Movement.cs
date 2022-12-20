@@ -36,8 +36,6 @@ public class Player_Movement : MonoBehaviour
         inputMaster.Player.Run.canceled += OnStopRunning;
     }
 
-
-
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();

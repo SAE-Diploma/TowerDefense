@@ -1498,6 +1498,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38973368}
   m_Mesh: {fileID: -462981019419857548, guid: c57d4f848d5f667489bcc171dac5caf2, type: 3}
+--- !u!1 &39683237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39683239}
+  - component: {fileID: 39683238}
+  m_Layer: 5
+  m_Name: UIDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &39683238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39683237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: d75132a25ff937f4f86244c2dc758e43, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 1a8dd825067eadf4a91b310d54d5ffa4, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &39683239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39683237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &40756752
 GameObject:
   m_ObjectHideFlags: 0
@@ -66388,6 +66436,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 49d75b4f-e243-4104-a7e9-e6a9fddd9d40
     m_ActionName: Player/MouseMovement[/Mouse/position/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 492aad7e-17d4-4c3b-aabb-872a0e4869fd
+    m_ActionName: Player/Tilt[/Mouse/delta/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 352aff80-a58f-4032-bd2c-0d9773a19ea9
+    m_ActionName: BuildMode/Enter[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3e304654-e1cc-4bc3-9d55-075ba7aeb465
+    m_ActionName: BuildMode/PreviousTab[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03a5b20e-2684-43ba-96d9-b029de9d4366
+    m_ActionName: BuildMode/NextTab[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc6632ec-6ea0-4d36-ace3-a91834282c00
+    m_ActionName: BuildMode/TowerSelection[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/numpad1,/Keyboard/numpad2,/Keyboard/numpad3,/Keyboard/numpad4,/Keyboard/numpad5]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

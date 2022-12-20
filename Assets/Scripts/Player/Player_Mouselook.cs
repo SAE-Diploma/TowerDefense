@@ -42,7 +42,6 @@ public class Player_Mouselook : MonoBehaviour
             rotationX = CapRotation(rotationX);
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
         }
-        Debug.Log(rotationX);
         Quaternion quaternionX = Quaternion.AngleAxis(rotationX, Vector3.up);
         Quaternion quaternionY = Quaternion.AngleAxis(rotationY, -Vector3.right);
         player.localRotation = originalPlayerRotation * quaternionX;

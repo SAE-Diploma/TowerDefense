@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1397.3334
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 300}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 308
+  controlID: 54
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,12 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2137.3333
+    width: 2211.3333
     height: 1347.3334
   m_MinSize: {x: 200, y: 300}
   m_MaxSize: {x: 16192, y: 24288}
   vertical: 1
-  controlID: 191
+  controlID: 55
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,12 +164,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2137.3333
+    width: 2211.3333
     height: 1247.3334
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 192
+  controlID: 56
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -189,12 +189,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 316
+    width: 326.66666
     height: 1247.3334
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 270
+  controlID: 25
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -212,7 +212,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 316
+    width: 326.66666
     height: 549.3333
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
@@ -238,7 +238,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 549.3333
-    width: 316
+    width: 326.66666
     height: 698.00006
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
@@ -257,26 +257,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 316
+    x: 326.66666
     y: 0
-    width: 1821.3333
+    width: 1884.6666
     height: 1247.3334
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 19}
   - {fileID: 20}
   - {fileID: 14}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -294,7 +294,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 1247.3334
-    width: 2137.3333
+    width: 2211.3333
     height: 100
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
@@ -319,12 +319,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 2137.3333
+    x: 2211.3333
     y: 0
-    width: 422.66675
+    width: 348.66675
     height: 1347.3334
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -350,9 +350,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 316
+    x: 326.6667
     y: 72.66667
-    width: 1819.3333
+    width: 1882.6666
     height: 1226.3334
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -360,8 +360,8 @@ MonoBehaviour:
     m_SaveData: []
   m_ActionMapsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0bcc920f
-    m_LastClickedID: 261278731
+    m_SelectedIDs: 023b1bfc
+    m_LastClickedID: -65324286
     m_ExpandedIDs: 00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -382,9 +382,9 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5c9a3f4a
-    m_LastClickedID: 1245682268
-    m_ExpandedIDs: 920f1bcb0bcc920f41871a32726a823f8830a04a68f8df55
+    m_SelectedIDs: 8e14300c
+    m_LastClickedID: 204477582
+    m_ExpandedIDs: d497d5a9920f1bcb023b1bfc0bcc920f8830a04a68f8df55
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -406,10 +406,10 @@ MonoBehaviour:
     m_AdvancedDropdownState:
       states:
       - itemId: 371857150
-        selectedIndex: 4
+        selectedIndex: 0
         scroll: {x: 0, y: 0}
       - itemId: -376880915
-        selectedIndex: 0
+        selectedIndex: -1
         scroll: {x: 0, y: 0}
       - itemId: 82801685
         selectedIndex: -1
@@ -418,6 +418,63 @@ MonoBehaviour:
         selectedIndex: 0
         scroll: {x: 0, y: 0}
       - itemId: -630248049
+        selectedIndex: -1
+        scroll: {x: 0, y: 37.5}
+      - itemId: -2031660377
+        selectedIndex: 0
+        scroll: {x: 0, y: 0}
+      - itemId: 378383742
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 1943893468
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -654788001
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1273337413
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 1275948795
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 403810634
+        selectedIndex: 0
+        scroll: {x: 0, y: 0}
+      - itemId: 917488242
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1824404937
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1321821545
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 1081013944
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -656690626
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -582599340
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1217029472
+        selectedIndex: 0
+        scroll: {x: 0, y: 0}
+      - itemId: -2140026721
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 101209689
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1542029941
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: -1208781481
+        selectedIndex: -1
+        scroll: {x: 0, y: 0}
+      - itemId: 1004610116
         selectedIndex: -1
         scroll: {x: 0, y: 0}
     m_ManualPathEditMode: 0
@@ -431,40 +488,208 @@ MonoBehaviour:
       \"type\": \"Value\",\n                    \"id\": \"a3cc91e5-b84d-45c8-87dd-8ade6e73940a\",\n                   
       \"expectedControlType\": \"Vector2\",\n                    \"processors\":
       \"\",\n                    \"interactions\": \"\",\n                    \"initialStateCheck\":
-      true\n                }\n            ],\n            \"bindings\": [\n               
-      {\n                    \"name\": \"Vector2\",\n                    \"id\":
-      \"0c55ca57-325b-463c-898c-0110f71eea65\",\n                    \"path\": \"2DVector\",\n                   
-      \"interactions\": \"\",\n                    \"processors\": \"\",\n                   
-      \"groups\": \"\",\n                    \"action\": \"Movement\",\n                   
-      \"isComposite\": true,\n                    \"isPartOfComposite\": false\n               
-      },\n                {\n                    \"name\": \"up\",\n                   
-      \"id\": \"d4f86c22-1bd0-41f3-83b6-260ad7bc52e0\",\n                    \"path\":
-      \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"Invert\",\n                    \"groups\": \"\",\n                   
+      true\n                },\n                {\n                    \"name\":
+      \"Run\",\n                    \"type\": \"Button\",\n                    \"id\":
+      \"d78b9303-8b01-4320-ba2c-a181d2cf93cd\",\n                    \"expectedControlType\":
+      \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"Jump\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"223d1cd3-5d4a-4579-9f4b-b6cb614499e4\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"Paning\",\n                   
+      \"type\": \"Value\",\n                    \"id\": \"49d75b4f-e243-4104-a7e9-e6a9fddd9d40\",\n                   
+      \"expectedControlType\": \"Axis\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
+      },\n                {\n                    \"name\": \"Tilt\",\n                   
+      \"type\": \"Value\",\n                    \"id\": \"492aad7e-17d4-4c3b-aabb-872a0e4869fd\",\n                   
+      \"expectedControlType\": \"Axis\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": true\n               
+      }\n            ],\n            \"bindings\": [\n                {\n                   
+      \"name\": \"Vector2\",\n                    \"id\": \"0c55ca57-325b-463c-898c-0110f71eea65\",\n                   
+      \"path\": \"2DVector\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Movement\",\n                    \"isComposite\": true,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"up\",\n                    \"id\": \"d4f86c22-1bd0-41f3-83b6-260ad7bc52e0\",\n                   
+      \"path\": \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Movement\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": true\n                },\n                {\n                   
       \"name\": \"down\",\n                    \"id\": \"a219d61c-27d1-4226-bab7-ccbe0c95dd46\",\n                   
       \"path\": \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"Invert\",\n                    \"groups\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Movement\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": true\n                },\n                {\n                   
       \"name\": \"left\",\n                    \"id\": \"522b49c8-969b-4979-9d89-093791aa1a36\",\n                   
       \"path\": \"<Keyboard>/a\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"Invert\",\n                    \"groups\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Movement\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": true\n                },\n                {\n                   
       \"name\": \"right\",\n                    \"id\": \"f400df61-d659-46a3-bbdb-bac7df48263f\",\n                   
       \"path\": \"<Keyboard>/d\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"Invert\",\n                    \"groups\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Movement\",\n                    \"isComposite\": false,\n                   
-      \"isPartOfComposite\": true\n                }\n            ]\n        }\n   
-      ],\n    \"controlSchemes\": []\n}"
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"fc80801a-c522-4e7e-8857-0274e65d2368\",\n                   
+      \"path\": \"<Keyboard>/leftShift\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Run\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"fbbd701a-8a0a-455e-8e7b-38aee81fb7cd\",\n                   
+      \"path\": \"<Keyboard>/space\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Jump\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"448daba4-e5d6-41b9-b3a4-0eb60be57eff\",\n                   
+      \"path\": \"<Mouse>/delta/x\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Paning\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"e97db5d4-841f-46aa-bb3b-09605fbbad56\",\n                   
+      \"path\": \"<Mouse>/delta/y\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Tilt\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                }\n            ]\n        },\n       
+      {\n            \"name\": \"BuildMode\",\n            \"id\": \"d81c7d3f-42a2-4ac5-8a61-cc0f15650e61\",\n           
+      \"actions\": [\n                {\n                    \"name\": \"Enter\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"352aff80-a58f-4032-bd2c-0d9773a19ea9\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"PreviousTab\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"3e304654-e1cc-4bc3-9d55-075ba7aeb465\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"NextTab\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"03a5b20e-2684-43ba-96d9-b029de9d4366\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"TowerSelection\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"fc6632ec-6ea0-4d36-ace3-a91834282c00\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      }\n            ],\n            \"bindings\": [\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"e3d6d59a-6ccb-4db6-ae0c-88313008ba02\",\n                   
+      \"path\": \"<Keyboard>/r\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Enter\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"a3254322-cb69-424d-b726-14c4fa7823a6\",\n                   
+      \"path\": \"<Keyboard>/q\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"PreviousTab\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"39ea0012-f4df-43f0-b08b-ea51ec55e311\",\n                   
+      \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"NextTab\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"3fafa56c-8f56-47a8-a60d-6d93e8efb8c9\",\n                   
+      \"path\": \"<Keyboard>/1\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"92d8d18c-98c7-4c6b-939e-06412c4e0960\",\n                   
+      \"path\": \"<Keyboard>/numpad1\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"7980d270-4d79-441d-817c-2b90b1037f60\",\n                   
+      \"path\": \"<Keyboard>/2\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=2)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"fdf8a9a0-38d5-4fe7-af39-a35642812932\",\n                   
+      \"path\": \"<Keyboard>/numpad2\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=2)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"c07276f8-f568-4c74-9682-c6ce8474f7fe\",\n                   
+      \"path\": \"<Keyboard>/3\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=3)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"a6f7bc17-0ba2-4d3e-9eb0-3b8fb33e841f\",\n                   
+      \"path\": \"<Keyboard>/numpad3\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=3)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"24671c4a-b640-407a-b90d-02b35486a535\",\n                   
+      \"path\": \"<Keyboard>/4\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=4)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"36ceee81-03ce-4419-a233-8548fe0d1080\",\n                   
+      \"path\": \"<Keyboard>/numpad4\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=4)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"18db60f0-abf5-48d2-adc6-24afecbc6cc9\",\n                   
+      \"path\": \"<Keyboard>/5\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=5)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"40c54f5f-16d4-46b5-863c-34bb13cab29d\",\n                   
+      \"path\": \"<Keyboard>/numpad5\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=5)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"c2f1c577-b050-4fcc-b507-5cc1605028bf\",\n                   
+      \"path\": \"<Keyboard>/6\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=6)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"d649351a-aa42-42b0-ac9b-8b85469dd8bf\",\n                   
+      \"path\": \"<Keyboard>/numpad6\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=6)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"ab1e7409-e0c4-4b68-b766-0c81f54552c5\",\n                   
+      \"path\": \"<Keyboard>/7\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=7)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"6015ad6c-6002-4ebd-8b2f-51e935f9d189\",\n                   
+      \"path\": \"<Keyboard>/numpad7\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=7)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"c249d447-6372-430d-8800-0fd4373e3195\",\n                   
+      \"path\": \"<Keyboard>/8\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=8)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"c2a51707-051e-46ba-9587-79045e611dc4\",\n                   
+      \"path\": \"<Keyboard>/numpad8\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=8)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"2a2b0521-c744-4f03-9d24-12e56050604b\",\n                   
+      \"path\": \"<Keyboard>/9\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=9)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"3055167f-a65d-4034-a423-a0770887f10b\",\n                   
+      \"path\": \"<Keyboard>/numpad9\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"Scale(factor=9)\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"TowerSelection\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
+      ],\n    \"controlSchemes\": [\n        {\n            \"name\": \"Keyboard\",\n           
+      \"bindingGroup\": \"Keyboard\",\n            \"devices\": [\n               
+      {\n                    \"devicePath\": \"<Keyboard>\",\n                   
+      \"isOptional\": false,\n                    \"isOR\": false\n               
+      }\n            ]\n        }\n    ]\n}"
     m_IsDirty: 0
   m_Toolbar:
     m_IsDirty: 0
     m_SelectedControlSchemeIndex: -1
     m_SelectedDeviceRequirementIndex: -1
-    m_ControlSchemes: []
+    m_ControlSchemes:
+    - m_Name: Keyboard
+      m_BindingGroup: Keyboard
+      m_DeviceRequirements:
+      - m_ControlPath: <Keyboard>
+        m_Flags: 0
     m_SearchText: 
   m_DirtyTitle:
     m_Text: (*) InputMaster (Input Actions)
@@ -496,7 +721,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 72.66667
-    width: 315
+    width: 325.66666
     height: 528.3333
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -507,7 +732,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 34fbffff
+      m_ExpandedIDs: 34fbfffffe750000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -553,7 +778,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 622
-    width: 315
+    width: 325.66666
     height: 677.00006
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -571,8 +796,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets
+    m_Folders: []
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -587,7 +811,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 38.333252}
     m_SelectedIDs: 8e7b0000
     m_LastClickedID: 31630
-    m_ExpandedIDs: 00000000aa7c0000e07d0000e27d0000e47d0000e67d0000e87d0000ea7d0000
+    m_ExpandedIDs: 00000000b07c0000d47d0000d67d0000d87d0000da7d0000dc7d0000de7d0000e07d0000e27d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -615,21 +839,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000aa7c0000e07d0000e27d0000e47d0000e67d0000e87d0000ea7d00001c7e0000cc9a0000
+    m_ExpandedIDs: 0a75ffffffffffff00000000b07c0000d47d0000d67d0000d87d0000da7d0000dc7d0000de7d0000e07d0000e27d0000187e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: InputMaster
-      m_OriginalName: InputMaster
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 65604
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -691,9 +915,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 316
+    x: 326.6667
     y: 72.66667
-    width: 1819.3333
+    width: 1882.6666
     height: 1226.3334
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -896,9 +1120,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -23.162518, y: 5.573863, z: 54.057964}
+    m_Target: {x: -23.092346, y: 4.949941, z: 54.816425}
     speed: 2
-    m_Value: {x: -23.162518, y: 5.573863, z: 54.057964}
+    m_Value: {x: -23.092346, y: 4.949941, z: 54.816425}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -945,9 +1169,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.121800505, y: -0.81104547, z: 0.17870273, w: 0.5449583}
+    m_Target: {x: 0.15311135, y: -0.7780574, z: 0.20472719, w: 0.57516676}
     speed: 2
-    m_Value: {x: 0.12170656, y: -0.8104199, z: 0.17856489, w: 0.54453796}
+    m_Value: {x: 0.15299311, y: -0.7774565, z: 0.20456909, w: 0.5747226}
   m_Size:
     m_Target: 4.327762
     speed: 2
@@ -996,9 +1220,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 316
+    x: 326.6667
     y: 72.66667
-    width: 1819.3333
+    width: 1882.6666
     height: 1226.3334
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1010,7 +1234,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 2729, y: 1535}
+  m_TargetSize: {x: 2824, y: 1588}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1025,10 +1249,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -909.6667
-    m_HBaseRangeMax: 909.6667
-    m_VBaseRangeMin: -511.6667
-    m_VBaseRangeMax: 511.6667
+    m_HBaseRangeMin: -941.3334
+    m_HBaseRangeMax: 941.3334
+    m_VBaseRangeMin: -529.3334
+    m_VBaseRangeMax: 529.3334
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -1037,7 +1261,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -1046,23 +1270,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1819.3333
+      width: 1882.6666
       height: 1205.3334
-    m_Scale: {x: 0.99999994, y: 0.99999994}
-    m_Translation: {x: 909.6666, y: 602.6667}
+    m_Scale: {x: 0.99999994, y: 0.9999999}
+    m_Translation: {x: 941.3333, y: 602.6667}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -909.6667
+      x: -941.3334
       y: -602.66675
-      width: 1819.3334
+      width: 1882.6667
       height: 1205.3335
     m_MinimalGUI: 1
   m_defaultScale: 0.99999994
-  m_LastWindowPixelSize: {x: 2729, y: 1839.5}
+  m_LastWindowPixelSize: {x: 2824, y: 1839.5}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 00000000000000000000
@@ -1190,7 +1414,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 30204
+  m_LastSelectedObjectID: 30206
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1211,9 +1435,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2137.3335
+    x: 2211.3335
     y: 72.66667
-    width: 421.66675
+    width: 347.66675
     height: 1326.3334
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1254,7 +1478,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 1320
-    width: 2136.3333
+    width: 2210.3333
     height: 79
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:

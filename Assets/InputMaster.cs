@@ -174,6 +174,281 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BuildMode"",
+            ""id"": ""d81c7d3f-42a2-4ac5-8a61-cc0f15650e61"",
+            ""actions"": [
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""352aff80-a58f-4032-bd2c-0d9773a19ea9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousTab"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e304654-e1cc-4bc3-9d55-075ba7aeb465"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextTab"",
+                    ""type"": ""Button"",
+                    ""id"": ""03a5b20e-2684-43ba-96d9-b029de9d4366"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TowerSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc6632ec-6ea0-4d36-ace3-a91834282c00"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e3d6d59a-6ccb-4db6-ae0c-88313008ba02"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3254322-cb69-424d-b726-14c4fa7823a6"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39ea0012-f4df-43f0-b08b-ea51ec55e311"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextTab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fafa56c-8f56-47a8-a60d-6d93e8efb8c9"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92d8d18c-98c7-4c6b-939e-06412c4e0960"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7980d270-4d79-441d-817c-2b90b1037f60"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdf8a9a0-38d5-4fe7-af39-a35642812932"",
+                    ""path"": ""<Keyboard>/numpad2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c07276f8-f568-4c74-9682-c6ce8474f7fe"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6f7bc17-0ba2-4d3e-9eb0-3b8fb33e841f"",
+                    ""path"": ""<Keyboard>/numpad3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24671c4a-b640-407a-b90d-02b35486a535"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36ceee81-03ce-4419-a233-8548fe0d1080"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18db60f0-abf5-48d2-adc6-24afecbc6cc9"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40c54f5f-16d4-46b5-863c-34bb13cab29d"",
+                    ""path"": ""<Keyboard>/numpad5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2f1c577-b050-4fcc-b507-5cc1605028bf"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d649351a-aa42-42b0-ac9b-8b85469dd8bf"",
+                    ""path"": ""<Keyboard>/numpad6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab1e7409-e0c4-4b68-b766-0c81f54552c5"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=7)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6015ad6c-6002-4ebd-8b2f-51e935f9d189"",
+                    ""path"": ""<Keyboard>/numpad7"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=7)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c249d447-6372-430d-8800-0fd4373e3195"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=8)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2a51707-051e-46ba-9587-79045e611dc4"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=8)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a2b0521-c744-4f03-9d24-12e56050604b"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=9)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3055167f-a65d-4034-a423-a0770887f10b"",
+                    ""path"": ""<Keyboard>/numpad9"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=9)"",
+                    ""groups"": """",
+                    ""action"": ""TowerSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -197,6 +472,12 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Paning = m_Player.FindAction("Paning", throwIfNotFound: true);
         m_Player_Tilt = m_Player.FindAction("Tilt", throwIfNotFound: true);
+        // BuildMode
+        m_BuildMode = asset.FindActionMap("BuildMode", throwIfNotFound: true);
+        m_BuildMode_Enter = m_BuildMode.FindAction("Enter", throwIfNotFound: true);
+        m_BuildMode_PreviousTab = m_BuildMode.FindAction("PreviousTab", throwIfNotFound: true);
+        m_BuildMode_NextTab = m_BuildMode.FindAction("NextTab", throwIfNotFound: true);
+        m_BuildMode_TowerSelection = m_BuildMode.FindAction("TowerSelection", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +598,63 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // BuildMode
+    private readonly InputActionMap m_BuildMode;
+    private IBuildModeActions m_BuildModeActionsCallbackInterface;
+    private readonly InputAction m_BuildMode_Enter;
+    private readonly InputAction m_BuildMode_PreviousTab;
+    private readonly InputAction m_BuildMode_NextTab;
+    private readonly InputAction m_BuildMode_TowerSelection;
+    public struct BuildModeActions
+    {
+        private @InputMaster m_Wrapper;
+        public BuildModeActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Enter => m_Wrapper.m_BuildMode_Enter;
+        public InputAction @PreviousTab => m_Wrapper.m_BuildMode_PreviousTab;
+        public InputAction @NextTab => m_Wrapper.m_BuildMode_NextTab;
+        public InputAction @TowerSelection => m_Wrapper.m_BuildMode_TowerSelection;
+        public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuildModeActions set) { return set.Get(); }
+        public void SetCallbacks(IBuildModeActions instance)
+        {
+            if (m_Wrapper.m_BuildModeActionsCallbackInterface != null)
+            {
+                @Enter.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnEnter;
+                @Enter.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnEnter;
+                @Enter.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnEnter;
+                @PreviousTab.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPreviousTab;
+                @PreviousTab.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPreviousTab;
+                @PreviousTab.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPreviousTab;
+                @NextTab.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnNextTab;
+                @NextTab.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnNextTab;
+                @NextTab.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnNextTab;
+                @TowerSelection.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnTowerSelection;
+                @TowerSelection.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnTowerSelection;
+                @TowerSelection.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnTowerSelection;
+            }
+            m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Enter.started += instance.OnEnter;
+                @Enter.performed += instance.OnEnter;
+                @Enter.canceled += instance.OnEnter;
+                @PreviousTab.started += instance.OnPreviousTab;
+                @PreviousTab.performed += instance.OnPreviousTab;
+                @PreviousTab.canceled += instance.OnPreviousTab;
+                @NextTab.started += instance.OnNextTab;
+                @NextTab.performed += instance.OnNextTab;
+                @NextTab.canceled += instance.OnNextTab;
+                @TowerSelection.started += instance.OnTowerSelection;
+                @TowerSelection.performed += instance.OnTowerSelection;
+                @TowerSelection.canceled += instance.OnTowerSelection;
+            }
+        }
+    }
+    public BuildModeActions @BuildMode => new BuildModeActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -333,5 +671,12 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnPaning(InputAction.CallbackContext context);
         void OnTilt(InputAction.CallbackContext context);
+    }
+    public interface IBuildModeActions
+    {
+        void OnEnter(InputAction.CallbackContext context);
+        void OnPreviousTab(InputAction.CallbackContext context);
+        void OnNextTab(InputAction.CallbackContext context);
+        void OnTowerSelection(InputAction.CallbackContext context);
     }
 }

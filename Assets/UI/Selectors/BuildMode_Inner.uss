@@ -1,0 +1,112 @@
+.NoPadding {
+    height: 20%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.Tab {
+    width: 10%;
+    min-width: 100px;
+    min-height: 50px;
+    max-height: 150px;
+    height: 100%;
+    -unity-text-align: upper-left;
+    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    opacity: 1;
+    display: flex;
+    background-color: rgba(88, 88, 88, 0.6);
+    align-items: center;
+    max-width: 300px;
+}
+
+.active {
+}
+
+.Tab.active {
+    background-color: rgba(128, 128, 128, 0.6);
+}
+
+.TowerContainer {
+    flex-shrink: 0;
+    flex-grow: 1;
+    width: 200px;
+    height: auto;
+    margin-left: 20px;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex-direction: column;
+    align-items: stretch;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(153, 153, 153);
+    border-right-color: rgb(153, 153, 153);
+    border-top-color: rgb(153, 153, 153);
+    border-bottom-color: rgb(153, 153, 153);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.TowerContainer.active {
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+
+.TowerImage {
+    flex-grow: 1;
+    margin-left: 0;
+    margin-right: 0;
+    flex-shrink: 0;
+    width: auto;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.WhiteText {
+    -unity-text-align: upper-center;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
+    color: rgba(255, 255, 255, 255);
+    -unity-font: url('project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Roboto-Bold.ttf?fileID=12800000&guid=4beb055f07aaff244873dec698d0363e&type=3#Roboto-Bold');
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.TowerLabel {
+    -unity-text-align: upper-center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: stretch;
+    width: 100%;
+    font-size: 20px;
+}

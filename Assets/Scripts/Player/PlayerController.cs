@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.InputSystem;
 
 public enum Interactions
 {
@@ -52,6 +53,19 @@ public class PlayerController : MonoBehaviour
     private TowerPlace placeTower;
     public TowerPlace PlaceTower => placeTower;
 
+    private InputMaster inputMaster;
+
+    private bool inBuildMode = false;
+    private int selectedTowerIndex = 0;
+
+    private void Awake()
+    {
+        inputMaster = new InputMaster();
+        inputMaster.BuildMode.Enable();
+        inputMaster.BuildMode.Enter.performed += OnEnterBuildMode;
+        inputMaster.BuildMode.TowerSelection.performed += OnTowerSelection;
+    }
+
     void Start()
     {
         movement = gameObject.GetComponent<Player_Movement>();
@@ -64,10 +78,10 @@ public class PlayerController : MonoBehaviour
         //{
         //    Interact();
         //}
-        //if (transform.position.y < -50)
-        //{
-        //    transform.position = new Vector3(38, 1, 6);
-        //}
+        if (transform.position.y < -50)
+        {
+            transform.position = new Vector3(38, 1, 6);
+        }
     }
 
     private void FixedUpdate()
@@ -155,5 +169,18 @@ public class PlayerController : MonoBehaviour
         movement.CanPlayerMove(canMove);
     }
 
+    private void OnEnterBuildMode(InputAction.CallbackContext obj)
+    {
+        inBuildMode = !inBuildMode;
+        Debug.Log($"In BuildMode {inBuildMode}");
+    }
+
+    private void OnTowerSelection(InputAction.CallbackContext obj)
+    {
+        if (inBuildMode)
+        {
+            selectedTowerIndex = Mathf.RoundToInt(obj.ReadValue<float>()) - 1;
+        }
+    }
 
 }
