@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/TowerManager/Editor/Views/TowerManager.uss?fileID=7433441132597879392&amp;guid=e4c85c94a435d1a4dbac6f188a24ee98&amp;type=3#TowerManager" />
     <ui:VisualElement name="Tower" style="flex-direction: row;">
         <ui:IMGUIContainer name="IconImage" style="width: 60px; height: 60px; flex-grow: 0; padding-right: 0; background-image: resource(&apos;UI/3DTowerIcon&apos;); -unity-background-scale-mode: scale-to-fit; padding-left: 0; padding-top: 0; padding-bottom: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
         <ui:VisualElement name="Tower" style="flex-grow: 1;">
@@ -25,6 +26,9 @@
             <ui:Button text="►" display-tooltip-when-elided="true" enable-rich-text="true" name="NextLevel" class="buttonPadding" style="-unity-text-align: middle-center;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="LevelFields" style="margin-bottom: 10px; border-left-color: rgba(32, 32, 32, 255); border-right-color: rgba(95, 95, 95, 255); border-top-color: rgba(32, 32, 32, 255); border-bottom-color: rgba(95, 95, 95, 255); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; margin-left: 10px; margin-right: 10px; margin-top: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;" />
     <ui:Button text="◄" display-tooltip-when-elided="true" name="BackButton" style="position: absolute; font-size: 16px; margin-top: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px; padding-left: 6px; padding-right: 7px; padding-top: 1px; padding-bottom: 1px; bottom: auto; right: 0; top: 22px;" />
+    <ui:VisualElement name="Fields" style="flex-direction: row; flex-grow: 1;">
+        <ui:VisualElement name="LevelFields_Fade" class="LevelList LevelList_FadeIn" />
+        <ui:VisualElement name="LevelFields" class="LevelList" style="background-color: rgba(107, 152, 146, 255);" />
+    </ui:VisualElement>
 </ui:UXML>

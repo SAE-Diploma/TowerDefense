@@ -14,6 +14,8 @@ public class TowerManagerViewModel : ViewModelBase
     private List<TowerStats> allStats;
     private Label levelIndexLabel;
     private VisualElement levelStatsContainer;
+    private VisualElement levelFadeInContainer;
+    private VisualElement fieldsContainer;
 
     private int levelIndex;
     public int LevelIndex
@@ -23,11 +25,6 @@ public class TowerManagerViewModel : ViewModelBase
         {
             levelIndex = value;
             levelIndexLabel.text = levelIndex.ToString();
-            if (towerStats.LevelList.Count > 0 )
-            {
-                ShowLevel(towerStats.LevelList[levelIndex - 1]);
-            }
-
         }
     }
 
@@ -42,9 +39,13 @@ public class TowerManagerViewModel : ViewModelBase
         iconImage = root.Q<IMGUIContainer>("IconImage");
         levelIndexLabel = root.Q<Label>("SelectedLevel");
         levelStatsContainer = root.Q<VisualElement>("LevelFields");
+        levelStatsContainer?.RegisterCallback<TransitionEndEvent>(ev => OnLevelStatsContainerTransitionEnd());
+
+        levelFadeInContainer = root.Q<VisualElement>("LevelFields_Fade");
+        fieldsContainer = root.Q<VisualElement>("Fields");
 
         // Get guids of all TowerStat scripts
-        allStats = new List<TowerStats>(); 
+        allStats = new List<TowerStats>();
         string[] allStatsGUIDs = AssetDatabase.FindAssets("t:TowerStats");
         foreach (string guid in allStatsGUIDs)
         {
@@ -54,6 +55,7 @@ public class TowerManagerViewModel : ViewModelBase
         BindFields(towerStats, allStatsGUIDs);
         BindButtons();
         LevelIndex = 1;
+        ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
     }
 
     public override void OnGUI()
@@ -107,7 +109,17 @@ public class TowerManagerViewModel : ViewModelBase
 
     }
 
-    private void ShowLevel(TowerLevel level)
+    private List<string> GetAllTypeOptions(string[] guids)
+    {
+        List<string> types = new List<string>();
+        foreach (string guid in guids)
+        {
+            types.Add(Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(guid)));
+        }
+        return types;
+    }
+
+    private void ShowLevel(VisualElement container, TowerLevel level)
     {
         SerializedObject so = new SerializedObject(level);
 
@@ -120,7 +132,7 @@ public class TowerManagerViewModel : ViewModelBase
         allFields.AddRange(fields);
 
         // add Floatfield and bind it to the SerializedObject
-        levelStatsContainer.Clear();
+        container.Clear();
         for (int i = 0; i < allFields.Count; i++)
         {
             FloatField newField = new FloatField();
@@ -128,8 +140,10 @@ public class TowerManagerViewModel : ViewModelBase
             newField.name = $"LevelField_{i}";
             newField.label = allFields[i].Name;
             newField.value = (float)allFields[i].GetValue(level);
-            levelStatsContainer.Add(newField);
+            newField.AddToClassList("Field");
+            container.Add(newField);
         }
+        fieldsContainer.style.minHeight = new StyleLength(allFields.Count * 28f + 20f);
     }
 
     private void BindButtons()
@@ -140,14 +154,51 @@ public class TowerManagerViewModel : ViewModelBase
         // NextLevel
         root.Q<Button>("NextLevel").clicked += () =>
         {
-            if (levelIndex < towerStats.LevelList.Count) LevelIndex++;
+            if (levelIndex < towerStats.LevelList.Count)
+            {
+                LevelIndex++;
+                NextLevel();
+
+            }
         };
 
         // Previous Level
         root.Q<Button>("PreviousLevel").clicked += () =>
         {
-            if (levelIndex > 1) LevelIndex--;
+            if (levelIndex > 1)
+            {
+                LevelIndex--;
+                PreviousLevel();
+            }
         };
+    }
+
+    #region EventHandlers
+
+    private void OnLevelStatsContainerTransitionEnd()
+    {
+        // need to set transitionspeed to 0 temporarily
+        levelFadeInContainer.RemoveFromClassList("LevelList");
+        levelFadeInContainer.AddToClassList("LevelList_FadeIn");
+        levelFadeInContainer.AddToClassList("LevelList");
+    }
+
+    #endregion
+
+    #region Button Functions
+
+    private void NextLevel()
+    {
+        ShowLevel(levelFadeInContainer, towerStats.LevelList[levelIndex - 1]);
+        levelStatsContainer.AddToClassList("LevelList_FadeOut");
+        levelFadeInContainer.RemoveFromClassList("LevelList_FadeIn");
+    }
+
+    private void PreviousLevel()
+    {
+        ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
+        levelStatsContainer.RemoveFromClassList("LevelList_FadeOut");
+        levelFadeInContainer.AddToClassList("LevelList_FadeIn");
     }
 
     private void OnBackButton()
@@ -155,14 +206,6 @@ public class TowerManagerViewModel : ViewModelBase
         manager.CurrentViewModel = new TowerListViewModel(manager, root);
     }
 
-    private List<string> GetAllTypeOptions(string[] guids)
-    {
-        List<string> types = new List<string>();
-        foreach (string guid in guids)
-        {
-            types.Add(Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(guid)));
-        }
-        return types;
-    }
+    #endregion
 
 }

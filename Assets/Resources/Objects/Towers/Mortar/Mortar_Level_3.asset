@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3127a51b4679994ea102363bc0b2afa, type: 3}
-  m_Name: SMART_Level_2
+  m_Script: {fileID: 11500000, guid: f1a60355899ebb94883c11b8e113328c, type: 3}
+  m_Name: Mortar_Level_3
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 25
   attackSpeed: 0
   range: 0
   projectileSpeed: 0
   rotationSpeed: 0
-  maxRicochets: 0
-  damageReduction: 0
+  explosionRadius: 0
+  explosionDamage: 0

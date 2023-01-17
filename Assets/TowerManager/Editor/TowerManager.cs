@@ -43,7 +43,7 @@ public class TowerManager : EditorWindow
 
     private void OnGUI()
     {
-        CurrentViewModel.OnGUI();
+        if (CurrentViewModel != null) CurrentViewModel.OnGUI();
     }
 
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MortarStats
   m_EditorClassIdentifier: 
   towerName: Mortar
-  levelType: 0
+  levelType: {fileID: 0}
   icon: {fileID: 21300000, guid: 712b58eb9f858ff499418373dfb6a11d, type: 3}
   isUnlocked: 1
   unlockCost: 500
@@ -23,3 +23,4 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: 718af46507105114e8226fe1b08e747e, type: 2}
   - {fileID: 11400000, guid: 247a9f747830de94e80fd5542b96ffdc, type: 2}
+  - {fileID: 11400000, guid: 4f1515ce7b428fb478f13cdc113319ba, type: 2}

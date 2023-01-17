@@ -8,6 +8,6 @@ public class SMARTLevel : TowerLevel
     [SerializeField] float maxRicochets;
     public float MaxRicochets => maxRicochets;
 
-    [SerializeField] int damageReduction;
-    public int DamageReduction => damageReduction;
+    [SerializeField] float damageReduction;
+    public float DamageReduction => damageReduction;
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3127a51b4679994ea102363bc0b2afa, type: 3}
   m_Name: SMART_Level_1
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 1
   attackSpeed: 0
   range: 0
   projectileSpeed: 0
