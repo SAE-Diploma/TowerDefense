@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a60355899ebb94883c11b8e113328c, type: 3}
   m_Name: Mortar_Level_2
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 25
   attackSpeed: 0
   range: 0
   projectileSpeed: 0

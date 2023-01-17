@@ -25,6 +25,6 @@
             <ui:Button text="►" display-tooltip-when-elided="true" enable-rich-text="true" name="NextLevel" class="buttonPadding" style="-unity-text-align: middle-center;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="LevelFields" style="margin-bottom: 40px;" />
+    <ui:VisualElement name="LevelFields" style="margin-bottom: 10px; border-left-color: rgba(32, 32, 32, 255); border-right-color: rgba(95, 95, 95, 255); border-top-color: rgba(32, 32, 32, 255); border-bottom-color: rgba(95, 95, 95, 255); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; margin-left: 10px; margin-right: 10px; margin-top: 10px; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;" />
     <ui:Button text="◄" display-tooltip-when-elided="true" name="BackButton" style="position: absolute; font-size: 16px; margin-top: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px; padding-left: 6px; padding-right: 7px; padding-top: 1px; padding-bottom: 1px; bottom: auto; right: 0; top: 22px;" />
 </ui:UXML>
