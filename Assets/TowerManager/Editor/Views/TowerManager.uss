@@ -1,0 +1,37 @@
+.Label {
+    padding-bottom: 1px;
+    padding-top: 1px;
+    font-size: 12px;
+}
+
+.buttonPadding {
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 22px;
+}
+
+.ListItem {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.ListItem:hover {
+    cursor: url('project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/Touch@4x.png?fileID=2800000&guid=6e9283a12f5b74afbba696cbb82f5e7f&type=3#Touch@4x');
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.Invisible {
+}
