@@ -14,7 +14,8 @@ public class TowerManagerViewModel : ViewModelBase
     private List<TowerStats> allStats;
     private Label levelIndexLabel;
     private VisualElement levelStatsContainer;
-    private VisualElement levelFadeInContainer;
+    private VisualElement levelRightContainer;
+    private VisualElement levelLeftContainer;
     private VisualElement fieldsContainer;
 
     private int levelIndex;
@@ -28,10 +29,17 @@ public class TowerManagerViewModel : ViewModelBase
         }
     }
 
+    private List<TimeValue> timeValue;
+    private TimeValue standardTimeValue;
+    private TimeValue instantTimeValue;
+
     public TowerManagerViewModel(TowerManager manager, VisualElement root, TowerStats towerStats) : base(manager, root)
     {
         this.towerStats = towerStats;
         this.viewName = "TowerManager";
+        timeValue = new List<TimeValue>();
+        instantTimeValue = new TimeValue() { value = 0, unit = TimeUnit.Millisecond };
+        standardTimeValue = new TimeValue() { value = 300, unit = TimeUnit.Millisecond };
     }
 
     public override void AfterShow()
@@ -41,7 +49,12 @@ public class TowerManagerViewModel : ViewModelBase
         levelStatsContainer = root.Q<VisualElement>("LevelFields");
         levelStatsContainer?.RegisterCallback<TransitionEndEvent>(ev => OnLevelStatsContainerTransitionEnd());
 
-        levelFadeInContainer = root.Q<VisualElement>("LevelFields_Fade");
+        levelRightContainer = root.Q<VisualElement>("LevelFields_Right");
+        levelRightContainer?.RegisterCallback<TransitionEndEvent>(ev => OnLevelFadeContainerTransitionEnd());
+
+        levelLeftContainer = root.Q<VisualElement>("LevelFields_Left");
+        levelLeftContainer?.RegisterCallback<TransitionEndEvent>(ev => OnlevelLeftContainerTransitionEnd());
+
         fieldsContainer = root.Q<VisualElement>("Fields");
 
         // Get guids of all TowerStat scripts
@@ -57,6 +70,8 @@ public class TowerManagerViewModel : ViewModelBase
         LevelIndex = 1;
         ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
     }
+
+    
 
     public override void OnGUI()
     {
@@ -173,14 +188,34 @@ public class TowerManagerViewModel : ViewModelBase
         };
     }
 
+    private List<TimeValue> getTransitionDration(TransitionType type)
+    {
+        timeValue.Clear();
+        if (type == TransitionType.instant) timeValue.Add(instantTimeValue);
+        else timeValue.Add(standardTimeValue);
+        return timeValue;
+    }
+
     #region EventHandlers
 
     private void OnLevelStatsContainerTransitionEnd()
     {
-        // need to set transitionspeed to 0 temporarily
-        levelFadeInContainer.RemoveFromClassList("LevelList");
-        levelFadeInContainer.AddToClassList("LevelList_FadeIn");
-        levelFadeInContainer.AddToClassList("LevelList");
+        levelStatsContainer.style.transitionDuration = getTransitionDration(TransitionType.instant);
+        levelStatsContainer.RemoveFromClassList("LevelList_FadeOut");
+        levelStatsContainer.RemoveFromClassList("LevelList_FadeIn");
+        ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
+    }
+
+    private void OnLevelFadeContainerTransitionEnd()
+    {
+        levelRightContainer.style.transitionDuration = getTransitionDration(TransitionType.instant);
+        levelRightContainer.AddToClassList("LevelList_FadeIn");
+    }
+
+    private void OnlevelLeftContainerTransitionEnd()
+    {
+        levelLeftContainer.style.transitionDuration = getTransitionDration(TransitionType.instant);
+        levelLeftContainer.AddToClassList("LevelList_FadeOut");
     }
 
     #endregion
@@ -189,16 +224,25 @@ public class TowerManagerViewModel : ViewModelBase
 
     private void NextLevel()
     {
-        ShowLevel(levelFadeInContainer, towerStats.LevelList[levelIndex - 1]);
+        ShowLevel(levelRightContainer, towerStats.LevelList[levelIndex - 1]);
+
+        levelStatsContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
         levelStatsContainer.AddToClassList("LevelList_FadeOut");
-        levelFadeInContainer.RemoveFromClassList("LevelList_FadeIn");
+
+        levelRightContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
+        levelRightContainer.RemoveFromClassList("LevelList_FadeIn");
+
     }
 
     private void PreviousLevel()
     {
-        ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
-        levelStatsContainer.RemoveFromClassList("LevelList_FadeOut");
-        levelFadeInContainer.AddToClassList("LevelList_FadeIn");
+        ShowLevel(levelLeftContainer, towerStats.LevelList[levelIndex - 1]);
+        
+        levelStatsContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
+        levelStatsContainer.AddToClassList("LevelList_FadeIn");
+
+        levelLeftContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
+        levelLeftContainer.RemoveFromClassList("LevelList_FadeOut");
     }
 
     private void OnBackButton()
@@ -208,4 +252,11 @@ public class TowerManagerViewModel : ViewModelBase
 
     #endregion
 
+}
+
+
+public enum TransitionType
+{
+    standard,
+    instant
 }

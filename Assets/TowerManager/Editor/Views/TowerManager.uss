@@ -37,7 +37,7 @@
 }
 
 .LevelList {
-    transition-duration: 250ms;
+    transition-duration: 1000ms;
     transition-property: all;
     transition-timing-function: ease-in-out;
     translate: 0 0;
