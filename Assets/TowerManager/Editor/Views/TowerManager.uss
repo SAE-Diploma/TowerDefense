@@ -70,11 +70,11 @@
 }
 
 .LevelList_FadeOut {
-    translate: -120% 0;
+    translate: -110% 0;
 }
 
 .LevelList_FadeIn {
-    translate: 120% 0;
+    translate: 110% 0;
 }
 
 .Field {
