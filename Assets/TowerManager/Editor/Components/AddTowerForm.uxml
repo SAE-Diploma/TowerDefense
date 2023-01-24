@@ -1,7 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement>
         <ui:TextField picking-mode="Ignore" label="Tower Name*" name="NewName" style="flex-grow: 0; min-height: 20px; height: 20px;" />
-        <ui:DropdownField label="LevelType*" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="LevelType" />
+        <ui:VisualElement style="flex-direction: row;">
+            <ui:DropdownField label="LevelType*" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="LevelType" style="flex-grow: 1;" />
+            <ui:Button display-tooltip-when-elided="true" tooltip="Refresh Options" name="RefreshTypesBtn" style="width: 22px; padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; background-color: rgba(88, 88, 88, 0);">
+                <ui:IMGUIContainer style="background-image: url(&apos;project://database/Assets/TowerManager/Editor/Assets/arrows-rotate-solid_64.jpg?fileID=2800000&amp;guid=84e25e1b5a96b134b93bb4af05b3c844&amp;type=3#arrows-rotate-solid_64&apos;); flex-grow: 1; -unity-background-image-tint-color: rgb(196, 196, 196);" />
+            </ui:Button>
+        </ui:VisualElement>
         <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="NewIcon" />
         <ui:VisualElement style="flex-direction: row-reverse; flex-grow: 0;">
             <ui:Button text="Canel" display-tooltip-when-elided="true" name="CancelBtn" style="height: 20px; min-height: 20px;" />

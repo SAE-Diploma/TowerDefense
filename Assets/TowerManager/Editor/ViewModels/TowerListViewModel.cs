@@ -17,6 +17,7 @@ public class TowerListViewModel : ViewModelBase
     private List<Type> levelTypes;
     private ListView listView;
     private VisualElement addForm;
+    private DropdownField typesDropDown;
 
     public TowerListViewModel(TowerManager manager, VisualElement root) : base(manager, root)
     {
@@ -87,10 +88,17 @@ public class TowerListViewModel : ViewModelBase
         addForm.Add(nameForm.CloneTree());
         addForm.Q<Button>("CancelBtn").clicked += OnCancel;
         addForm.Q<Button>("NewBtn").clicked += OnCreate;
+        addForm.Q<Button>("RefreshTypesBtn").clicked += OnRefreshTypes;
 
         // Setting type dropdown
         levelTypes = GetAllLevelTypes();
-        addForm.Q<DropdownField>("LevelType").choices = GetLevelNames(levelTypes);
+        SetLevelTypeOptions();
+    }
+
+    private void SetLevelTypeOptions()
+    {
+        if (typesDropDown == null) typesDropDown = addForm.Q<DropdownField>("LevelType");
+        typesDropDown.choices = GetLevelNames(levelTypes);
     }
 
 
@@ -159,6 +167,7 @@ public class TowerListViewModel : ViewModelBase
         RebuildListView();
     }
 
+    // NameForm Event Handlers
     private void OnCreate()
     {
         TextField nameField = addForm.Q<TextField>("NewName");
@@ -200,6 +209,11 @@ public class TowerListViewModel : ViewModelBase
         nameField.RemoveFromClassList("TextFieldError");
         DropdownField typeDropdown = root.Q<DropdownField>("LevelType");
         typeDropdown.index = -1;
+    }
+
+    private void OnRefreshTypes()
+    {
+        SetLevelTypeOptions();
     }
 
     #endregion

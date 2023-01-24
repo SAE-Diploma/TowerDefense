@@ -126,12 +126,6 @@ public class TowerManagerViewModel : ViewModelBase
         blueprintPrefab.BindProperty(so.FindProperty("towerBlueprintPrefab"));
         blueprintPrefab.value = towerStats.TowerBlueprintPrefab;
 
-        DropdownField typeDropDown = root.Q<DropdownField>("TowerType");
-        //typeDropDown.BindProperty(so.FindProperty("levelType"));
-        typeDropDown.choices = GetAllTypeOptions(allStatsGUIDs);
-        typeDropDown.index = 0;
-
-
         LevelIndex = 1;
 
     }

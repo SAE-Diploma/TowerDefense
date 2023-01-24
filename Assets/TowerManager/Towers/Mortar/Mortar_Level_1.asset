@@ -15,7 +15,7 @@ MonoBehaviour:
   damage: 12
   attackSpeed: 1
   range: 15
-  projectileSpeed: 5
+  projectileSpeed: 5.15
   rotationSpeed: 1
   explosionRadius: 5
   explosionDamage: 1

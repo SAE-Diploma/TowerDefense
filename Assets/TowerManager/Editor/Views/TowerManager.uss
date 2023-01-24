@@ -18,11 +18,13 @@
     overflow: hidden;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
+    min-height: 95px;
 }
 
 .NameFormHide {
     height: 0;
     overflow: hidden;
+    min-height: 0;
 }
 
 .button {
