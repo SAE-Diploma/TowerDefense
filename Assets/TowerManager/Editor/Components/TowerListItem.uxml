@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/TowerManager/Editor/Views/TowerManager.uss?fileID=7433441132597879392&amp;guid=e4c85c94a435d1a4dbac6f188a24ee98&amp;type=3#TowerManager" />
-    <ui:VisualElement focusable="true" tabindex="0" style="flex-direction: row; margin-top: 0; margin-bottom: 0; border-bottom-color: rgb(40, 40, 40); border-bottom-width: 1px; border-top-width: 0; border-top-color: rgb(40, 40, 40); padding-bottom: 5px; padding-top: 5px; margin-left: 0; margin-right: 0; height: 60px; align-items: center; padding-left: 5px;">
+    <ui:VisualElement focusable="true" tabindex="0" style="flex-direction: row; margin-top: 0; margin-bottom: 0; border-bottom-color: rgb(40, 40, 40); border-bottom-width: 1px; border-top-width: 0; border-top-color: rgb(40, 40, 40); padding-bottom: 5px; padding-top: 5px; margin-left: 0; margin-right: 0; height: 60px; align-items: center; padding-left: 5px; min-height: 60px; position: relative; flex-grow: 0; flex-shrink: 1;">
         <uie:IntegerField label="Int Field" value="42" name="Index" class="Invisible" style="display: none; visibility: hidden;" />
         <ui:IMGUIContainer name="Icon" style="width: 50px; height: 50px; margin-right: 10px;" />
-        <ui:VisualElement focusable="true" style="flex-grow: 1;">
+        <ui:VisualElement focusable="true" style="flex-grow: 1; min-height: 60px; justify-content: center;">
             <ui:Label text="Name" display-tooltip-when-elided="true" name="Name" class="Label" />
             <ui:Label text="LevelType" display-tooltip-when-elided="true" name="Type" class="Label" />
         </ui:VisualElement>

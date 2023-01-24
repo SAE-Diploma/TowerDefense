@@ -8,7 +8,7 @@ using UnityEngine;
 public class TowerStats : ScriptableObject
 {
     [SerializeField] string towerName;
-    public string TowerName => towerName;
+    public string TowerName { get { return towerName; } set { towerName = value; } }
 
     [SerializeField] public TowerLevel levelType;
     public TowerLevel LevelType => levelType;

@@ -33,10 +33,13 @@ public class TowerManagerViewModel : ViewModelBase
     private TimeValue standardTimeValue;
     private TimeValue instantTimeValue;
 
-    public TowerManagerViewModel(TowerManager manager, VisualElement root, TowerStats towerStats) : base(manager, root)
+    private bool blank;
+
+    public TowerManagerViewModel(TowerManager manager, VisualElement root, TowerStats towerStats,bool blank = false) : base(manager, root)
     {
         this.towerStats = towerStats;
         this.viewName = "TowerManager";
+        this.blank = blank;
         timeValue = new List<TimeValue>();
         instantTimeValue = new TimeValue() { value = 0, unit = TimeUnit.Millisecond };
         standardTimeValue = new TimeValue() { value = 300, unit = TimeUnit.Millisecond };
@@ -44,6 +47,12 @@ public class TowerManagerViewModel : ViewModelBase
 
     public override void AfterShow()
     {
+        // show/hide elements in blank mode
+        if (blank)
+        {
+            root.Q<Button>("SaveBtn").style.visibility = Visibility.Visible;
+        }
+
         iconImage = root.Q<IMGUIContainer>("IconImage");
         levelIndexLabel = root.Q<Label>("SelectedLevel");
         levelStatsContainer = root.Q<VisualElement>("LevelFields");

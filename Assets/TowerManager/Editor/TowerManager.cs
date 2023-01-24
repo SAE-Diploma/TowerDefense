@@ -11,6 +11,7 @@ public class TowerManager : EditorWindow
 {
     public static readonly string ViewsPath = "Assets/TowerManager/Editor/Views";
     public static readonly string ComponentsPath = "Assets/TowerManager/Editor/Components";
+    public static readonly string TowersPath = "Assets/TowerManager/Towers";
 
 
     private ViewModelBase currentViewModel;

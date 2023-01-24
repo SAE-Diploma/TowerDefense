@@ -1,13 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/TowerManager/Editor/Views/TowerManager.uss?fileID=7433441132597879392&amp;guid=e4c85c94a435d1a4dbac6f188a24ee98&amp;type=3#TowerManager" />
-    <ui:VisualElement name="Tower" style="flex-direction: row;">
+    <ui:VisualElement name="Tower" class="container" style="flex-direction: row;">
         <ui:IMGUIContainer name="IconImage" style="width: 60px; height: 60px; flex-grow: 0; padding-right: 0; background-image: resource(&apos;UI/3DTowerIcon&apos;); -unity-background-scale-mode: scale-to-fit; padding-left: 0; padding-top: 0; padding-bottom: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
         <ui:VisualElement name="Tower" style="flex-grow: 1;">
             <ui:TextField picking-mode="Ignore" label="Name" password="false" name="TowerNameOld" readonly="true" style="display: none; visibility: hidden;" />
             <ui:Label text="TowerManager" name="TowerName" style="-unity-text-align: middle-left; font-size: 28px; -unity-font-style: bold; margin-bottom: 10px; margin-top: 10px; flex-grow: 1; justify-content: center; height: 60px; align-items: flex-start; margin-left: 10px;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="TowerStats">
+    <ui:VisualElement name="TowerStats" class="container">
         <ui:DropdownField label="Type" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="TowerType" style="visibility: hidden; display: none;" />
         <ui:Toggle label="IsUnlocked" name="isUnlocked" />
         <uie:IntegerField label="UnlockCost" value="0" name="UnlockCost" />
@@ -16,7 +16,7 @@
         <uie:ObjectField label="Prefab" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="false" name="Prefab" />
         <uie:ObjectField label="Blueprint Prefab" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="BlueprintPrefab" />
     </ui:VisualElement>
-    <ui:VisualElement name="LevelSelector" style="border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; flex-direction: row; padding-right: 4px; padding-left: 4px; height: auto;">
+    <ui:VisualElement name="LevelSelector" class="container" style="border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; flex-direction: row; height: auto;">
         <ui:VisualElement style="width: 150px; justify-content: center;">
             <ui:Label text="Level" display-tooltip-when-elided="true" class="Label" style="color: rgb(196, 196, 196);" />
         </ui:VisualElement>
@@ -27,9 +27,12 @@
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:Button text="◄" display-tooltip-when-elided="true" name="BackButton" style="position: absolute; font-size: 16px; margin-top: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px; padding-left: 6px; padding-right: 7px; padding-top: 1px; padding-bottom: 1px; bottom: auto; right: 0; top: 22px;" />
-    <ui:VisualElement name="Fields" style="flex-direction: row; flex-grow: 1;">
+    <ui:VisualElement name="Fields" class="container" style="flex-direction: row; flex-grow: 0;">
         <ui:VisualElement name="LevelFields_Right" class="LevelList LevelList_FadeIn" />
         <ui:VisualElement name="LevelFields" class="LevelList" />
         <ui:VisualElement name="LevelFields_Left" class="LevelList LevelList_FadeOut" />
+    </ui:VisualElement>
+    <ui:VisualElement class="container" style="flex-direction: row-reverse; margin-top: 5px;">
+        <ui:Button text="Save" display-tooltip-when-elided="true" name="SaveBtn" style="width: 100px; padding-top: 6px; padding-bottom: 6px; visibility: hidden;" />
     </ui:VisualElement>
 </ui:UXML>
