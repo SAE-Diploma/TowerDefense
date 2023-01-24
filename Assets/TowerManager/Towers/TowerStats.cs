@@ -10,8 +10,8 @@ public class TowerStats : ScriptableObject
     [SerializeField] string towerName;
     public string TowerName { get { return towerName; } set { towerName = value; } }
 
-    [SerializeField] public TowerLevel levelType;
-    public TowerLevel LevelType => levelType;
+    [SerializeField] public Type levelType;
+    public Type LevelType { get { return levelType; } set { levelType = value; } }
 
     [SerializeField] Sprite icon;
     public Sprite Icon => icon;
@@ -32,5 +32,5 @@ public class TowerStats : ScriptableObject
     public GameObject TowerBlueprintPrefab => towerBlueprintPrefab;
 
     [SerializeField] List<TowerLevel> levelList;
-    public List<TowerLevel> LevelList => levelList;
+    public List<TowerLevel> LevelList { get { return levelList; } set { levelList = value; } }
 }

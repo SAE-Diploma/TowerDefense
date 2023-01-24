@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: MyTowerStats
   m_EditorClassIdentifier: 
   towerName: MyTower
-  levelType: {fileID: 0}
   icon: {fileID: 0}
   isUnlocked: 0
   unlockCost: 0
   buildCost: 0
   towerPrefab: {fileID: 0}
   towerBlueprintPrefab: {fileID: 0}
-  levelList: []
+  levelList:
+  - {fileID: 11400000, guid: 22de6514f0c10514982ad6743e3fb85d, type: 2}

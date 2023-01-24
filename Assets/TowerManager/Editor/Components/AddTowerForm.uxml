@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement>
+        <ui:TextField picking-mode="Ignore" label="Tower Name*" name="NewName" style="flex-grow: 0; min-height: 20px; height: 20px;" />
+        <ui:DropdownField label="LevelType*" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="LevelType" />
+        <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="NewIcon" />
+        <ui:VisualElement style="flex-direction: row-reverse; flex-grow: 0;">
+            <ui:Button text="Canel" display-tooltip-when-elided="true" name="CancelBtn" style="height: 20px; min-height: 20px;" />
+            <ui:Button text="Create" display-tooltip-when-elided="true" name="NewBtn" style="height: 20px; min-height: 20px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

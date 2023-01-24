@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <Style src="project://database/Assets/TowerManager/Editor/Views/TowerList.uss?fileID=7433441132597879392&amp;guid=181baa2fb7efc1346b0e16bfc5d775f6&amp;type=3#TowerList" />
     <Style src="project://database/Assets/TowerManager/Editor/Views/TowerManager.uss?fileID=7433441132597879392&amp;guid=e4c85c94a435d1a4dbac6f188a24ee98&amp;type=3#TowerManager" />
     <ui:Label text="Tower Selection" display-tooltip-when-elided="true" style="font-size: 28px; margin-bottom: 0; margin-top: 0; -unity-font-style: bold; -unity-text-align: upper-center; border-bottom-color: rgb(40, 40, 40); border-bottom-width: 1px; padding-bottom: 10px; padding-top: 10px; padding-right: 0; padding-left: 0; margin-left: 0; margin-right: 0;" />
     <ui:VisualElement class="container" style="flex-direction: row; flex-grow: 0; color: rgb(204, 70, 50); min-height: 40px; margin-right: 5px; margin-left: 5px; margin-top: 5px;">
@@ -7,14 +6,7 @@
         <ui:Button text="REMOVE" display-tooltip-when-elided="true" name="RemoveBtn" class="button" />
         <ui:Button text="REFRESH" display-tooltip-when-elided="true" name="RefreshBtn" class="button" />
     </ui:VisualElement>
-    <ui:VisualElement name="AddForm" class="container NameForm">
-        <ui:TextField picking-mode="Ignore" label="New Tower Name" name="NewName" style="flex-grow: 0; min-height: 20px; height: 20px;" />
-        <ui:DropdownField label="Dropdown" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="LevelType" />
-        <ui:VisualElement style="flex-direction: row-reverse; flex-grow: 1;">
-            <ui:Button text="Canel" display-tooltip-when-elided="true" name="CancelBtn" style="height: 20px; min-height: 20px;" />
-            <ui:Button text="Create" display-tooltip-when-elided="true" name="NewBtn" style="height: 20px; min-height: 20px;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
+    <ui:VisualElement name="AddForm" class="container NameForm NameFormHide" />
     <ui:VisualElement name="List" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(40, 40, 40); border-right-color: rgb(40, 40, 40); border-top-color: rgb(40, 40, 40); border-bottom-color: rgb(40, 40, 40); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; overflow: hidden; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-grow: 1; height: auto; display: none;" />
-    <ui:ListView focusable="true" name="ListView" class="container" style="height: auto; flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-left-color: rgb(142, 136, 136); border-right-color: rgb(142, 136, 136); border-top-color: rgb(142, 136, 136); border-bottom-color: rgb(142, 136, 136); margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 0;" />
+    <ui:ListView focusable="true" name="ListView" class="container" style="height: auto; flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-left-color: rgb(142, 136, 136); border-right-color: rgb(142, 136, 136); border-top-color: rgb(142, 136, 136); border-bottom-color: rgb(142, 136, 136); margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 10px;" />
 </ui:UXML>

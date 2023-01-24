@@ -18,6 +18,9 @@ public class TowerManagerViewModel : ViewModelBase
     private VisualElement levelLeftContainer;
     private VisualElement fieldsContainer;
 
+    private Button nextLevelBtn;
+    private Button previousLevelBtn;
+
     private int levelIndex;
     public int LevelIndex
     {
@@ -176,23 +179,35 @@ public class TowerManagerViewModel : ViewModelBase
         root.Q<Button>("BackButton").clicked += OnBackButton;
 
         // NextLevel
-        root.Q<Button>("NextLevel").clicked += () =>
+        nextLevelBtn = root.Q<Button>("NextLevel");
+        nextLevelBtn.clicked += () =>
         {
             if (levelIndex < towerStats.LevelList.Count)
             {
                 LevelIndex++;
                 NextLevel();
+                previousLevelBtn.SetEnabled(true);
+            }
+            else if (levelIndex == towerStats.LevelList.Count - 1)
+            {
 
+                nextLevelBtn.SetEnabled(false);
             }
         };
 
         // Previous Level
-        root.Q<Button>("PreviousLevel").clicked += () =>
+        previousLevelBtn = root.Q<Button>("PreviousLevel");
+        previousLevelBtn.clicked += () =>
         {
             if (levelIndex > 1)
             {
                 LevelIndex--;
                 PreviousLevel();
+                nextLevelBtn.SetEnabled(true);
+            }
+            else if (levelIndex == 0)
+            {
+                previousLevelBtn.SetEnabled(false);
             }
         };
     }

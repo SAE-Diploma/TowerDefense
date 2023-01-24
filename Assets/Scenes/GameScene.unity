@@ -3381,9 +3381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c7aa65ac9513040a5481e2af993c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 1196984516}
-  towerIcon: {fileID: 2001917283}
-  towerCost: {fileID: 1160443596}
 --- !u!1 &115868207
 GameObject:
   m_ObjectHideFlags: 0
@@ -18390,9 +18387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c7aa65ac9513040a5481e2af993c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 1529798621}
-  towerIcon: {fileID: 141433393}
-  towerCost: {fileID: 647447535}
 --- !u!114 &594086390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54633,9 +54627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c7aa65ac9513040a5481e2af993c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 393686710}
-  towerIcon: {fileID: 1901112196}
-  towerCost: {fileID: 1858900121}
 --- !u!114 &1661967206
 MonoBehaviour:
   m_ObjectHideFlags: 0

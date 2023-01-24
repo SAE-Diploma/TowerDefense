@@ -1,8 +1,8 @@
 .TextFieldError {
-    border-left-color: rgba(173, 63, 63, 255);
-    border-right-color: rgba(173, 63, 63, 255);
-    border-top-color: rgba(173, 63, 63, 255);
-    border-bottom-color: rgba(173, 63, 63, 255);
+    border-left-color: rgb(173, 63, 63);
+    border-right-color: rgb(173, 63, 63);
+    border-top-color: rgb(173, 63, 63);
+    border-bottom-color: rgb(173, 63, 63);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -14,7 +14,7 @@
 }
 
 .NameForm {
-    height: 70px;
+    height: 95px;
     overflow: hidden;
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
@@ -73,7 +73,7 @@
     transition-duration: 1000ms;
     transition-property: all;
     transition-timing-function: ease-in-out;
-    translate: 0 0;
+    translate: 0.1% 0;
     border-left-color: rgb(32, 32, 32);
     border-top-color: rgb(32, 32, 32);
     border-right-color: rgb(95, 95, 95);
@@ -122,4 +122,9 @@
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
+}
+
+.NoLeftPadding {
+    padding-left: 0;
+    margin-left: 0;
 }
