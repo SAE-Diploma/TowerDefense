@@ -130,3 +130,9 @@
     padding-left: 0;
     margin-left: 0;
 }
+.RemovingEffect {
+}
+
+.RemovingEffect:hover {
+    background-color: rgba(212, 45, 45, 255);
+}

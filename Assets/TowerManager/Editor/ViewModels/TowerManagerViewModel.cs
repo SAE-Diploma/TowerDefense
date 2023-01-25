@@ -21,14 +21,14 @@ public class TowerManagerViewModel : ViewModelBase
     private Button nextLevelBtn;
     private Button previousLevelBtn;
 
-    private int levelIndex;
-    public int LevelIndex
+    private int _selectedLevel;
+    public int SelectedLevel
     {
-        get { return levelIndex; }
+        get { return _selectedLevel; }
         set
         {
-            levelIndex = value;
-            levelIndexLabel.text = levelIndex.ToString();
+            _selectedLevel = value;
+            levelIndexLabel.text = _selectedLevel.ToString();
         }
     }
 
@@ -38,7 +38,7 @@ public class TowerManagerViewModel : ViewModelBase
 
     private bool blank;
 
-    public TowerManagerViewModel(TowerManager manager, VisualElement root, TowerStats towerStats,bool blank = false) : base(manager, root)
+    public TowerManagerViewModel(TowerManager manager, VisualElement root, TowerStats towerStats, bool blank = false) : base(manager, root)
     {
         this.towerStats = towerStats;
         this.viewName = "TowerManager";
@@ -79,11 +79,9 @@ public class TowerManagerViewModel : ViewModelBase
 
         BindFields(towerStats, allStatsGUIDs);
         BindButtons();
-        LevelIndex = 1;
-        ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
+        SelectedLevel = 1;
+        ShowLevel(levelStatsContainer, towerStats.LevelList[SelectedLevel - 1]);
     }
-
-    
 
     public override void OnGUI()
     {
@@ -101,6 +99,8 @@ public class TowerManagerViewModel : ViewModelBase
 
         Label label = root.Q<Label>("TowerName");
         label.text = towerStats.TowerName;
+
+        root.Q<Label>("TowerType").text = towerStats.LevelType == null ? "null" : towerStats.LevelType.Name;
 
         ObjectField iconField = root.Q<ObjectField>("Icon");
         iconField.BindProperty(so.FindProperty("icon"));
@@ -126,18 +126,8 @@ public class TowerManagerViewModel : ViewModelBase
         blueprintPrefab.BindProperty(so.FindProperty("towerBlueprintPrefab"));
         blueprintPrefab.value = towerStats.TowerBlueprintPrefab;
 
-        LevelIndex = 1;
+        SelectedLevel = 1;
 
-    }
-
-    private List<string> GetAllTypeOptions(string[] guids)
-    {
-        List<string> types = new List<string>();
-        foreach (string guid in guids)
-        {
-            types.Add(Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(guid)));
-        }
-        return types;
     }
 
     private void ShowLevel(VisualElement container, TowerLevel level)
@@ -176,15 +166,14 @@ public class TowerManagerViewModel : ViewModelBase
         nextLevelBtn = root.Q<Button>("NextLevel");
         nextLevelBtn.clicked += () =>
         {
-            if (levelIndex < towerStats.LevelList.Count)
+            if (SelectedLevel < towerStats.LevelList.Count)
             {
-                LevelIndex++;
+                SelectedLevel++;
                 NextLevel();
                 previousLevelBtn.SetEnabled(true);
             }
-            else if (levelIndex == towerStats.LevelList.Count - 1)
+            else if (SelectedLevel == towerStats.LevelList.Count - 1)
             {
-
                 nextLevelBtn.SetEnabled(false);
             }
         };
@@ -193,17 +182,22 @@ public class TowerManagerViewModel : ViewModelBase
         previousLevelBtn = root.Q<Button>("PreviousLevel");
         previousLevelBtn.clicked += () =>
         {
-            if (levelIndex > 1)
+            if (SelectedLevel > 1)
             {
-                LevelIndex--;
+                SelectedLevel--;
                 PreviousLevel();
                 nextLevelBtn.SetEnabled(true);
             }
-            else if (levelIndex == 0)
+            else if (SelectedLevel == 0)
             {
                 previousLevelBtn.SetEnabled(false);
             }
         };
+
+        Button addLevelBtn = root.Q<Button>("AddAfterBtn");
+        addLevelBtn.clicked += OnAddLevel;
+
+        //Button removeLevelBtn = root.Q<Button>("RemoveLevelBtn");
     }
 
     private List<TimeValue> getTransitionDration(TransitionType type)
@@ -216,12 +210,13 @@ public class TowerManagerViewModel : ViewModelBase
 
     #region EventHandlers
 
+    // Transitions
     private void OnLevelStatsContainerTransitionEnd()
     {
         levelStatsContainer.style.transitionDuration = getTransitionDration(TransitionType.instant);
         levelStatsContainer.RemoveFromClassList("LevelList_FadeOut");
         levelStatsContainer.RemoveFromClassList("LevelList_FadeIn");
-        ShowLevel(levelStatsContainer, towerStats.LevelList[levelIndex - 1]);
+        ShowLevel(levelStatsContainer, towerStats.LevelList[SelectedLevel - 1]);
     }
 
     private void OnLevelFadeContainerTransitionEnd()
@@ -242,7 +237,7 @@ public class TowerManagerViewModel : ViewModelBase
 
     private void NextLevel()
     {
-        ShowLevel(levelRightContainer, towerStats.LevelList[levelIndex - 1]);
+        ShowLevel(levelRightContainer, towerStats.LevelList[SelectedLevel - 1]);
 
         levelStatsContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
         levelStatsContainer.AddToClassList("LevelList_FadeOut");
@@ -254,13 +249,45 @@ public class TowerManagerViewModel : ViewModelBase
 
     private void PreviousLevel()
     {
-        ShowLevel(levelLeftContainer, towerStats.LevelList[levelIndex - 1]);
-        
+        ShowLevel(levelLeftContainer, towerStats.LevelList[SelectedLevel - 1]);
+
         levelStatsContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
         levelStatsContainer.AddToClassList("LevelList_FadeIn");
 
         levelLeftContainer.style.transitionDuration = getTransitionDration(TransitionType.standard);
         levelLeftContainer.RemoveFromClassList("LevelList_FadeOut");
+    }
+
+    private void OnAddLevel()
+    {
+        // rename higher levels
+        if (SelectedLevel < towerStats.LevelList.Count)
+        {
+            int diff = towerStats.LevelList.Count - SelectedLevel;
+            Debug.Log($"{diff} Datein müssen umbenannt werden");
+            TowerLevel[] towerLevels = towerStats.LevelList.GetRange(SelectedLevel, diff).ToArray();
+            int counter = 0;
+            for (int i = towerLevels.Length - 1; i >= 0; i--)
+            {
+                // i = 1
+                // levelnumber: 3 (count - counter)
+                int currentIndex = towerStats.LevelList.Count - counter;
+                string p = AssetDatabase.GetAssetPath(towerLevels[i]);
+                AssetDatabase.RenameAsset(p, $"{towerStats.LevelType.Name}_{currentIndex + 1}.asset");
+                counter++;
+            }
+        }
+
+        // copy level
+        string path = AssetDatabase.GetAssetPath(towerStats.LevelList[SelectedLevel - 1]);
+        string oldFileName = Path.GetFileName(path);
+        string newPath = path.Replace(oldFileName, $"{towerStats.LevelType?.Name}_{SelectedLevel + 1}.asset");
+        if (AssetDatabase.CopyAsset(path, newPath))
+        {
+            towerStats.LevelList.Insert(SelectedLevel, AssetDatabase.LoadAssetAtPath<TowerLevel>(newPath));
+        }
+        SelectedLevel++;
+        NextLevel();
     }
 
     private void OnBackButton()

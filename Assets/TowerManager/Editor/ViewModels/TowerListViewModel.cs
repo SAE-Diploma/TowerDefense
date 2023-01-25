@@ -18,6 +18,8 @@ public class TowerListViewModel : ViewModelBase
     private ListView listView;
     private VisualElement addForm;
     private DropdownField typesDropDown;
+    private Button removeBtn;
+    private bool isRemoving = false;
 
     public TowerListViewModel(TowerManager manager, VisualElement root) : base(manager, root)
     {
@@ -31,7 +33,8 @@ public class TowerListViewModel : ViewModelBase
 
         root.Q<Button>("RefreshBtn").clicked += OnRefresh;
         root.Q<Button>("AddBtn").clicked += OnAdd;
-        root.Q<Button>("RemoveBtn").clicked += OnRemove;
+        removeBtn = root.Q<Button>("RemoveBtn");
+        removeBtn.clicked += OnRemove;
 
         // prepare list view
         allTowerStats = GetAllTowerStats();
@@ -133,11 +136,31 @@ public class TowerListViewModel : ViewModelBase
         element.Q<Button>("ClickHandler").clicked += () =>
         {
             int index = element.Q<IntegerField>("Index").value;
-            if (index > 0 && index < allTowerStats.Count - 1)
+            if (isRemoving)
             {
-                manager.CurrentViewModel = new TowerManagerViewModel(manager, root, allTowerStats[index]);
+                RemoveTower(index);
             }
+            else
+            {
+                if (index >= 0 && index < allTowerStats.Count)
+                {
+                    manager.CurrentViewModel = new TowerManagerViewModel(manager, root, allTowerStats[index]);
+                }
+            }
+
+            if (isRemoving)
+            {
+                element.AddToClassList("RemovingEffect");
+                removeBtn.text = "CANCEL";
+            }
+            else
+            {
+                element.RemoveFromClassList("RemovingEffect");
+                removeBtn.text = "REMOVE";
+            }
+
         };
+
     }
     
     private void RebuildListView()
@@ -145,6 +168,15 @@ public class TowerListViewModel : ViewModelBase
         allTowerStats = GetAllTowerStats();
         listView.itemsSource = allTowerStats;
         listView.Rebuild();
+    }
+    private void RemoveTower(int index)
+    {
+        TowerStats stats = allTowerStats[index];
+        Debug.Log($"Removing {stats.TowerName}");
+        string path = TowerManager.TowersPath + "/" + stats.TowerName;
+        if (AssetDatabase.IsValidFolder(path)) AssetDatabase.DeleteAsset(path);
+        isRemoving = false;
+        RebuildListView();
     }
 
     #endregion
@@ -154,6 +186,7 @@ public class TowerListViewModel : ViewModelBase
 
     private void OnRemove()
     {
+        isRemoving = true;
         RebuildListView();
     }
 
