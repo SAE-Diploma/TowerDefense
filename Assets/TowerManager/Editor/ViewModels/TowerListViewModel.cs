@@ -133,8 +133,7 @@ public class TowerListViewModel : ViewModelBase
         element.Q<Button>("ClickHandler").clicked += () =>
         {
             int index = element.Q<IntegerField>("Index").value;
-            Debug.Log(index);
-            if (index >= 0 && index < allTowerStats.Count)
+            if (index > 0 && index < allTowerStats.Count - 1)
             {
                 manager.CurrentViewModel = new TowerManagerViewModel(manager, root, allTowerStats[index]);
             }

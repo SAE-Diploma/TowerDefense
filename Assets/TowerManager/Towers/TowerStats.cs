@@ -10,7 +10,7 @@ public class TowerStats : ScriptableObject
     [SerializeField] string towerName;
     public string TowerName { get { return towerName; } set { towerName = value; } }
 
-    [SerializeField] Type levelType;
+    [SerializeField] public Type levelType;
     public Type LevelType { get { return levelType; } set { levelType = value; } }
 
     [SerializeField] Sprite icon;

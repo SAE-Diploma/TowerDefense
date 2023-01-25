@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a60355899ebb94883c11b8e113328c, type: 3}
-  m_Name: MortarLevel_3
+  m_Script: {fileID: 11500000, guid: b1a02ab052a6bf443be5a2125eccd5c9, type: 3}
+  m_Name: DartTrapLevel_1
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 0
   attackSpeed: 0
   range: 0
   projectileSpeed: 0
   rotationSpeed: 0
-  explosionRadius: 0
-  explosionDamage: 0
+  stacksPerShot: 0
