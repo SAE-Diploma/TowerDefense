@@ -65,7 +65,7 @@
 
 .ListItem:hover {
     cursor: url('project://database/Packages/com.unity.inputsystem/InputSystem/Editor/Icons/Touch@4x.png?fileID=2800000&guid=6e9283a12f5b74afbba696cbb82f5e7f&type=3#Touch@4x');
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .Invisible {
@@ -130,9 +130,12 @@
     padding-left: 0;
     margin-left: 0;
 }
+
 .RemovingEffect {
 }
 
 .RemovingEffect:hover {
-    background-color: rgba(212, 45, 45, 255);
+    background-color: rgb(193, 61, 54);
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
 }

@@ -14,7 +14,7 @@ public class TowerStats : ScriptableObject
     public Type LevelType { get { return levelType; } set { levelType = value; } }
 
     [SerializeField] Sprite icon;
-    public Sprite Icon => icon;
+    public Sprite Icon { get { return icon; } set { icon = value; } }
 
     [SerializeField] bool isUnlocked;
     public bool IsUnlocked => isUnlocked;

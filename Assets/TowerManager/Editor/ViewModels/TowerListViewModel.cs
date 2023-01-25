@@ -194,7 +194,7 @@ public class TowerListViewModel : ViewModelBase
 
     private void OnRemove()
     {
-        isRemoving = true;
+        isRemoving = !isRemoving;
         RebuildListView();
     }
 
@@ -213,6 +213,7 @@ public class TowerListViewModel : ViewModelBase
     {
         TextField nameField = addForm.Q<TextField>("NewName");
         DropdownField typeDropdown = addForm.Q<DropdownField>("LevelType");
+        ObjectField icon = addForm.Q<ObjectField>("NewIcon");
         if (string.IsNullOrEmpty(nameField.value))
         {
             nameField.AddToClassList("TextFieldError");
@@ -235,7 +236,13 @@ public class TowerListViewModel : ViewModelBase
 
             TowerLevel level = AssetDatabase.LoadAssetAtPath<TowerLevel>(levelpath);
 
-            AssetDatabase.CreateAsset(new TowerStats() { TowerName = nameField.value, LevelList = new List<TowerLevel>() { level }, LevelType = type }, $"{TowerManager.TowersPath}/{nameField.value}/{nameField.value}Stats.asset");
+            AssetDatabase.CreateAsset(new TowerStats()
+            {
+                TowerName = nameField.value,
+                LevelList = new List<TowerLevel>() { level },
+                LevelType = type,
+                Icon = (Sprite)icon.value
+            }, $"{TowerManager.TowersPath}/{nameField.value}/{nameField.value}Stats.asset");
 
             addForm.AddToClassList("NameFormHide");
             RebuildListView();
