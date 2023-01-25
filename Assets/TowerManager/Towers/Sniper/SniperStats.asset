@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
   m_Name: SniperStats
   m_EditorClassIdentifier: 
+  towerName: Sniper
+  icon: {fileID: 0}
+  isUnlocked: 0
+  unlockCost: 1500
+  buildCost: 50
+  towerPrefab: {fileID: 0}
+  towerBlueprintPrefab: {fileID: 0}
   levelList:
   - {fileID: 11400000, guid: cec2e3ef44a9a8745b19c58b9e8a345e, type: 2}
   - {fileID: 11400000, guid: 3c69b120585b74242bddeec83df8cb56, type: 2}
-  buildCost: 50
-  unlockCost: 1500

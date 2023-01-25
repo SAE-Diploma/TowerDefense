@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
   m_Name: FlamethrowerStats
   m_EditorClassIdentifier: 
+  towerName: Flamethrower
+  icon: {fileID: 0}
+  isUnlocked: 0
+  unlockCost: 750
+  buildCost: 40
+  towerPrefab: {fileID: 0}
+  towerBlueprintPrefab: {fileID: 0}
   levelList:
   - {fileID: 11400000, guid: ac6a44ae945bcae4e89ee9a9e448cf4a, type: 2}
   - {fileID: 11400000, guid: 68cd02d8daa7dbb44b97e6311ba32514, type: 2}
-  buildCost: 40
-  unlockCost: 750

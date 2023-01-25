@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
   m_Name: StandardStats
   m_EditorClassIdentifier: 
+  towerName: Standard
+  icon: {fileID: 0}
+  isUnlocked: 1
+  unlockCost: 100
+  buildCost: 25
+  towerPrefab: {fileID: 6659852332058942141, guid: 451add44248964c44884d1de8a8ca36b, type: 3}
+  towerBlueprintPrefab: {fileID: 1131783226813674370, guid: dfaa561bea861fe4397cf9b3efa29317, type: 3}
   levelList:
   - {fileID: 11400000, guid: d94462038340f6a4194e73f4d833a78b, type: 2}
   - {fileID: 11400000, guid: 6aa12fd9d11c2144ca886c457763acba, type: 2}
-  buildCost: 25
-  unlockCost: 100
-  isUnlocked: 1
-  towerPrefab: {fileID: 6659852332058942141, guid: 451add44248964c44884d1de8a8ca36b, type: 3}
-  towerBlueprintPrefab: {fileID: 1131783226813674370, guid: dfaa561bea861fe4397cf9b3efa29317, type: 3}

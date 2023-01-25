@@ -147,34 +147,42 @@ public class TowerListViewModel : ViewModelBase
                     manager.CurrentViewModel = new TowerManagerViewModel(manager, root, allTowerStats[index]);
                 }
             }
-
-            if (isRemoving)
-            {
-                element.AddToClassList("RemovingEffect");
-                removeBtn.text = "CANCEL";
-            }
-            else
-            {
-                element.RemoveFromClassList("RemovingEffect");
-                removeBtn.text = "REMOVE";
-            }
-
         };
 
+        if (isRemoving)
+        {
+            element.AddToClassList("RemovingEffect");
+            removeBtn.text = "CANCEL";
+        }
+        else
+        {
+            element.RemoveFromClassList("RemovingEffect");
+            removeBtn.text = "REMOVE";
+        }
+
+
     }
-    
+
     private void RebuildListView()
     {
         allTowerStats = GetAllTowerStats();
         listView.itemsSource = allTowerStats;
         listView.Rebuild();
     }
+
     private void RemoveTower(int index)
     {
         TowerStats stats = allTowerStats[index];
-        Debug.Log($"Removing {stats.TowerName}");
         string path = TowerManager.TowersPath + "/" + stats.TowerName;
-        if (AssetDatabase.IsValidFolder(path)) AssetDatabase.DeleteAsset(path);
+        if (AssetDatabase.IsValidFolder(path) && !string.IsNullOrEmpty(stats.TowerName))
+        {
+            Debug.Log($"Removing {path}");
+            AssetDatabase.DeleteAsset(path);
+        }
+        else
+        {
+            Debug.Log($"Cant remove that");
+        }
         isRemoving = false;
         RebuildListView();
     }

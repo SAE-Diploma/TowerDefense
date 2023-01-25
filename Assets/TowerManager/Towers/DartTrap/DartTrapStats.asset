@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
   m_Name: DartTrapStats
   m_EditorClassIdentifier: 
+  towerName: DartTrap
+  icon: {fileID: 0}
+  isUnlocked: 0
+  unlockCost: 40
+  buildCost: 750
+  towerPrefab: {fileID: 0}
+  towerBlueprintPrefab: {fileID: 0}
   levelList:
   - {fileID: 11400000, guid: 3ab3b40c6753a324b92a8b78ddec484f, type: 2}
   - {fileID: 11400000, guid: da7ac05484e3ce84d9f8deb5b2963f7c, type: 2}
-  buildCost: 750
-  unlockCost: 40

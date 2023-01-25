@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957f2809c63d58c4ba7d8d10c68f0041, type: 3}
   m_Name: SnowCanonStats
   m_EditorClassIdentifier: 
+  towerName: SnowCanon
+  icon: {fileID: 0}
+  isUnlocked: 0
+  unlockCost: 50
+  buildCost: 900
+  towerPrefab: {fileID: 0}
+  towerBlueprintPrefab: {fileID: 0}
   levelList:
   - {fileID: 11400000, guid: 6236d252b34fdcb49b6786062f270398, type: 2}
   - {fileID: 11400000, guid: 6172a3c6588b30a42898c3233489b289, type: 2}
-  buildCost: 900
-  unlockCost: 50
