@@ -16,16 +16,16 @@ public abstract class ViewModelBase
         this.root = root;
     }
 
-    public virtual void Show() 
+    public virtual void Build() 
     {
         VisualTreeAsset asset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>($"{TowerManager.ViewsPath}/{viewName}.uxml");
         if (asset != null)
         {
             root.Clear();
             root.Add(asset.Instantiate());
-            AfterShow();
+            Show();
         }
     }
-    public virtual void AfterShow() { }
+    public virtual void Show() { }
     public virtual void OnGUI() { }
 }

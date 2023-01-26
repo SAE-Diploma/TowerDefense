@@ -15,6 +15,6 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   range: 0
-  projectileSpeed: 0
-  rotationSpeed: 0
-  stacksPerShot: 0
+  projectileSpeed: 0.3
+  rotationSpeed: 0.42
+  stacksPerShot: 0.46

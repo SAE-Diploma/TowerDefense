@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: SnowCanon
   levelType: SnowCanonLevel
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dae33700bd23f76409a80bf78fdb8a42, type: 3}
   isUnlocked: 0
   unlockCost: 50
   buildCost: 900

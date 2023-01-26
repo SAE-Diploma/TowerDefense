@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e827e78e65e19bd4db9ae1c8afdbe079, type: 3}
   m_Name: SniperLevel_2
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 50
   attackSpeed: 0
   range: 0
   projectileSpeed: 0
-  rotationSpeed: 0.54
-  maxPenetrations: 255
+  rotationSpeed: 0
+  maxPenetrations: 0
   damageReduction: 0

@@ -1,18 +1,15 @@
-﻿using Codice.CM.SEIDInfo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-public class TowerManagerViewModel : ViewModelBase
+public class TowerDetailsViewModel : ViewModelBase
 {
     private readonly TowerStats towerStats;
     private IMGUIContainer iconImage;
-    private List<TowerStats> allStats;
     private Label levelIndexLabel;
     private VisualElement levelStatsContainer;
     private VisualElement levelRightContainer;
@@ -39,30 +36,22 @@ public class TowerManagerViewModel : ViewModelBase
         }
     }
 
+    // timings for transitions
     private List<TimeValue> timeValue;
     private TimeValue standardTimeValue;
     private TimeValue instantTimeValue;
 
-    private bool blank;
-
-    public TowerManagerViewModel(TowerManager manager, VisualElement root, TowerStats towerStats, bool blank = false) : base(manager, root)
+    public TowerDetailsViewModel(TowerManager manager, VisualElement root, TowerStats towerStats) : base(manager, root)
     {
         this.towerStats = towerStats;
-        this.viewName = "TowerManager";
-        this.blank = blank;
+        this.viewName = "TowerDetails";
         timeValue = new List<TimeValue>();
         instantTimeValue = new TimeValue() { value = 0, unit = TimeUnit.Millisecond };
         standardTimeValue = new TimeValue() { value = 300, unit = TimeUnit.Millisecond };
     }
 
-    public override void AfterShow()
+    public override void Show()
     {
-        // show/hide elements in blank mode
-        if (blank)
-        {
-            root.Q<Button>("SaveBtn").style.visibility = Visibility.Visible;
-        }
-
         iconImage = root.Q<IMGUIContainer>("IconImage");
         levelIndexLabel = root.Q<Label>("SelectedLevel");
         levelStatsContainer = root.Q<VisualElement>("LevelFields");
@@ -76,16 +65,8 @@ public class TowerManagerViewModel : ViewModelBase
 
         fieldsContainer = root.Q<VisualElement>("Fields");
 
-        // Get guids of all TowerStat scripts
-        allStats = new List<TowerStats>();
-        string[] allStatsGUIDs = AssetDatabase.FindAssets("t:TowerStats");
-        foreach (string guid in allStatsGUIDs)
-        {
-            allStats.Add(AssetDatabase.LoadAssetAtPath<TowerStats>(AssetDatabase.GUIDToAssetPath(guid)));
-        }
-
         BindButtons();
-        BindFields(towerStats, allStatsGUIDs);
+        BindFields(towerStats);
         SelectedLevel = 1;
         ShowLevel(levelStatsContainer, towerStats.LevelList[SelectedLevel - 1]);
     }
@@ -100,7 +81,7 @@ public class TowerManagerViewModel : ViewModelBase
     }
 
 
-    private void BindFields(TowerStats stats, string[] allStatsGUIDs)
+    private void BindFields(TowerStats stats)
     {
         SerializedObject so = new SerializedObject(stats);
 
@@ -284,7 +265,6 @@ public class TowerManagerViewModel : ViewModelBase
         if (SelectedLevel < towerStats.LevelList.Count)
         {
             int diff = towerStats.LevelList.Count - SelectedLevel;
-            Debug.Log($"{diff} Datein müssen umbenannt werden");
             TowerLevel[] towerLevels = towerStats.LevelList.GetRange(SelectedLevel, diff).ToArray();
             int counter = 0;
             for (int i = towerLevels.Length - 1; i >= 0; i--)
@@ -321,6 +301,8 @@ public class TowerManagerViewModel : ViewModelBase
         if (towerStats.LevelList.Count == 1)
         {
             removeLevelBtn.SetEnabled(false);
+            nextLevelBtn.SetEnabled(false);
+            previousLevelBtn.SetEnabled(false);
         }
 
         if (SelectedLevel > 1)

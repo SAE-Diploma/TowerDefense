@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,17 +10,7 @@ public class TowerStats : ScriptableObject
     public string TowerName { get { return towerName; } set { towerName = value; } }
 
     [SerializeField] string levelType = "";
-    public Type LevelType
-    {
-        get
-        {
-            return Type.GetType(levelType);
-        }
-        set
-        {
-            levelType = value.AssemblyQualifiedName;
-        }
-    }
+    public Type LevelType { get { return Type.GetType(levelType); } set { levelType = value.AssemblyQualifiedName; } }
 
     [SerializeField] Sprite icon;
     public Sprite Icon { get { return icon; } set { icon = value; } }
@@ -35,8 +24,8 @@ public class TowerStats : ScriptableObject
     [SerializeField] int buildCost;
     public int BuildCost => buildCost;
 
-    [SerializeField] Tower towerPrefab;
-    public Tower TowerPrefab => towerPrefab;
+    [SerializeField] GameObject towerPrefab;
+    public GameObject TowerPrefab => towerPrefab;
 
     [SerializeField] GameObject towerBlueprintPrefab;
     public GameObject TowerBlueprintPrefab => towerBlueprintPrefab;

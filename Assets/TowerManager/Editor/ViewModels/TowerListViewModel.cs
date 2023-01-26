@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -21,13 +22,15 @@ public class TowerListViewModel : ViewModelBase
     private Button removeBtn;
     private bool isRemoving = false;
 
+    private string errorMessage = string.Empty;
+
     public TowerListViewModel(TowerManager manager, VisualElement root) : base(manager, root)
     {
         this.viewName = "TowerList";
         allTowerStats = new List<TowerStats>();
     }
 
-    public override void AfterShow()
+    public override void Show()
     {
         AddNewTowerForm();
 
@@ -62,13 +65,13 @@ public class TowerListViewModel : ViewModelBase
     {
         // fill levelType Dropdown
         List<Type> levels = new List<Type>();
-        string[] guids = AssetDatabase.FindAssets("", new string[] { "Assets/TowerManager/Towers/Levels" });
+        string[] guids = AssetDatabase.FindAssets("", new string[] { TowerManager.LevelsPath });
         foreach (string guid in guids)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
             string name = Path.GetFileNameWithoutExtension(path);
             Type type = Type.GetType($"{name}, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-            if (type != null) levels.Add(type);
+            if (type != null && type != typeof(TowerStats)) levels.Add(type);
         }
         return levels;
     }
@@ -80,6 +83,7 @@ public class TowerListViewModel : ViewModelBase
         {
             names.Add(type.Name);
         }
+        names.Remove("TowerLevel");
         return names;
     }
     
@@ -144,7 +148,7 @@ public class TowerListViewModel : ViewModelBase
             {
                 if (index >= 0 && index < allTowerStats.Count)
                 {
-                    manager.CurrentViewModel = new TowerManagerViewModel(manager, root, allTowerStats[index]);
+                    manager.CurrentViewModel = new TowerDetailsViewModel(manager, root, allTowerStats[index]);
                 }
             }
         };
@@ -176,13 +180,10 @@ public class TowerListViewModel : ViewModelBase
         string path = TowerManager.TowersPath + "/" + stats.TowerName;
         if (AssetDatabase.IsValidFolder(path) && !string.IsNullOrEmpty(stats.TowerName))
         {
-            Debug.Log($"Removing {path}");
             AssetDatabase.DeleteAsset(path);
         }
-        else
-        {
-            Debug.Log($"Cant remove that");
-        }
+        else Debug.LogError($"Cant remove asset at {path}"); 
+
         isRemoving = false;
         RebuildListView();
     }
@@ -200,6 +201,7 @@ public class TowerListViewModel : ViewModelBase
 
     private void OnAdd()
     {
+        addForm.AddToClassList("NameFormHideErrorMessage");
         addForm.ToggleInClassList("NameFormHide");
     }
 
@@ -214,20 +216,35 @@ public class TowerListViewModel : ViewModelBase
         TextField nameField = addForm.Q<TextField>("NewName");
         DropdownField typeDropdown = addForm.Q<DropdownField>("LevelType");
         ObjectField icon = addForm.Q<ObjectField>("NewIcon");
+        errorMessage = string.Empty;
+
+        int i = nameField.value.IndexOfAny(TowerManager.InvalidFileNameChars.ToArray());
+
         if (string.IsNullOrEmpty(nameField.value))
         {
+            errorMessage = "Give your tower a name";
             nameField.AddToClassList("TextFieldError");
         }
-        else if (typeDropdown.index < 0 || typeDropdown.index > levelTypes.Count - 1)
+        else if (nameField.value.IndexOfAny(TowerManager.InvalidFileNameChars.ToArray()) != -1)
         {
+            errorMessage = $"Your name contains illigal characters ("+ string.Join(" ",TowerManager.InvalidFileNameChars) + ")";
+            nameField.AddToClassList("TextFieldError");
+        }
+        else if (typeDropdown.index == -1 || typeDropdown.index > levelTypes.Count - 1)
+        {
+            errorMessage = "Select a leveltype for your tower";
             nameField.RemoveFromClassList("TextFieldError");
             typeDropdown.AddToClassList("TextFieldError");
         }
-        else
+
+        if (string.IsNullOrEmpty(errorMessage))
         {
             nameField.RemoveFromClassList("TextFieldError");
             typeDropdown.RemoveFromClassList("TextFieldError");
+            addForm.Q<Label>("ErrorMessage").text = "";
+            addForm.AddToClassList("NameFormHideErrorMessage");
 
+            if (!AssetDatabase.IsValidFolder(TowerManager.TowersPath)) AssetDatabase.CreateFolder(Path.GetDirectoryName(TowerManager.TowersPath),Path.GetFileName(TowerManager.TowersPath));
             AssetDatabase.CreateFolder(TowerManager.TowersPath, nameField.value);
 
             Type type = levelTypes[typeDropdown.index];
@@ -247,11 +264,18 @@ public class TowerListViewModel : ViewModelBase
             addForm.AddToClassList("NameFormHide");
             RebuildListView();
         }
+        else
+        {
+            addForm.Q<Label>("ErrorMessage").text = errorMessage;
+            addForm.RemoveFromClassList("NameFormHideErrorMessage");
+        }
     }
 
     private void OnCancel()
     {
         addForm.AddToClassList("NameFormHide");
+        addForm.AddToClassList("NameFormHideErrorMessage");
+
         TextField nameField = root.Q<TextField>("NewName");
         nameField.value = "";
         nameField.RemoveFromClassList("TextFieldError");

@@ -1,16 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement>
+    <Style src="project://database/Assets/TowerManager/Editor/Views/TowerManagerStyles.uss?fileID=7433441132597879392&amp;guid=e4c85c94a435d1a4dbac6f188a24ee98&amp;type=3#TowerManagerStyles" />
+    <ui:VisualElement style="overflow: hidden;">
         <ui:TextField picking-mode="Ignore" label="Tower Name*" name="NewName" style="flex-grow: 0; min-height: 20px; height: 20px;" />
-        <ui:VisualElement style="flex-direction: row;">
+        <ui:VisualElement style="flex-direction: row; min-height: 24px;">
             <ui:DropdownField label="LevelType*" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="LevelType" style="flex-grow: 1;" />
             <ui:Button display-tooltip-when-elided="true" tooltip="Refresh Options" name="RefreshTypesBtn" style="width: 22px; padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; background-color: rgba(88, 88, 88, 0);">
                 <ui:IMGUIContainer style="background-image: url(&apos;project://database/Assets/TowerManager/Editor/Assets/arrows-rotate-solid_64.jpg?fileID=2800000&amp;guid=84e25e1b5a96b134b93bb4af05b3c844&amp;type=3#arrows-rotate-solid_64&apos;); flex-grow: 1; -unity-background-image-tint-color: rgb(196, 196, 196);" />
             </ui:Button>
         </ui:VisualElement>
-        <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="NewIcon" />
-        <ui:VisualElement style="flex-direction: row-reverse; flex-grow: 0;">
+        <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="NewIcon" style="height: 20px; min-height: 20px;" />
+        <ui:VisualElement style="flex-direction: row-reverse; flex-grow: 0; height: 20px; min-height: 20px;">
             <ui:Button text="Canel" display-tooltip-when-elided="true" name="CancelBtn" style="height: 20px; min-height: 20px;" />
             <ui:Button text="Create" display-tooltip-when-elided="true" name="NewBtn" style="height: 20px; min-height: 20px;" />
         </ui:VisualElement>
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="ErrorMessage" style="padding-left: 5px; color: rgb(255, 58, 47); padding-top: 2px;" />
     </ui:VisualElement>
 </ui:UXML>
