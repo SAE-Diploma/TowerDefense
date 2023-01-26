@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SnowCanonStats
   m_EditorClassIdentifier: 
   towerName: SnowCanon
+  levelType: SnowCanonLevel
   icon: {fileID: 0}
   isUnlocked: 0
   unlockCost: 50

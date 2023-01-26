@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Codice.CM.SEIDInfo;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -20,6 +21,7 @@ public class TowerManagerViewModel : ViewModelBase
 
     private Button nextLevelBtn;
     private Button previousLevelBtn;
+    private Button removeLevelBtn;
 
     private int _selectedLevel;
     public int SelectedLevel
@@ -29,6 +31,11 @@ public class TowerManagerViewModel : ViewModelBase
         {
             _selectedLevel = value;
             levelIndexLabel.text = _selectedLevel.ToString();
+            if (_selectedLevel == 1) previousLevelBtn.SetEnabled(false);
+            else previousLevelBtn.SetEnabled(true);
+
+            if (_selectedLevel == towerStats.LevelList.Count) nextLevelBtn.SetEnabled(false);
+            else nextLevelBtn.SetEnabled(true);
         }
     }
 
@@ -77,8 +84,8 @@ public class TowerManagerViewModel : ViewModelBase
             allStats.Add(AssetDatabase.LoadAssetAtPath<TowerStats>(AssetDatabase.GUIDToAssetPath(guid)));
         }
 
-        BindFields(towerStats, allStatsGUIDs);
         BindButtons();
+        BindFields(towerStats, allStatsGUIDs);
         SelectedLevel = 1;
         ShowLevel(levelStatsContainer, towerStats.LevelList[SelectedLevel - 1]);
     }
@@ -146,13 +153,27 @@ public class TowerManagerViewModel : ViewModelBase
         container.Clear();
         for (int i = 0; i < allFields.Count; i++)
         {
-            FloatField newField = new FloatField();
-            newField.BindProperty(so.FindProperty(allFields[i].Name));
-            newField.name = $"LevelField_{i}";
-            newField.label = allFields[i].Name;
-            newField.value = (float)allFields[i].GetValue(level);
-            newField.AddToClassList("Field");
-            container.Add(newField);
+            Type type = allFields[i].FieldType;
+            if (type == typeof(int))
+            {
+                IntegerField newField = new IntegerField();
+                newField.BindProperty(so.FindProperty(allFields[i].Name));
+                newField.name = $"LevelField_{i}";
+                newField.label = allFields[i].Name;
+                newField.value = (int)allFields[i].GetValue(level);
+                newField.AddToClassList("Field");
+                container.Add(newField);
+            }
+            else if (type == typeof(float))
+            {
+                FloatField newField = new FloatField();
+                newField.BindProperty(so.FindProperty(allFields[i].Name));
+                newField.name = $"LevelField_{i}";
+                newField.label = allFields[i].Name;
+                newField.value = (float)allFields[i].GetValue(level);
+                newField.AddToClassList("Field");
+                container.Add(newField);
+            }
         }
         fieldsContainer.style.minHeight = new StyleLength(allFields.Count * 28f + 20f);
     }
@@ -170,35 +191,34 @@ public class TowerManagerViewModel : ViewModelBase
             {
                 SelectedLevel++;
                 NextLevel();
-                previousLevelBtn.SetEnabled(true);
-            }
-            else if (SelectedLevel == towerStats.LevelList.Count - 1)
-            {
-                nextLevelBtn.SetEnabled(false);
+                if (SelectedLevel == towerStats.LevelList.Count) nextLevelBtn.SetEnabled(false);
+                else previousLevelBtn.SetEnabled(true);
             }
         };
 
         // Previous Level
         previousLevelBtn = root.Q<Button>("PreviousLevel");
+        previousLevelBtn.SetEnabled(false);
         previousLevelBtn.clicked += () =>
         {
             if (SelectedLevel > 1)
             {
                 SelectedLevel--;
                 PreviousLevel();
-                nextLevelBtn.SetEnabled(true);
-            }
-            else if (SelectedLevel == 0)
-            {
-                previousLevelBtn.SetEnabled(false);
+                if (SelectedLevel == 1) previousLevelBtn.SetEnabled(false);
+                else nextLevelBtn.SetEnabled(true);
             }
         };
 
         Button addLevelBtn = root.Q<Button>("AddAfterBtn");
         addLevelBtn.clicked += OnAddLevel;
 
-        //Button removeLevelBtn = root.Q<Button>("RemoveLevelBtn");
+        removeLevelBtn = root.Q<Button>("RemoveLevelBtn");
+        removeLevelBtn.clicked += OnRemoveLevel;
+        if (towerStats.LevelList.Count == 1) removeLevelBtn.SetEnabled(false);
     }
+
+
 
     private List<TimeValue> getTransitionDration(TransitionType type)
     {
@@ -278,7 +298,7 @@ public class TowerManagerViewModel : ViewModelBase
             }
         }
 
-        // copy level
+        // copy level 
         string path = AssetDatabase.GetAssetPath(towerStats.LevelList[SelectedLevel - 1]);
         string oldFileName = Path.GetFileName(path);
         string newPath = path.Replace(oldFileName, $"{towerStats.LevelType?.Name}_{SelectedLevel + 1}.asset");
@@ -286,8 +306,32 @@ public class TowerManagerViewModel : ViewModelBase
         {
             towerStats.LevelList.Insert(SelectedLevel, AssetDatabase.LoadAssetAtPath<TowerLevel>(newPath));
         }
+        removeLevelBtn.SetEnabled(true);
         SelectedLevel++;
         NextLevel();
+    }
+
+    private void OnRemoveLevel()
+    {
+        TowerLevel selectedLevel = towerStats.LevelList[SelectedLevel - 1];
+        string path = AssetDatabase.GetAssetPath(selectedLevel);
+        towerStats.LevelList.Remove(selectedLevel);
+        AssetDatabase.DeleteAsset(path);
+
+        if (towerStats.LevelList.Count == 1)
+        {
+            removeLevelBtn.SetEnabled(false);
+        }
+
+        if (SelectedLevel > 1)
+        {
+            SelectedLevel--;
+            PreviousLevel();
+        }
+        else
+        {
+            NextLevel();
+        }
     }
 
     private void OnBackButton()

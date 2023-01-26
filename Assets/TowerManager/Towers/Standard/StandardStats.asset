@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StandardStats
   m_EditorClassIdentifier: 
   towerName: Standard
+  levelType: StandardLevel
   icon: {fileID: 0}
   isUnlocked: 1
   unlockCost: 100

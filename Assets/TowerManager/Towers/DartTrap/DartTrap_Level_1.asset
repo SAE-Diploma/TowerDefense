@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a02ab052a6bf443be5a2125eccd5c9, type: 3}
   m_Name: DartTrap_Level_1
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 8.71
   attackSpeed: 0
   range: 0
   projectileSpeed: 0

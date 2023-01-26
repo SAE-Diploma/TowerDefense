@@ -10,15 +10,25 @@ public class TowerStats : ScriptableObject
     [SerializeField] string towerName;
     public string TowerName { get { return towerName; } set { towerName = value; } }
 
-    [SerializeField] Type levelType;
-    public Type LevelType { get { return levelType; } set { levelType = value; } }
+    [SerializeField] string levelType = "";
+    public Type LevelType
+    {
+        get
+        {
+            return Type.GetType(levelType);
+        }
+        set
+        {
+            levelType = value.AssemblyQualifiedName;
+        }
+    }
 
     [SerializeField] Sprite icon;
     public Sprite Icon { get { return icon; } set { icon = value; } }
 
     [SerializeField] bool isUnlocked;
     public bool IsUnlocked => isUnlocked;
-    
+
     [SerializeField] int unlockCost;
     public int UnlockCost => unlockCost;
 
