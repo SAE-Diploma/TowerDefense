@@ -34,6 +34,15 @@ public class TowerListViewModel : ViewModelBase
     {
         AddNewTowerForm();
 
+        Button rm2 = root.Q<Button>("RemoveBtn2");
+        rm2.clicked += () =>
+        {
+            rm2.style.rotate = new Rotate(UnityEngine.Random.Range(-15, 15));
+        };
+        rm2.RegisterCallback<TransitionEndEvent>(ev =>
+        {
+            rm2.style.rotate = new Rotate(UnityEngine.Random.Range(-15, 15));
+        });
         root.Q<Button>("RefreshBtn").clicked += OnRefresh;
         root.Q<Button>("AddBtn").clicked += OnAdd;
         removeBtn = root.Q<Button>("RemoveBtn");
@@ -86,7 +95,7 @@ public class TowerListViewModel : ViewModelBase
         names.Remove("TowerLevel");
         return names;
     }
-    
+
     private void AddNewTowerForm()
     {
         // adding AddTowerForm component
@@ -182,7 +191,7 @@ public class TowerListViewModel : ViewModelBase
         {
             AssetDatabase.DeleteAsset(path);
         }
-        else Debug.LogError($"Cant remove asset at {path}"); 
+        else Debug.LogError($"Cant remove asset at {path}");
 
         isRemoving = false;
         RebuildListView();
@@ -227,7 +236,7 @@ public class TowerListViewModel : ViewModelBase
         }
         else if (nameField.value.IndexOfAny(TowerManager.InvalidFileNameChars.ToArray()) != -1)
         {
-            errorMessage = $"Your name contains illigal characters ("+ string.Join(" ",TowerManager.InvalidFileNameChars) + ")";
+            errorMessage = $"Your name contains illigal characters (" + string.Join(" ", TowerManager.InvalidFileNameChars) + ")";
             nameField.AddToClassList("TextFieldError");
         }
         else if (typeDropdown.index == -1 || typeDropdown.index > levelTypes.Count - 1)
@@ -244,7 +253,7 @@ public class TowerListViewModel : ViewModelBase
             addForm.Q<Label>("ErrorMessage").text = "";
             addForm.AddToClassList("NameFormHideErrorMessage");
 
-            if (!AssetDatabase.IsValidFolder(TowerManager.TowersPath)) AssetDatabase.CreateFolder(Path.GetDirectoryName(TowerManager.TowersPath),Path.GetFileName(TowerManager.TowersPath));
+            if (!AssetDatabase.IsValidFolder(TowerManager.TowersPath)) AssetDatabase.CreateFolder(Path.GetDirectoryName(TowerManager.TowersPath), Path.GetFileName(TowerManager.TowersPath));
             AssetDatabase.CreateFolder(TowerManager.TowersPath, nameField.value);
 
             Type type = levelTypes[typeDropdown.index];

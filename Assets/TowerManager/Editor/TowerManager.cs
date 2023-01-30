@@ -10,7 +10,7 @@ public class TowerManager : EditorWindow
 {
     public static readonly string ViewsPath = "Assets/TowerManager/Editor/Views";
     public static readonly string ComponentsPath = "Assets/TowerManager/Editor/Components";
-    public static readonly string TowersPath = "Assets/TowerManager/Towers";
+    public static readonly string TowersPath = "Assets/Resources/Objects/Towers";
     public static readonly string LevelsPath = "Assets/TowerManager/Levels";
 
     private static List<Char> invalidFileNameChars;

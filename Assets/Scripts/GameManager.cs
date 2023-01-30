@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,11 +63,21 @@ public class GameManager : MonoBehaviour
 
     public int Points => enemiesKilled * pointsPerEnemy + Coins;
 
+    private TowerStats[] allStats;
+    public TowerStats[] AllStats => allStats;
+
+    private void Awake()
+    {
+        transition = GetComponent<SceneTransition>();
+        allStats = Resources.LoadAll<TowerStats>("Objects/Towers");
+    }
+
     void Start()
     {
         Cursor.visible = defaultCursorVisibility;
         if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
-        transition = GetComponent<SceneTransition>();
+        UI_Toolkit_Manager.Instance.RefreshTowers(allStats);
+        Debug.Log(allStats.Length);
 
         /*
         GameObject saveFileObject = GameObject.Find("SaveManager(Clone)");

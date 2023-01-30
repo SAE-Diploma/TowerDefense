@@ -145,3 +145,45 @@
     transition-duration: 100ms;
     transition-timing-function: ease-in-out;
 }
+
+.ImageButton {
+}
+
+.ImageButton:hover .Icon {
+    -unity-background-image-tint-color: rgb(78, 214, 105);
+}
+
+.Icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('project://database/Assets/TowerManager/Editor/Assets/arrows-rotate-solid_64.jpg?fileID=2800000&guid=84e25e1b5a96b134b93bb4af05b3c844&type=3#arrows-rotate-solid_64');
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    -unity-background-image-tint-color: rgb(229, 219, 219);
+}
+
+.RemoveButton {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    background-color: rgb(142, 136, 136);
+    border-left-color: rgb(142, 136, 136);
+    border-right-color: rgb(142, 136, 136);
+    border-top-color: rgb(142, 136, 136);
+    border-bottom-color: rgb(142, 136, 136);
+    rotate: 0;
+}
+
+.RemoveButton:hover .Icon {
+    -unity-background-image-tint-color: rgb(214, 85, 78);
+    border-left-color: rgb(255, 0, 0);
+    border-right-color: rgb(255, 0, 0);
+    border-top-color: rgb(255, 0, 0);
+    border-bottom-color: rgb(255, 0, 0);
+}

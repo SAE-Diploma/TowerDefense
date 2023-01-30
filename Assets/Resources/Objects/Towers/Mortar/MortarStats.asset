@@ -20,7 +20,4 @@ MonoBehaviour:
   buildCost: 25
   towerPrefab: {fileID: 0}
   towerBlueprintPrefab: {fileID: 0}
-  levelList:
-  - {fileID: 11400000, guid: 718af46507105114e8226fe1b08e747e, type: 2}
-  - {fileID: 11400000, guid: 247a9f747830de94e80fd5542b96ffdc, type: 2}
-  - {fileID: 11400000, guid: 4f1515ce7b428fb478f13cdc113319ba, type: 2}
+  levelList: []

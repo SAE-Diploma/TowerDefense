@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnterBuildMode(InputAction.CallbackContext obj)
     {
         inBuildMode = !inBuildMode;
-        Debug.Log($"In BuildMode {inBuildMode}");
+        UI_Toolkit_Manager.Instance.ToggleBuildMode();
     }
 
     private void OnTowerSelection(InputAction.CallbackContext obj)
