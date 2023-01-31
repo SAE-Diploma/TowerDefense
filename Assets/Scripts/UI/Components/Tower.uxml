@@ -1,6 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="-unity-text-align: upper-center; white-space: normal; align-items: center; background-color: rgb(103, 103, 103); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px; flex-grow: 1;">
-        <ui:IMGUIContainer name="Image" style="background-image: resource(&apos;UI/3DTowerIcon&apos;); -unity-background-scale-mode: scale-to-fit; -unity-slice-left: 1; -unity-slice-top: 1; -unity-slice-right: 1; -unity-slice-bottom: 1; overflow: visible; flex-grow: 1; width: 100%;" />
-        <ui:Label text="Label" display-tooltip-when-elided="true" name="Name" style="-unity-text-align: upper-center; align-items: center; margin-top: 5px; flex-grow: 0;" />
-    </ui:VisualElement>
-</ui:UXML>

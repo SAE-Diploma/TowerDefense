@@ -34,14 +34,19 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-bottom-width: 2px;
-    border-left-color: rgba(93, 241, 79, 255);
-    border-right-color: rgba(93, 241, 79, 255);
-    border-top-color: rgba(93, 241, 79, 255);
-    border-bottom-color: rgba(93, 241, 79, 255);
+    border-left-color: rgb(93, 241, 79);
+    border-right-color: rgb(93, 241, 79);
+    border-top-color: rgb(93, 241, 79);
+    border-bottom-color: rgb(93, 241, 79);
     flex-direction: row;
 }
 
 .BuildMode_show {
     transform-origin: top;
     translate: 0 0.1%;
+}
+
+.BuildMode * {
+    height: 100%;
+    min-width: 10%;
 }
