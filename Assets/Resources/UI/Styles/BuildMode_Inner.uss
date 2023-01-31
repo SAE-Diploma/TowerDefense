@@ -30,15 +30,15 @@
     transition-timing-function: ease-in-out;
     transform-origin: top;
     translate: 0 100%;
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
-    border-left-color: rgb(93, 241, 79);
-    border-right-color: rgb(93, 241, 79);
-    border-top-color: rgb(93, 241, 79);
-    border-bottom-color: rgb(93, 241, 79);
     flex-direction: row;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-left-color: rgba(204, 79, 73, 255);
+    border-right-color: rgba(204, 79, 73, 255);
+    border-top-color: rgba(204, 79, 73, 255);
+    border-bottom-color: rgba(204, 79, 73, 255);
 }
 
 .BuildMode_show {
@@ -47,6 +47,47 @@
 }
 
 .BuildMode * {
+    width: 20%;
     height: 100%;
-    min-width: 10%;
+}
+
+.BuildMode_Tower {
+    background-color: rgba(96, 96, 96, 255);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-left-color: rgba(96, 96, 96, 255);
+    border-right-color: rgba(96, 96, 96, 255);
+    border-top-color: rgba(96, 96, 96, 255);
+    border-bottom-color: rgba(96, 96, 96, 255);
+    flex-grow: 1;
+    width: 400px;
+    height: 400px;
+}
+
+.BuildMode_Tower_Selected {
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-left-color: rgba(148, 214, 98, 255);
+    border-right-color: rgba(148, 214, 98, 255);
+    border-top-color: rgba(148, 214, 98, 255);
+    border-bottom-color: rgba(148, 214, 98, 255);
+}
+
+.unity-imgui-container {
 }

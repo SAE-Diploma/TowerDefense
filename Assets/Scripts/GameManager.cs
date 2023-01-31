@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = defaultCursorVisibility;
         if (!defaultCursorVisibility) Cursor.lockState = CursorLockMode.Locked;
         UI_Toolkit_Manager.Instance.RefreshTowers(allStats);
-        Debug.Log(allStats.Length);
 
         /*
         GameObject saveFileObject = GameObject.Find("SaveManager(Clone)");

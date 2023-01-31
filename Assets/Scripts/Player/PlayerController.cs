@@ -55,12 +55,12 @@ public class PlayerController : MonoBehaviour
 
     private InputMaster inputMaster;
 
-    private bool inBuildMode = false;
+    private bool inBuildMode = true;
     private int selectedTowerIndex = 0;
 
     private void Awake()
     {
-        inputMaster = new InputMaster();
+        inputMaster = InputManager.GetMaster();
         inputMaster.BuildMode.Enable();
         inputMaster.BuildMode.Enter.performed += OnEnterBuildMode;
         inputMaster.BuildMode.TowerSelection.performed += OnTowerSelection;
@@ -169,6 +169,8 @@ public class PlayerController : MonoBehaviour
         movement.CanPlayerMove(canMove);
     }
 
+
+
     private void OnEnterBuildMode(InputAction.CallbackContext obj)
     {
         inBuildMode = !inBuildMode;
@@ -179,7 +181,12 @@ public class PlayerController : MonoBehaviour
     {
         if (inBuildMode)
         {
+            int oldIndex = selectedTowerIndex;
             selectedTowerIndex = Mathf.RoundToInt(obj.ReadValue<float>()) - 1;
+            if (selectedTowerIndex < manager.AllStats.Length)
+            {
+                UI_Toolkit_Manager.Instance.SelectTower(selectedTowerIndex, oldIndex);
+            }
         }
     }
 
