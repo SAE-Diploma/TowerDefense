@@ -60,6 +60,8 @@ public class BuildMode : MonoBehaviour
 
     private void OnLeftClick(InputAction.CallbackContext obj)
     {
+        // Check Coins
+        // Check placement
         if (inBuildMode)
         {
             Instantiate(placable[selectedTowerIndex].TowerPrefab, target.transform.position, target.transform.rotation);

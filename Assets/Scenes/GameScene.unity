@@ -1426,6 +1426,7 @@ GameObject:
   - component: {fileID: 38891378}
   - component: {fileID: 38891380}
   - component: {fileID: 38891379}
+  - component: {fileID: 38891381}
   m_Layer: 0
   m_Name: Blueprint
   m_TagString: Untagged
@@ -1498,6 +1499,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38891377}
   m_Mesh: {fileID: 8969716129047936018, guid: 454cc62f00b0da34da5b935ea3ac9c05, type: 3}
+--- !u!114 &38891381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38891377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74439380bd3685408d2de85cf6f38eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canPlace: 1
+  isActive: 1
+  radius: 1
+  valid: {r: 0.21039653, g: 1, b: 0, a: 1}
+  invalid: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &38973368
 GameObject:
   m_ObjectHideFlags: 0
@@ -66563,6 +66581,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fc6632ec-6ea0-4d36-ace3-a91834282c00
     m_ActionName: BuildMode/TowerSelection[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/numpad1,/Keyboard/numpad2,/Keyboard/numpad3,/Keyboard/numpad4,/Keyboard/numpad5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6d77b23-22d8-490b-9266-27bf39872cb1
+    m_ActionName: BuildMode/Place[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
