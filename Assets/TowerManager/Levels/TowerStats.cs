@@ -4,7 +4,7 @@ using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(fileName = "Stat", menuName = "Tower/Stat")]
-public class TowerStats : ScriptableObject
+public class TowerStats : ScriptableObject, IPlacable
 {
     [SerializeField] string towerName;
     public string TowerName { get { return towerName; } set { towerName = value; } }
@@ -29,6 +29,9 @@ public class TowerStats : ScriptableObject
 
     [SerializeField] GameObject towerBlueprintPrefab;
     public GameObject TowerBlueprintPrefab => towerBlueprintPrefab;
+
+    [SerializeField] Mesh blueprintMesh;
+    public Mesh BlueprintMesh => blueprintMesh;
 
     [SerializeField] List<TowerLevel> levelList;
     public List<TowerLevel> LevelList { get { return levelList; } set { levelList = value; } }

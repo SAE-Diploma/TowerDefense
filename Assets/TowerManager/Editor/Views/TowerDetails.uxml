@@ -13,7 +13,7 @@
         <uie:IntegerField label="BuildCost" value="20" name="BuildCost" class="NoLeftPadding" />
         <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" allow-scene-objects="false" name="Icon" class="NoLeftPadding" />
         <uie:ObjectField label="Prefab" type="UnityEngine.GameObject, UnityEngine.CoreModule" allow-scene-objects="false" name="Prefab" class="NoLeftPadding" />
-        <uie:ObjectField label="Blueprint Prefab" type="UnityEngine.GameObject, UnityEngine.CoreModule" name="BlueprintPrefab" class="NoLeftPadding" />
+        <uie:ObjectField label="Blueprint Mesh" type="UnityEngine.Mesh, UnityEngine.CoreModule" name="BlueprintPrefab" class="NoLeftPadding" />
     </ui:VisualElement>
     <ui:VisualElement name="LevelSelector" class="container" style="border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; flex-direction: row; height: auto; margin-top: 0; min-height: 22px;">
         <ui:VisualElement style="width: 150px; justify-content: center;">

@@ -1,4 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/Styles/BuildMode_Inner.uss?fileID=7433441132597879392&amp;guid=726228621b690604b86c403fa1e703cc&amp;type=3#BuildMode_Inner" />
-    <ui:GroupBox name="BuildMode" tabindex="1" class="NoPadding BuildMode BuildMode_show" />
+    <ui:GroupBox name="BuildMode" tabindex="1" class="NoPadding BuildMode" />
 </ui:UXML>

@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Interaction")]
     [SerializeField] float rayDistance;
+    private Vector3 hitPosition;
+    public Vector3 HitPosition => hitPosition;
+    [SerializeField] Transform hitTransform;
 
     [Header("Coins")]
     [SerializeField] float coinAttractionRange;
@@ -53,17 +56,10 @@ public class PlayerController : MonoBehaviour
     private TowerPlace placeTower;
     public TowerPlace PlaceTower => placeTower;
 
-    private InputMaster inputMaster;
-
-    private bool inBuildMode = true;
-    private int selectedTowerIndex = 0;
 
     private void Awake()
     {
-        inputMaster = InputManager.GetMaster();
-        inputMaster.BuildMode.Enable();
-        inputMaster.BuildMode.Enter.performed += OnEnterBuildMode;
-        inputMaster.BuildMode.TowerSelection.performed += OnTowerSelection;
+
     }
 
     void Start()
@@ -100,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(new Ray(playerCamera.transform.position, playerCamera.transform.forward), out RaycastHit hit, rayDistance))
         {
+            hitPosition = hit.point;
+            hitTransform.position = hitPosition;
             if (hit.transform.tag == "towerPlace")
             {
                 CurrentInteraction = Interactions.TowerPlace;
@@ -167,27 +165,6 @@ public class PlayerController : MonoBehaviour
     public void SetMovability(bool canMove)
     {
         movement.CanPlayerMove(canMove);
-    }
-
-
-
-    private void OnEnterBuildMode(InputAction.CallbackContext obj)
-    {
-        inBuildMode = !inBuildMode;
-        UI_Toolkit_Manager.Instance.ToggleBuildMode();
-    }
-
-    private void OnTowerSelection(InputAction.CallbackContext obj)
-    {
-        if (inBuildMode)
-        {
-            int oldIndex = selectedTowerIndex;
-            selectedTowerIndex = Mathf.RoundToInt(obj.ReadValue<float>()) - 1;
-            if (selectedTowerIndex < manager.AllStats.Length)
-            {
-                UI_Toolkit_Manager.Instance.SelectTower(selectedTowerIndex, oldIndex);
-            }
-        }
     }
 
 }

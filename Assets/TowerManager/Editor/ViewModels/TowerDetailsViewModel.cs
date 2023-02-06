@@ -111,8 +111,8 @@ public class TowerDetailsViewModel : ViewModelBase
         prefab.value = towerStats.TowerPrefab;
 
         ObjectField blueprintPrefab = root.Q<ObjectField>("BlueprintPrefab");
-        blueprintPrefab.BindProperty(so.FindProperty("towerBlueprintPrefab"));
-        blueprintPrefab.value = towerStats.TowerBlueprintPrefab;
+        blueprintPrefab.BindProperty(so.FindProperty("blueprintMesh"));
+        blueprintPrefab.value = towerStats.BlueprintMesh;
 
         SelectedLevel = 1;
 

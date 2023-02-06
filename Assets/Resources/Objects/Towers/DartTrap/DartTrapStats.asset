@@ -18,8 +18,9 @@ MonoBehaviour:
   isUnlocked: 1
   unlockCost: 40
   buildCost: 750
-  towerPrefab: {fileID: 0}
+  towerPrefab: {fileID: 5813555276617557993, guid: 451add44248964c44884d1de8a8ca36b, type: 3}
   towerBlueprintPrefab: {fileID: 0}
+  blueprintMesh: {fileID: 8969716129047936018, guid: 9b9e7cd335288444b9693323737b228f, type: 3}
   levelList:
   - {fileID: 11400000, guid: 3ab3b40c6753a324b92a8b78ddec484f, type: 2}
   - {fileID: 11400000, guid: 85483f4405c92f14180a93e3a328433c, type: 2}

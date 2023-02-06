@@ -214,6 +214,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6d77b23-22d8-490b-9266-27bf39872cb1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -447,6 +456,17 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""TowerSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6529ccc1-2d8d-48a4-96fc-497220f52890"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -478,6 +498,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_BuildMode_PreviousTab = m_BuildMode.FindAction("PreviousTab", throwIfNotFound: true);
         m_BuildMode_NextTab = m_BuildMode.FindAction("NextTab", throwIfNotFound: true);
         m_BuildMode_TowerSelection = m_BuildMode.FindAction("TowerSelection", throwIfNotFound: true);
+        m_BuildMode_Place = m_BuildMode.FindAction("Place", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -606,6 +627,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputAction m_BuildMode_PreviousTab;
     private readonly InputAction m_BuildMode_NextTab;
     private readonly InputAction m_BuildMode_TowerSelection;
+    private readonly InputAction m_BuildMode_Place;
     public struct BuildModeActions
     {
         private @InputMaster m_Wrapper;
@@ -614,6 +636,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         public InputAction @PreviousTab => m_Wrapper.m_BuildMode_PreviousTab;
         public InputAction @NextTab => m_Wrapper.m_BuildMode_NextTab;
         public InputAction @TowerSelection => m_Wrapper.m_BuildMode_TowerSelection;
+        public InputAction @Place => m_Wrapper.m_BuildMode_Place;
         public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -635,6 +658,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @TowerSelection.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnTowerSelection;
                 @TowerSelection.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnTowerSelection;
                 @TowerSelection.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnTowerSelection;
+                @Place.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
             }
             m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -651,6 +677,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @TowerSelection.started += instance.OnTowerSelection;
                 @TowerSelection.performed += instance.OnTowerSelection;
                 @TowerSelection.canceled += instance.OnTowerSelection;
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
             }
         }
     }
@@ -678,5 +707,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnPreviousTab(InputAction.CallbackContext context);
         void OnNextTab(InputAction.CallbackContext context);
         void OnTowerSelection(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
     }
 }
